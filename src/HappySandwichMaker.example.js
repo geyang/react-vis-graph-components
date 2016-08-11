@@ -3,15 +3,15 @@
  */
 import React, {Component, PropTypes} from "react";
 import HappySandwichMaker from "./HappySandwichMaker";
+import Graph from './Graph';
+import Mark from './Mark';
+import Connectior from './Connectior';
 
 var {number, string} = PropTypes;
 export default class HappySandwichMakerExample extends Component {
   render() {
     return (
-      <HappySandwichMaker lattice={true}
-                          protein="turkey"
-                          cheese="PepperJack"
-                          onBite={()=>alert("This is delicious!!")}
+      <LineSeries
       />
     );
   }

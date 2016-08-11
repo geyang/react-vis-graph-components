@@ -55,3 +55,18 @@ var HappySandwichMaker = (_temp = _class = function (_Component) {
   style: string.isRequired
 }, _temp);
 exports.default = HappySandwichMaker;
+;
+
+(function () {
+  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+    return;
+  }
+
+  __REACT_HOT_LOADER__.register(number, "number", "src/HappySandwichMaker.spec.js");
+
+  __REACT_HOT_LOADER__.register(string, "string", "src/HappySandwichMaker.spec.js");
+
+  __REACT_HOT_LOADER__.register(HappySandwichMaker, "HappySandwichMaker", "src/HappySandwichMaker.spec.js");
+})();
+
+;
