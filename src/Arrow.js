@@ -4,23 +4,24 @@ const propTypes = {};
 
 export default function Arrow({
   id,
-  refX = 0,
-  refY = 0,
+  refX = 0.1,
+  refY = 2,
+  d = 'M0,0 V4 L4,2 Z',
   width: markerWidth = 5,
   height: markerHeight = 5,
-  color: fill = 'transparent',
+  color: fill = 'black',
   orient = 'auto',
   ..._props
 }) {
   const props = {
-    id, refX, refY, markerWidth, markerHeight, fill, orient
+    id, refX, refY, markerWidth, markerHeight, orient
   };
   const pathProps = {
-    fill, ..._props
+    fill, d, ..._props
   };
   return (
     <marker {...props}>
-      <path d="M 0 0 L 10 5 L 0 10 z" {...pathProps}/>
+      <path {...pathProps}/>
     </marker>
   );
 }

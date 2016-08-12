@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react';
 
 const {arrayOf, oneOf} = PropTypes;
-
 const propTypes = {
   points: arrayOf(oneOf(['square', 'cubic']))
 };
@@ -11,24 +10,25 @@ const styleProps = {
 };
 
 export default function StraightConnector({
-  wayPoints,
-  width: strokeWidth = 2,
-  color: stroke = 'red',
-  markerStartId = '',
-  markerMidId = '',
-  markerEndId = '',
-  bendType,
-  bendRadius,
+  from,
+  to,
+  x1,
+  y1,
+  x2,
+  y2,
+  markerStartId,
+  markerMidId,
+  markerEndId,
+  stroke = "black",
+  strokeWidth,
   ..._props
 }) {
+  const wayPoints = [[x1, y1], [x2, y2]];
   const d = 'M ' + wayPoints.map(pt => pt.join(', ')).join(' ');
 
   const markerStart = markerStartId ? `url(#${markerStartId})` : '';
   const markerMid = markerMidId ? `url(#${markerMidId})` : '';
   const markerEnd = markerEndId ? `url(#${markerEndId})` : '';
-
-  if (bendType === 'square') {
-  }
 
   const props = {
     ...styleProps,
@@ -40,4 +40,4 @@ export default function StraightConnector({
   );
 }
 
-Connector.propTypes = propTypes;
+StraightConnector.propTypes = propTypes;
