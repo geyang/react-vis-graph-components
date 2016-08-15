@@ -6,7 +6,7 @@ This component allows you to draw a linked node graph easily.
 The graph component takes in the children (links and nodes) and automatically calculates
 the end points for the connections and adds padding.
 
-For live demo and example code, look at [react-vis-link-graph](https://episodeyang.com/react-vis-link-graph)
+For live demo and example code, look at [react-vis-link-graph](http://episodeyang.com/react-vis-link-graph)
 
 ## Develop
 
