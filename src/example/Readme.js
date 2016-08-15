@@ -14,12 +14,13 @@ import HappySandwichMakerAST from "!!react-docgen!../HappySandwichMaker";
 export default function Readme({}) {
   return (
     <Markdown stripIndent={true}>{`
-      # React ES6 Component Template
+      # Linked Node Graph Component
 
       [![github](https://img.shields.io/github/downloads/episodeyang/react-vis-link-graph/total.svg?style=flat-square&maxAge=2592000)]()
 
-      ## Example Component: \`HappySandwichMaker\`
-      This component makes you a delicious Subway sandwich.
+      This component allows you to draw a linked node graph easily.
+      The graph component takes in the children (links and nodes) and automatically calculates
+      the end points for the connections and adds padding.
       `}
       <HappySandwichMakerExample/>
       ### Props

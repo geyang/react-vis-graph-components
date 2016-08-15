@@ -1,19 +1,12 @@
-# react-vis-link-graph
-a minimal react es6 template with automatic document generation
+# Linked Node Graph Component
 
-## Usage (as a template)
+[![github](https://img.shields.io/github/downloads/episodeyang/react-vis-link-graph/total.svg?style=flat-square&maxAge=2592000)]()
 
-```shell
-git clone https://github.com/episodeyang/react-vis-link-graph \<name of your new component\>
-cd \<name of your new component\>
-rm -rf .git
-rm -rf dist
+This component allows you to draw a linked node graph easily.
+The graph component takes in the children (links and nodes) and automatically calculates
+the end points for the connections and adds padding.
 
-# now do your git init, git add/coommit/push
-# replace "react-vis-link-graph" with your own
-# replace "react es6 template" with your own
-# replace "react es6 component" with you own etc.
-```
+For live demo and example code, look at [react-vis-link-graph](https://episodeyang.com/react-vis-link-graph)
 
 ## Develop
 
