@@ -22,26 +22,70 @@ const LINKS = [
 
 
 export default class HappySandwichMakerExample extends Component {
+  componentWillMount() {
+    this.setState({links: LINKS, nodes: NODES});
+  }
+
+  _onMouseEnter(name) {
+    return ()=> {
+      const [from, to] = name.split('-');
+      for (var ind in LINKS) {
+        if (LINKS[ind].from === from && LINKS[ind].to === to) {
+          break;
+        }
+      }
+      this.setState({
+        links: [
+          ...LINKS.slice(0, ind),
+          {...LINKS[ind], strokeWidth: 4, paddingEnd: 17},
+          ...LINKS.slice(ind)
+        ]
+      });
+    };
+  }
+
+  _onMouseLeave(name) {
+    return ()=> {
+      const [from, to] = name.split('-');
+      for (var ind in LINKS) {
+        if (LINKS[ind].from === from && LINKS[ind].to === to) {
+          break;
+        }
+      }
+      this.setState({
+        links: [
+          ...LINKS.slice(0, ind),
+          {...LINKS[ind], strokeWidth: 1, paddingEnd: 5},
+          ...LINKS.slice(ind)
+        ]
+      });
+    };
+  }
+
   render() {
+    const {links, nodes} = this.state;
     return (
       <LinkGraph width="200" height="200">
         <defs>
           <Arrow id="arrow" width="10" height="10"/>
         </defs>
-        {NODES.map(({x, y, key})=>(
+        {nodes.map(({x, y, key})=>(
           <CircleNode name={key} key={key} x={x} y={y} r={10}
                       nodeType="node"
                       stroke="black" strokeWidth="0" fill="red"/>
         ))}
-        {LINKS.map(({from, to})=>(
+        {links.map(({from, to, strokeWidth = 1, paddingEnd = 5})=>(
           <StraightConnector from={from}
                              to={to}
                              key={`${from}-${to}`}
+                             name={`${from}-${to}`}
                              nodeType="link"
-                             strokeWidth={1}
+                             strokeWidth={strokeWidth}
                              color="rgba(24, 55, 55, 0.6)"
+                             onMouseEnter={this._onMouseEnter(`${from}-${to}`)}
+                             onMouseLeave={this._onMouseLeave(`${from}-${to}`)}
                              paddingStart={2}
-                             paddingEnd={5}
+                             paddingEnd={paddingEnd}
                              markerEndId="arrow"/>
         ))}
       </LinkGraph>
