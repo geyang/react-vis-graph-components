@@ -29,7 +29,7 @@ export default class HappySandwichMakerExample extends Component {
           <Arrow id="arrow" width="10" height="10"/>
         </defs>
         {NODES.map(({x, y, key})=>(
-          <CircleNode id={key} key={key} x={x} y={y} r={10}
+          <CircleNode name={key} key={key} x={x} y={y} r={10}
                       nodeType="node"
                       stroke="black" strokeWidth="0" fill="red"/>
         ))}

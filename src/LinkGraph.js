@@ -32,7 +32,7 @@ export default class LinkGraph extends Component {
       const {from, to, nodeType, paddingStart = 0, paddingEnd = 0, ..._linkProps} = link.props;
       let x1, y1, padding1, x2, y2, padding2;
       if (isDefined(from)) {
-        let {props: {x, y, r, strokeWidth}} = nodes.filter(({props: {id: _id}})=>(_id == from))[0];
+        let {props: {x, y, r, strokeWidth}} = nodes.filter(({props: {name: _name}})=>(_name == from))[0];
         if (isDefined(x) && isDefined(y)) {
           x1 = x;
           y1 = y;
@@ -41,7 +41,7 @@ export default class LinkGraph extends Component {
       }
 
       if (isDefined(to)) {
-        let {props: {x, y, r, strokeWidth}} = nodes.filter(({props: {id: _id}})=>(_id == to))[0];
+        let {props: {x, y, r, strokeWidth}} = nodes.filter(({props: {name: _name}})=>(_name == to))[0];
         if (isDefined(x) && isDefined(y)) {
           x2 = x;
           y2 = y;
