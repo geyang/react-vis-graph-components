@@ -62,7 +62,6 @@ export default class HappySandwichMakerExample extends Component {
 
   render() {
     const {links, nodes} = this.state;
-    console.log(links);
     return (
       <LinkGraph width="200" height="200">
         <defs>
