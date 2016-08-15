@@ -2,35 +2,49 @@
  * Created by ge on 6/23/16.
  */
 import React, {Component, PropTypes} from "react";
+import LinkGraph from './LinkGraph';
 import Arrow from './Arrow';
-import TextBlock from './blocks/TextBlock';
-import Rectangle from './blocks/Rectangle';
+import CircleNode from './blocks/CircleNode';
 import StraightConnector from './connectors/StraigntConnector';
+
+const NODES = [
+  {x: 10, y: 50, key: 'batman'},
+  {x: 40, y: 20, key: 'superman'},
+  {x: 75, y: 30, key: 'antman'},
+  {x: 10, y: 20, key: 'manman'}
+];
+
+const LINKS = [
+  {from: 'batman', to: 'superman'},
+  {from: 'superman', to: 'antman'},
+  {from: 'antman', to: 'manman'},
+];
+
 
 export default class HappySandwichMakerExample extends Component {
   render() {
     return (
-      <svg width="200" height="200">
+      <LinkGraph width="200" height="200">
         <defs>
-          <Arrow id="arrow"/>
+          <Arrow id="arrow" width="10" height="10"/>
         </defs>
-        <TextBlock text={"this is a line\n of text."}
-                   x={10}
-                   y={20}
-                   width={140}
-                   height={40}
-                   stroke="black"
-                   strokeWidth={2}
-                   fill="white"
-        />
-        <StraightConnector x1="10"
-                           y1="10"
-                           x2="100"
-                           y2="100"
-                           strokeWidth={4}
-                           color="rgba(24, 55, 55, 0.6)"
-                           markerEndId="arrow"/>
-      </svg>
+        {NODES.map(({x, y, key})=>(
+          <CircleNode id={key} key={key} x={x} y={y} r={4}
+                      nodeType="node"
+                      stroke="black" strokeWidth="1" fill="red"/>
+        ))}
+        {LINKS.map(({from, to})=>(
+          <StraightConnector from={from}
+                             to={to}
+                             key={`${from}-${to}`}
+                             nodeType="link"
+                             strokeWidth={1}
+                             color="rgba(24, 55, 55, 0.6)"
+                             markerEndId="arrow"/>
+        ))}
+      </LinkGraph>
     );
   }
 }
+
+
