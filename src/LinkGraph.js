@@ -1,6 +1,7 @@
 import React, {PropTypes, Component, cloneElement} from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
 import ByProp from './utils/byProp';
+import isDefined from './utils/isDefined';
 
 export const NODE_TYPES = {
   DEFS: 'defs',
@@ -28,19 +29,19 @@ export default class LinkGraph extends Component {
     // 2. clone the links and subplant the x1, y1 with the xy locations of the nodes.
     const linksWithCoords = links.map((link)=> {
       const {from, to, nodeType, ..._linkProps} = link.props;
-      if (typeof from !== 'undefined') {
-        const fromNode = nodes.filter(({props: {id: _id}})=>(_id == from))[0];
-        if (typeof fromNode !== 'undefined') {
-          _linkProps.x1 = fromNode.props.x;
-          _linkProps.y1 = fromNode.props.y;
+      if (isDefined(from)) {
+        let {props: {x, y}} = nodes.filter(({props: {id: _id}})=>(_id == from))[0];
+        if (isDefined(x) && isDefined(y)) {
+          _linkProps.x1 = x;
+          _linkProps.y1 = y;
         }
       }
 
-      if (typeof to !== 'undefined') {
-        const fromNode = nodes.filter(({props: {id: _id}})=>(_id == to))[0];
-        if (typeof fromNode !== 'undefined') {
-          _linkProps.x2 = fromNode.props.x;
-          _linkProps.y2 = fromNode.props.y;
+      if (isDefined(to)) {
+        let {props: {x, y}} = nodes.filter(({props: {id: _id}})=>(_id == to))[0];
+        if (isDefined(x) && isDefined(y)) {
+          _linkProps.x2 = x;
+          _linkProps.y2 = y;
         }
       }
       return cloneElement(link, {..._linkProps}, link.children);
