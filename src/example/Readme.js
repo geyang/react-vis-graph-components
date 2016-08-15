@@ -22,13 +22,7 @@ export default function Readme({}) {
       The graph component takes in the children (links and nodes) and automatically calculates
       the end points for the connections and adds padding.
       `}
-      <HappySandwichMakerExample/>
-      ### Props
-      {`This table below is generated automatically`}
-      <div className="table-container horizontal-scroll flex-column center">
-        <PropsTable propMetaData={HappySandwichMakerAST.props}/>
-      </div>
-      {`
+      <HappySandwichMakerExample/>{`
       ### Usage Example
 
       The source code below of the example above is loaded using the webpack raw loader.`}
@@ -44,3 +38,8 @@ export default function Readme({}) {
     </Markdown>
   )
 }
+// ### Props
+// {`This table below is generated automatically`}
+// <div className="table-container horizontal-scroll flex-column center">
+//   <PropsTable propMetaData={HappySandwichMakerAST.props}/>
+// </div>
