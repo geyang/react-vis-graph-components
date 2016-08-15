@@ -31,16 +31,15 @@ export default class HappySandwichMakerExample extends Component {
       const [from, to] = name.split('-');
       for (var ind in LINKS) {
         if (LINKS[ind].from === from && LINKS[ind].to === to) {
-          break;
+          return this.setState({
+            links: [
+              ...LINKS.slice(0, ind - 1),
+              {...LINKS[ind], strokeWidth: 4, paddingEnd: 17},
+              ...LINKS.slice(ind + 1)
+            ]
+          });
         }
       }
-      this.setState({
-        links: [
-          ...LINKS.slice(0, ind),
-          {...LINKS[ind], strokeWidth: 4, paddingEnd: 17},
-          ...LINKS.slice(ind)
-        ]
-      });
     };
   }
 
@@ -49,16 +48,15 @@ export default class HappySandwichMakerExample extends Component {
       const [from, to] = name.split('-');
       for (var ind in LINKS) {
         if (LINKS[ind].from === from && LINKS[ind].to === to) {
-          break;
+          return this.setState({
+            links: [
+              ...LINKS.slice(0, ind - 1),
+              {...LINKS[ind], strokeWidth: 1, paddingEnd: 5},
+              ...LINKS.slice(ind + 1)
+            ]
+          });
         }
       }
-      this.setState({
-        links: [
-          ...LINKS.slice(0, ind),
-          {...LINKS[ind], strokeWidth: 1, paddingEnd: 5},
-          ...LINKS.slice(ind)
-        ]
-      });
     };
   }
 
