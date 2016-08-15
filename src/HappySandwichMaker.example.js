@@ -33,9 +33,9 @@ export default class HappySandwichMakerExample extends Component {
         if (LINKS[ind].from === from && LINKS[ind].to === to) {
           return this.setState({
             links: [
-              ...LINKS.slice(0, ind - 1),
+              ...LINKS.slice(0, parseInd(ind)),
               {...LINKS[ind], strokeWidth: 4, paddingEnd: 17},
-              ...LINKS.slice(ind + 1)
+              ...LINKS.slice(parseInd(ind) + 1)
             ]
           });
         }
@@ -50,9 +50,9 @@ export default class HappySandwichMakerExample extends Component {
         if (LINKS[ind].from === from && LINKS[ind].to === to) {
           return this.setState({
             links: [
-              ...LINKS.slice(0, ind - 1),
+              ...LINKS.slice(0, parseInt(ind)),
               {...LINKS[ind], strokeWidth: 1, paddingEnd: 5},
-              ...LINKS.slice(ind + 1)
+              ...LINKS.slice(parseInt(ind) + 1)
             ]
           });
         }
@@ -62,6 +62,7 @@ export default class HappySandwichMakerExample extends Component {
 
   render() {
     const {links, nodes} = this.state;
+    console.log(links);
     return (
       <LinkGraph width="200" height="200">
         <defs>
