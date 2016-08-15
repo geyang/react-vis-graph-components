@@ -8,10 +8,10 @@ import CircleNode from './blocks/CircleNode';
 import StraightConnector from './connectors/StraigntConnector';
 
 const NODES = [
-  {x: 10, y: 50, key: 'batman'},
-  {x: 40, y: 20, key: 'superman'},
-  {x: 75, y: 30, key: 'antman'},
-  {x: 10, y: 20, key: 'manman'}
+  {x: 100, y: 50, key: 'batman'},
+  {x: 140, y: 80, key: 'superman'},
+  {x: 175, y: 130, key: 'antman'},
+  {x: 110, y: 120, key: 'manman'}
 ];
 
 const LINKS = [
@@ -29,9 +29,9 @@ export default class HappySandwichMakerExample extends Component {
           <Arrow id="arrow" width="10" height="10"/>
         </defs>
         {NODES.map(({x, y, key})=>(
-          <CircleNode id={key} key={key} x={x} y={y} r={4}
+          <CircleNode id={key} key={key} x={x} y={y} r={10}
                       nodeType="node"
-                      stroke="black" strokeWidth="1" fill="red"/>
+                      stroke="black" strokeWidth="0" fill="red"/>
         ))}
         {LINKS.map(({from, to})=>(
           <StraightConnector from={from}
@@ -40,6 +40,8 @@ export default class HappySandwichMakerExample extends Component {
                              nodeType="link"
                              strokeWidth={1}
                              color="rgba(24, 55, 55, 0.6)"
+                             paddingStart={2}
+                             paddingEnd={5}
                              markerEndId="arrow"/>
         ))}
       </LinkGraph>

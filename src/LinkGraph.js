@@ -2,6 +2,7 @@ import React, {PropTypes, Component, cloneElement} from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
 import ByProp from './utils/byProp';
 import isDefined from './utils/isDefined';
+import padLine from './utils/padLine';
 
 export const NODE_TYPES = {
   DEFS: 'defs',
@@ -28,30 +29,38 @@ export default class LinkGraph extends Component {
     // 1. get all nodes and extract their x, y locations
     // 2. clone the links and subplant the x1, y1 with the xy locations of the nodes.
     const linksWithCoords = links.map((link)=> {
-      const {from, to, nodeType, ..._linkProps} = link.props;
+      const {from, to, nodeType, paddingStart = 0, paddingEnd = 0, ..._linkProps} = link.props;
+      let x1, y1, padding1, x2, y2, padding2;
       if (isDefined(from)) {
-        let {props: {x, y}} = nodes.filter(({props: {id: _id}})=>(_id == from))[0];
+        let {props: {x, y, r, strokeWidth}} = nodes.filter(({props: {id: _id}})=>(_id == from))[0];
         if (isDefined(x) && isDefined(y)) {
-          _linkProps.x1 = x;
-          _linkProps.y1 = y;
+          x1 = x;
+          y1 = y;
+          padding1 = r + strokeWidth / 2 + paddingStart;
         }
       }
 
       if (isDefined(to)) {
-        let {props: {x, y}} = nodes.filter(({props: {id: _id}})=>(_id == to))[0];
+        let {props: {x, y, r, strokeWidth}} = nodes.filter(({props: {id: _id}})=>(_id == to))[0];
         if (isDefined(x) && isDefined(y)) {
-          _linkProps.x2 = x;
-          _linkProps.y2 = y;
+          x2 = x;
+          y2 = y;
+          padding2 = r + strokeWidth / 2 + paddingEnd;
         }
       }
-      return cloneElement(link, {..._linkProps}, link.children);
+
+      // calculate the intersection points
+      const paddedEndPoints = padLine(x1, y1, x2, y2, -padding1, -padding2);
+
+
+      return cloneElement(link, {...paddedEndPoints, ..._linkProps}, link.children);
     });
 
     return (
       <svg {..._props}>
         {defs}
-        {linksWithCoords}
         {nodes}
+        {linksWithCoords}
       </svg>
     );
   }

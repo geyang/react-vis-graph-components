@@ -17,6 +17,8 @@ export default function StraightConnector({
   y1,
   x2,
   y2,
+  paddingStart,
+  paddingEnd,
   markerStartId,
   markerMidId,
   markerEndId,
