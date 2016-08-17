@@ -51,7 +51,7 @@ export default class HappySandwichMakerExample extends Component {
           return this.setState({
             links: [
               ...LINKS.slice(0, parseInt(ind)),
-              {...LINKS[ind], strokeWidth: 1, paddingEnd: 5},
+              {...LINKS[ind], strokeWidth: 2, paddingEnd: 10},
               ...LINKS.slice(parseInt(ind) + 1)
             ]
           });
@@ -69,15 +69,13 @@ export default class HappySandwichMakerExample extends Component {
         </defs>
         {nodes.map(({x, y, key})=>(
           <CircleNode name={key} key={key} x={x} y={y} r={10}
-                      nodeType="node"
                       stroke="black" strokeWidth="0" fill="red"/>
         ))}
-        {links.map(({from, to, strokeWidth = 1, paddingEnd = 5})=>(
+        {links.map(({from, to, strokeWidth = 2, paddingEnd = 10})=>(
           <StraightConnector from={from}
                              to={to}
                              key={`${from}-${to}`}
                              name={`${from}-${to}`}
-                             nodeType="link"
                              strokeWidth={strokeWidth}
                              color="rgba(24, 55, 55, 0.6)"
                              onMouseEnter={this._onMouseEnter(`${from}-${to}`)}

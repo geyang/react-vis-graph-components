@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import {LINK} from '../node-types';
+import NODE_TYPES from '../node-types';
 
 const {arrayOf, oneOf} = PropTypes;
 const propTypes = {
@@ -13,7 +13,6 @@ const styleProps = {
 export default function StraightConnector({
   from,
   to,
-  nodeType,
   x1,
   y1,
   x2,
@@ -44,5 +43,5 @@ export default function StraightConnector({
   );
 }
 
-StraightConnector.graphNodeType = LINK;
+StraightConnector.graphNodeType = NODE_TYPES.LINK;
 StraightConnector.propTypes = propTypes;

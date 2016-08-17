@@ -16,8 +16,8 @@ export default class LinkGraph extends Component {
     const {children, ..._props} = this.props;
     const _children = children.reduce((l, item)=>l.concat(item), []);
     const defs = _children.filter(({type})=>(type === NODE_TYPES.DEFS));
-    const links = _children.filter(ByProp('nodeType', NODE_TYPES.LINK));
-    const nodes = _children.filter(ByProp('nodeType', NODE_TYPES.NODE));
+    const links = _children.filter(({type: {graphNodeType}})=>(graphNodeType == NODE_TYPES.LINK));
+    const nodes = _children.filter(({type: {graphNodeType}})=>(graphNodeType == NODE_TYPES.NODE));
 
     // 1. get all nodes and extract their x, y locations
     // 2. clone the links and subplant the x1, y1 with the xy locations of the nodes.

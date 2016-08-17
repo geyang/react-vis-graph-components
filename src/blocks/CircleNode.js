@@ -2,7 +2,7 @@
  * Created by ge on 8/14/16.
  */
 import React, {PropTypes} from 'react';
-import {NODE} from '../node-types';
+import NODE_TYPES from '../node-types';
 
 // const {} = PropTypes;
 const propTypes = {};
@@ -36,5 +36,6 @@ export default function CircleNode({
   }
 }
 
+CircleNode.graphNodeType = NODE_TYPES.NODE;
 CircleNode.propTypes = propTypes;
 
