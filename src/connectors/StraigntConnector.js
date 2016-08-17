@@ -13,6 +13,7 @@ const styleProps = {
 export default function StraightConnector({
   from,
   to,
+  nodeType,
   x1,
   y1,
   x2,
