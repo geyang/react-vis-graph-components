@@ -5,7 +5,7 @@ import isDefined from './utils/isDefined';
 import padLine from './utils/padLine';
 import NODE_TYPES from './node-types';
 
-export default class LinkGraph extends Component {
+export default class SunkeyGraph extends Component {
   static propTypes = {};
 
   shouldComponentUpdate(nextProp, nextState) {

@@ -14,7 +14,9 @@ import HappySandwichMakerAST from "!!react-docgen!../HappySandwichMaker";
 export default function Readme({}) {
   return (
     <Markdown stripIndent={true}>{`
-      # Linked Node Graph Component
+      # Linked Node Graph Component and Sunkey Diagram
+
+      ## Linked Node Graph
 
       [![github](https://img.shields.io/github/downloads/episodeyang/react-vis-link-graph/total.svg?style=flat-square&maxAge=2592000)]()
 
@@ -28,6 +30,13 @@ export default function Readme({}) {
       The source code below of the example above is loaded using the webpack raw loader.`}
       <Highlight>{HappySandwichMakerSource}</Highlight>
       {`
+
+      ## Sunkey Diagram
+
+      `}
+
+      {`
+
       ## Develop
 
       1. First make your changes, then git commit. Use \`serve-docs\` to view live update at [http://localhost:5000](http://localhost:5000).

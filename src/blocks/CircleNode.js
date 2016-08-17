@@ -2,6 +2,7 @@
  * Created by ge on 8/14/16.
  */
 import React, {PropTypes} from 'react';
+import {NODE} from '../node-types';
 
 // const {} = PropTypes;
 const propTypes = {};
