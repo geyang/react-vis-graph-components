@@ -26,7 +26,7 @@ export default class TextWrap extends PureRenderComponent {
 
       return (
         <foreignObject
-          requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+          requiredFeatures='http://www.w3.org/TR/SVG11/feature#Extensibility'
           {...paddedBound}>
           <xhtml:div style={style} {...paddedBound}>{text}</xhtml:div>
         </foreignObject>

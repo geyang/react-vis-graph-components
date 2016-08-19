@@ -1,7 +1,7 @@
 /**
  * Created by ge on 6/23/16.
  */
-import React, {Component, PropTypes} from "react";
+import React, {Component, PropTypes} from 'react';
 import LinkGraph from './LinkGraph';
 import Arrow from './Arrow';
 import CircleNode from './blocks/CircleNode';
@@ -51,7 +51,7 @@ export default class HappySandwichMakerExample extends Component {
           return this.setState({
             links: [
               ...LINKS.slice(0, parseInt(ind)),
-              {...LINKS[ind], strokeWidth: 2, paddingEnd: 10},
+              {...LINKS[ind], strokeWidth: 2, paddingEnd: 9},
               ...LINKS.slice(parseInt(ind) + 1)
             ]
           });
@@ -63,26 +63,26 @@ export default class HappySandwichMakerExample extends Component {
   render() {
     const {links, nodes} = this.state;
     return (
-      <LinkGraph width="200" height="200">
+      <LinkGraph width='200' height='200'>
         <defs>
-          <Arrow id="arrow" width="10" height="10"/>
+          <Arrow id='arrow' width='10' height='10'/>
         </defs>
         {nodes.map(({x, y, key})=>(
-          <CircleNode name={key} key={key} x={x} y={y} r={10}
-                      stroke="black" strokeWidth="0" fill="red"/>
+          <CircleNode name={key} key={key} cx={x} cy={y} r={10}
+                      stroke='black' strokeWidth='0' fill='red'/>
         ))}
-        {links.map(({from, to, strokeWidth = 2, paddingEnd = 10})=>(
+        {links.map(({from, to, strokeWidth = 2, paddingEnd = 9})=>(
           <StraightConnector from={from}
                              to={to}
                              key={`${from}-${to}`}
                              name={`${from}-${to}`}
                              strokeWidth={strokeWidth}
-                             color="rgba(24, 55, 55, 0.6)"
+                             color='rgba(24, 55, 55, 0.6)'
                              onMouseEnter={this._onMouseEnter(`${from}-${to}`)}
                              onMouseLeave={this._onMouseLeave(`${from}-${to}`)}
                              paddingStart={2}
                              paddingEnd={paddingEnd}
-                             markerEndId="arrow"/>
+                             markerEndId='arrow'/>
         ))}
       </LinkGraph>
     );

@@ -27,9 +27,6 @@ export default function SquareConnector({
   const intersect1 =
 
 
-
-
-
   const wayPoints = [
     from,
     controlPoint,

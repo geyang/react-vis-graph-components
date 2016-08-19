@@ -23,7 +23,7 @@ export function getGlyphSize(string, font, fontSize) {
   const frag = document.createDocumentFragment();
   const svg = document.createElement('svg');
   frag.appendChild(svg);
-  const tspan = document.createElement('tspan', {style: {"font-size": fontSize}}, string);
+  const tspan = document.createElement('tspan', {style: {'font-size': fontSize}}, string);
   svg.append(tspan);
   // tspan.getComputedTextLength();
   const bbox = tspan.getBBox();

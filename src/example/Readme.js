@@ -1,40 +1,47 @@
 /**
  * Created by ge on 6/24/16.
  */
-import React from "react";
-import Markdown from "react-markdownit";
-
-import Highlight from "@episodeyang/react-highlight.js";
-import PropsTable from "react-component-props-table";
-
-import HappySandwichMakerExample from "../HappySandwichMaker.example";
-import HappySandwichMakerSource from "!!raw!../HappySandwichMaker.example";
-import HappySandwichMakerAST from "!!react-docgen!../HappySandwichMaker";
+import React from 'react';
+import Markdown from 'react-markdownit';
+import Highlight from '@episodeyang/react-highlight.js';
+import HappySandwichMakerExample from '../HappySandwichMaker.example';
+import HappySandwichMakerSource from '!!raw!../HappySandwichMaker.example';
+import SankeyDiagramExample from '../SankeyDiagram.example';
+import SankeyDiagramSource from '!!raw!../SankeyDiagram.example';
 
 export default function Readme({}) {
   return (
     <Markdown stripIndent={true}>{`
-      # Linked Node Graph Component and Sunkey Diagram
+      # Linked Node Graph Component and Sankey Diagram
 
       ## Linked Node Graph
 
-      [![github](https://img.shields.io/github/downloads/episodeyang/react-vis-link-graph/total.svg?style=flat-square&maxAge=2592000)]()
+      [![github](https://img.shields.io/github/downloads/episodeyang/` +
+      `react-vis-link-graph/total.svg?style=flat-square&maxAge=2592000)]()
 
       This component allows you to draw a linked node graph easily.
-      The graph component takes in the children (links and nodes) and automatically calculates
-      the end points for the connections and adds padding.
+      The graph component takes in the children (links and nodes) and
+      automatically calculates the end points for the connections and
+      adds padding.
       `}
       <HappySandwichMakerExample/>{`
       ### Usage Example
 
-      The source code below of the example above is loaded using the webpack raw loader.`}
+      The source code below of the example above is loaded using the
+      webpack raw loader.`}
       <Highlight>{HappySandwichMakerSource}</Highlight>
       {`
 
-      ## Sunkey Diagram
+      ## Sankey Diagram
 
       `}
+      <SankeyDiagramExample/>
+      {`
+      ### Usage example
 
+      The source code below of the example above is loaded using the
+      webpack raw loader.`}
+      <Highlight>{SankeyDiagramSource}</Highlight>
       {`
 
       ## Develop
@@ -49,6 +56,6 @@ export default function Readme({}) {
 }
 // ### Props
 // {`This table below is generated automatically`}
-// <div className="table-container horizontal-scroll flex-column center">
+// <div className='table-container horizontal-scroll flex-column center'>
 //   <PropsTable propMetaData={HappySandwichMakerAST.props}/>
 // </div>

@@ -22,7 +22,7 @@ export default function StraightConnector({
   markerStartId,
   markerMidId,
   markerEndId,
-  stroke = "black",
+  stroke = 'black',
   strokeWidth,
   ..._props
 }) {

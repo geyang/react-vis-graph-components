@@ -12,7 +12,9 @@ var _Readme = require("./Readme");
 
 var _Readme2 = _interopRequireDefault(_Readme);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {default: obj};
+}
 
 /**
  * Created by ge on 6/23/16.

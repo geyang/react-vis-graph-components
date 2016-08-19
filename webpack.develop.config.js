@@ -17,11 +17,11 @@ const build_entry = {
     'webpack/hot/only-dev-server',
     'react-hot-loader/patch',
     'babel-polyfill',
-    "./src/example/index"
+    './src/example/index'
   ],
   vendor: [
-    "react",
-    "react-dom"
+    'react',
+    'react-dom'
   ]
 };
 
@@ -51,7 +51,7 @@ module.exports = {
       {
         test: /\.html$/,
         exclude: /(node_modules|bower_components)/,
-        loader: "file?[name].[ext]"
+        loader: 'file?[name].[ext]'
       },
       {
         test: /react-highlight\.js\/dist\/main\.js$/,
@@ -74,43 +74,43 @@ module.exports = {
       },
       {
         test: /\.json$/,
-        loader: "json"
+        loader: 'json'
       },
       {
         test: /\.s?css$/,
-        loaders: ['style', 'css', "postcss-loader", 'sass']
+        loaders: ['style', 'css', 'postcss-loader', 'sass']
       },
       {
         test: /\.md$/,
-        loaders: ["html", "markdown-it"]
+        loaders: ['html', 'markdown-it']
       },
       // {
       //   test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-      //   loader: "file"
+      //   loader: 'file'
       // },
       // {
       //   test: /\.(woff|woff2)$/,
-      //   loader: "url?prefix=font/&limit=5000"
+      //   loader: 'url?prefix=font/&limit=5000'
       // },
       // {
       //   test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-      //   loader: "url?limit=10000&mimetype=application/octet-stream"
+      //   loader: 'url?limit=10000&mimetype=application/octet-stream'
       // },
       // {
       //   test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-      //   loader: "url?limit=10000&mimetype=image/svg+xml"
+      //   loader: 'url?limit=10000&mimetype=image/svg+xml'
       // },
       // {
       //   test: /\.gif/,
-      //   loader: "url-loader?limit=10000&mimetype=image/gif"
+      //   loader: 'url-loader?limit=10000&mimetype=image/gif'
       // },
       // {
       //   test: /\.jpg/,
-      //   loader: "url-loader?limit=10000&mimetype=image/jpg"
+      //   loader: 'url-loader?limit=10000&mimetype=image/jpg'
       // },
       // {
       //   test: /\.png/,
-      //   loader: "url-loader?limit=10000&mimetype=image/png"
+      //   loader: 'url-loader?limit=10000&mimetype=image/png'
       // }
     ]
   },
@@ -120,13 +120,13 @@ module.exports = {
     // highlight: function (str, lang) {
     //   if (lang && hljs.getLanguage(lang)) {
     //     try {
-    //       return '<pre><code class="hljs '+lang+'">' +
+    //       return '<pre><code class='hljs '+lang+''>' +
     //         hljs.highlight(lang, str, true).value +
     //         '</code></pre>';
     //     } catch (__) {}
     //   }
     //
-    //   return '<pre><code class="hljs">' + md.utils.escapeHtml(str) + '</code></pre>';
+    //   return '<pre><code class='hljs'>' + md.utils.escapeHtml(str) + '</code></pre>';
     // }
   },
   postcss: function () {
@@ -135,7 +135,7 @@ module.exports = {
   devServer: {
     port: port,
     stats: {colors: true},
-    contentBase: "./src/example",
+    contentBase: './src/example',
     noInfo: true, //  --no-info option
     hot: true,
     inline: false,
@@ -148,28 +148,28 @@ module.exports = {
       colors: true
     }
     // historyApiFallback: {
-    //   index: "/index.html"
+    //   index: '/index.html'
     // },
     // proxy: {
-    //   "/gittor/*": {
+    //   '/gittor/*': {
     //     target: {
-    //       "host": "localhost",
-    //       "protocol": 'http:',
-    //       "port": 4000
+    //       'host': 'localhost',
+    //       'protocol': 'http:',
+    //       'port': 4000
     //     },
     //     rewrite: function (req) {
-    //       req.url = req.url.replace(/^\/gittor\//, "/");
-    //       if (req.url.match(/\/$/)) req.url += "index.html";
+    //       req.url = req.url.replace(/^\/gittor\//, '/');
+    //       if (req.url.match(/\/$/)) req.url += 'index.html';
     //       var extension = req.url
     //         .split('/').slice(-1)[0]
     //         .split('.')[1];
-    //       if (!extension) req.url += ".html";
+    //       if (!extension) req.url += '.html';
     //     }
     //   }
     // }
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.js"),
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.ProvidePlugin({})// provide globals

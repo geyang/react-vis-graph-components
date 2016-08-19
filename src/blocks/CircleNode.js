@@ -1,17 +1,13 @@
-/**
- * Created by ge on 8/14/16.
- */
-import React, {PropTypes} from 'react';
-import NODE_TYPES from '../node-types';
+/** Created by ge on 8/14/16. */
+import React from "react";
+import NODE_TYPES from "../node-types";
 
-// const {} = PropTypes;
 const propTypes = {};
 
 export default function CircleNode({
   name,
-  nodeType,
-  x,
-  y,
+  cx,
+  cy,
   r,
   fill = 'transparent',
   stroke = 'rgba(35, 170, 255, 0.5)',
@@ -20,20 +16,18 @@ export default function CircleNode({
   ..._props
 }) {
   const props = {
-    name, cx: x, cy: y, r, fill, stroke, strokeWidth,
+    name, cx, cy, r, fill, stroke, strokeWidth,
     ..._props
   };
   if (typeof children === 'undefined') {
-    return (
-      <circle {...props}/>
-    );
-  } else {
-    return (
-      <g>
-        <circle {...props}/>
-      </g>
-    );
+    return <circle {...props}/>;
   }
+  return (
+    <g>
+      <circle {...props}/>
+      {children}
+    </g>
+  );
 }
 
 CircleNode.graphNodeType = NODE_TYPES.NODE;

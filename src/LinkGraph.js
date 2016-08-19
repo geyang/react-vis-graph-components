@@ -1,6 +1,5 @@
 import React, {PropTypes, Component, cloneElement} from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
-import ByProp from './utils/byProp';
 import isDefined from './utils/isDefined';
 import padLine from './utils/padLine';
 import NODE_TYPES from './node-types';
@@ -25,27 +24,25 @@ export default class LinkGraph extends Component {
       const {from, to, nodeType, paddingStart = 0, paddingEnd = 0, ..._linkProps} = link.props;
       let x1, y1, padding1, x2, y2, padding2;
       if (isDefined(from)) {
-        let {props: {x, y, r, strokeWidth}} = nodes.filter(({props: {name: _name}})=>(_name == from))[0];
-        if (isDefined(x) && isDefined(y)) {
-          x1 = x;
-          y1 = y;
+        let {props: {cx, cy, r, strokeWidth}} = nodes.filter(({props: {name: _name}})=>(_name == from))[0];
+        if (isDefined(cx) && isDefined(cy)) {
+          x1 = cx;
+          y1 = cy;
           padding1 = r + strokeWidth / 2 + paddingStart;
         }
       }
 
       if (isDefined(to)) {
-        let {props: {x, y, r, strokeWidth}} = nodes.filter(({props: {name: _name}})=>(_name == to))[0];
-        if (isDefined(x) && isDefined(y)) {
-          x2 = x;
-          y2 = y;
+        let {props: {cx, cy, r, strokeWidth}} = nodes.filter(({props: {name: _name}})=>(_name == to))[0];
+        if (isDefined(cx) && isDefined(cy)) {
+          x2 = cx;
+          y2 = cy;
           padding2 = r + strokeWidth / 2 + paddingEnd;
         }
       }
 
       // calculate the intersection points
       const paddedEndPoints = padLine(x1, y1, x2, y2, -padding1, -padding2);
-
-
       return cloneElement(link, {...paddedEndPoints, ..._linkProps}, link.children);
     });
 
