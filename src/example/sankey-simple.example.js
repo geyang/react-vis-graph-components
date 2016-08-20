@@ -2,7 +2,7 @@
  * Created by ge on 6/23/16.
  */
 import React, {Component, PropTypes} from 'react';
-import SankeyGraph from '../sankey-graph';
+import SankeyGraph from '../sankey';
 import CircleNode from '../blocks/circle-nodes';
 import StraightConnector from '../connectors/straight-connector';
 

@@ -3,10 +3,10 @@
  */
 import React, {Component, PropTypes} from 'react';
 
-var {number, string} = PropTypes;
+const {string} = PropTypes;
 export default class HappySandwichMaker extends Component {
   static propTypes = {
-    style: string.isRequired,
+    style: string.isRequired
   };
 
   render() {

@@ -434,8 +434,7 @@
         "require-yield": 2,
         "jsx-quotes": [
             2,
-            "double",
-            "avoid-escape"
+            "prefer-double"
         ],
         "react/jsx-no-undef": 2,
         "react/no-unknown-property": 2,
