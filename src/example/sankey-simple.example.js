@@ -157,16 +157,16 @@ export default class SankeyDiagramExample extends Component {
   render() {
     const {links, nodes} = this.state;
     return (
-      <SankeyGraph width='800' height='600'>
-        {nodes.map(({name})=>(
+      <SankeyGraph width={800} height={600}>
+        {nodes.map(({name}) => (
           <CircleNode name={name} key={name}/>
         ))}
         {links.map(({from, to}) => (
-          <StraightConnector from={from}
-                             to={to}
-                             key={`${from}-${to}`}
-                             name={`${from}-${to}`}
-                             color='rgba(24, 55, 55, 0.6)'/>
+          <StraightConnector
+            key={`${from}-${to}`}
+            from={from}
+            to={to}
+            color='rgba(24, 55, 55, 0.6)'/>
         ))}
       </SankeyGraph>
     );
