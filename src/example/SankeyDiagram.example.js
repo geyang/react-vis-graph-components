@@ -1,10 +1,10 @@
 /**
  * Created by ge on 6/23/16.
  */
-import React, {Component, PropTypes} from "react";
-import SankeyGraph from "./SankeyGraph";
-import CircleNode from "./blocks/CircleNode";
-import StraightConnector from "./connectors/StraigntConnector";
+import React, {Component, PropTypes} from 'react';
+import SankeyGraph from '../sankey-graph';
+import CircleNode from '../blocks/circle-nodes';
+import StraightConnector from '../connectors/straight-connector';
 
 const NODES = [
   {name: 'Energy'},

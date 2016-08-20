@@ -4,10 +4,10 @@
 import React from 'react';
 import Markdown from 'react-markdownit';
 import Highlight from '@episodeyang/react-highlight.js';
-import HappySandwichMakerExample from '../HappySandwichMaker.example';
-import HappySandwichMakerSource from '!!raw!../HappySandwichMaker.example';
-import SankeyDiagramExample from '../SankeyDiagram.example';
-import SankeyDiagramSource from '!!raw!../SankeyDiagram.example';
+import HappySandwichMakerExample from './SimpleLinkNodes.example';
+import HappySandwichMakerSource from '!!raw!./SimpleLinkNodes.example.js';
+import SankeyDiagramExample from './SankeyDiagram.example';
+import SankeyDiagramSource from '!!raw!./SankeyDiagram.example.js';
 
 export default function Readme({}) {
   return (
@@ -24,7 +24,8 @@ export default function Readme({}) {
       automatically calculates the end points for the connections and
       adds padding.
       `}
-      <HappySandwichMakerExample/>{`
+      <HappySandwichMakerExample/>
+      {`
       ### Usage Example
 
       The source code below of the example above is loaded using the
@@ -46,7 +47,8 @@ export default function Readme({}) {
 
       ## Develop
 
-      1. First make your changes, then git commit. Use \`serve-docs\` to view live update at [http://localhost:5000](http://localhost:5000).
+      1. First make your changes, then git commit. Use \`serve-docs\`
+       to view live update at [http://localhost:5000](http://localhost:5000).
       2. run \`build-docs\`, \`build-static-docs\`, \`gh-pages\`
       3. Then remember to push to master.
 

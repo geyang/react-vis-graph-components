@@ -1,11 +1,14 @@
 /**
  * Created by ge on 6/23/16.
  */
-import React, {Component, PropTypes} from 'react';
-import LinkGraph from './LinkGraph';
-import Arrow from './Arrow';
-import CircleNode from './blocks/CircleNode';
-import StraightConnector from './connectors/StraigntConnector';
+import {window} from 'global';
+import React, {Component} from 'react';
+import LinkGraph from '../link-nodes';
+import Arrow from '../arrow';
+import CircleNode from '../blocks/circle-nodes';
+import StraightConnector from '../connectors/straight-connector';
+
+const {parseInt} = window;
 
 const NODES = [
   {x: 100, y: 50, key: 'batman'},
@@ -17,9 +20,8 @@ const NODES = [
 const LINKS = [
   {from: 'batman', to: 'superman'},
   {from: 'superman', to: 'antman'},
-  {from: 'antman', to: 'manman'},
+  {from: 'antman', to: 'manman'}
 ];
-
 
 export default class HappySandwichMakerExample extends Component {
   componentWillMount() {
@@ -27,7 +29,7 @@ export default class HappySandwichMakerExample extends Component {
   }
 
   _onMouseEnter(name) {
-    return ()=> {
+    return () => {
       const [from, to] = name.split('-');
       for (var ind in LINKS) {
         if (LINKS[ind].from === from && LINKS[ind].to === to) {
@@ -44,7 +46,7 @@ export default class HappySandwichMakerExample extends Component {
   }
 
   _onMouseLeave(name) {
-    return ()=> {
+    return () => {
       const [from, to] = name.split('-');
       for (var ind in LINKS) {
         if (LINKS[ind].from === from && LINKS[ind].to === to) {
@@ -63,27 +65,28 @@ export default class HappySandwichMakerExample extends Component {
   render() {
     const {links, nodes} = this.state;
     return (
-      <LinkGraph width='200' height='200'>
+      <LinkGraph width={200} height={200}>
         <defs>
           <Arrow id='arrow' width='10' height='10'/>
         </defs>
-        {nodes.map(({x, y, key})=>(
-          <CircleNode name={key} key={key} cx={x} cy={y} r={10}
-                      stroke='black' strokeWidth='0' fill='red'/>
-        ))}
-        {links.map(({from, to, strokeWidth = 2, paddingEnd = 9})=>(
-          <StraightConnector from={from}
-                             to={to}
-                             key={`${from}-${to}`}
-                             name={`${from}-${to}`}
-                             strokeWidth={strokeWidth}
-                             color='rgba(24, 55, 55, 0.6)'
-                             onMouseEnter={this._onMouseEnter(`${from}-${to}`)}
-                             onMouseLeave={this._onMouseLeave(`${from}-${to}`)}
-                             paddingStart={2}
-                             paddingEnd={paddingEnd}
-                             markerEndId='arrow'/>
-        ))}
+        {nodes.map(
+          ({x, y, key}) =>
+            <CircleNode name={key} key={key} cx={x} cy={y} r={10}
+                        stroke='black' strokeWidth='0' fill='red'/>
+        )}
+        {links.map(
+          ({from, to, strokeWidth = 2, paddingEnd = 9}) =>
+            <StraightConnector from={from}
+                               to={to}
+                               key={`${from}-${to}`}
+                               strokeWidth={strokeWidth}
+                               color='rgba(24, 55, 55, 0.6)'
+                               onMouseEnter={this._onMouseEnter(`${from}-${to}`)}
+                               onMouseLeave={this._onMouseLeave(`${from}-${to}`)}
+                               paddingStart={2}
+                               paddingEnd={paddingEnd}
+                               markerEndId='arrow'/>
+        )}
       </LinkGraph>
     );
   }

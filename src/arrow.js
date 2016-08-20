@@ -1,6 +1,4 @@
-import React, {PropTypes} from 'react';
-
-const propTypes = {};
+import React from 'react';
 
 export default function Arrow({
   id,
@@ -25,5 +23,3 @@ export default function Arrow({
     </marker>
   );
 }
-
-Arrow.propTypes = propTypes;
