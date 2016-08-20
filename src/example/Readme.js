@@ -4,10 +4,10 @@
 import React from 'react';
 import Markdown from 'react-markdownit';
 import Highlight from '@episodeyang/react-highlight.js';
-import HappySandwichMakerExample from './SimpleLinkNodes.example';
-import HappySandwichMakerSource from '!!raw!./SimpleLinkNodes.example.js';
-import SankeyDiagramExample from './SankeyDiagram.example';
-import SankeyDiagramSource from '!!raw!./SankeyDiagram.example.js';
+import HappySandwichMakerExample from './link-nodes-simple.example';
+import HappySandwichMakerSource from '!!raw!./link-nodes-simple.example.js';
+import SankeyDiagramExample from './sankey-diagram.example';
+import SankeyDiagramSource from '!!raw!./sankey-diagram.example.js';
 
 export default function Readme({}) {
   return (
