@@ -3,16 +3,9 @@ import shallowCompare from 'react-addons-shallow-compare';
 import isDefined from './utils/isDefined';
 import padLine from './utils/padLine';
 import NODE_TYPES from './node-types';
+import getPaddingFromCircleNodes from './utils/getPaddingFromCircleNodes';
 
 // helper functions
-function getPaddingFromCircleNodes(name, nodes, padding) {
-  const {props: {cx, cy, r, strokeWidth}} =
-    nodes.filter(({props: {name: nodeName}}) => (nodeName === name))[0];
-  if (isDefined(cx) && isDefined(cy)) {
-    return {cx, cy, totalPadding: r + strokeWidth / 2 + padding};
-  }
-  return null;
-}
 
 const {number} = PropTypes;
 export default class LinkGraph extends Component {

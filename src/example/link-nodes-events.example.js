@@ -5,7 +5,7 @@ import {window} from 'global';
 import React, {Component} from 'react';
 import LinkGraph from '../link-nodes';
 import Arrow from '../arrow';
-import CircleNode from '../blocks/circle-nodes';
+import CircleNode from '../blocks/circle-node';
 import StraightConnector from '../connectors/straight-connector';
 
 const {parseInt} = window;

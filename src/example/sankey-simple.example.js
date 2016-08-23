@@ -3,7 +3,7 @@
  */
 import React, {Component, PropTypes} from 'react';
 import SankeyGraph from '../sankey';
-import CircleNode from '../blocks/circle-nodes';
+import RectangleNode from '../blocks/rectangle-node';
 import StraightConnector from '../connectors/straight-connector';
 
 const NODES = [
@@ -157,16 +157,16 @@ export default class SankeyDiagramExample extends Component {
   render() {
     const {links, nodes} = this.state;
     return (
-      <SankeyGraph width={800} height={600}>
+      <SankeyGraph width={800} height={600} spacing={100} margin={10}>
         {nodes.map(({name}) => (
-          <CircleNode name={name} key={name}/>
+          <RectangleNode name={name} key={name} width={10}/>
         ))}
         {links.map(({from, to}) => (
           <StraightConnector
             key={`${from}-${to}`}
             from={from}
             to={to}
-            color='rgba(24, 55, 55, 0.6)'/>
+            color="rgba(24, 55, 55, 0.6)"/>
         ))}
       </SankeyGraph>
     );
