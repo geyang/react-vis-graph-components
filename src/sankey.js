@@ -134,7 +134,10 @@ export default class SankeyGraph extends Component {
       });
 
     return (
-      <svg {..._props}>
+      <svg
+        width={containerWidth}
+        height={containerHeight}
+        {..._props}>
         {defs}
         {Children.toArray(nodesWithCoords)}
         {linksWithCoords}
