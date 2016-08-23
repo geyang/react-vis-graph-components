@@ -113,27 +113,31 @@ export default class SankeyGraph extends Component {
       }
     );
 
-    // const linksWithCoords = links.map(
-    //   link => {
-    //     const {
-    //       from, to, paddingStart = 0, paddingEnd = 0, children, ..._linkProps
-    //     } = link.props;
-    //
-    //     const {x: x1, y: y1} = getPaddingFromRectangleNodes(from, nodes, paddingStart);
-    //     const {x: x2, y: y2} = getPaddingFromRectangleNodes(to, nodes, paddingStart);
-    //
-    //     return cloneElement(
-    //       link,
-    //       {x1, x2, y1, y2, ..._linkProps},
-    //       children
-    //     );
-    //   });
+    const linksWithCoords = links.map(
+      link => {
+        const {
+          from, to, paddingStart = 0, paddingEnd = 0, children, ..._linkProps
+        } = link.props;
+
+
+        const nodes = Children.toArray(nodesWithCoords);
+        const {x: x1, y: y1} = getPaddingFromRectangleNodes(from, nodes, paddingStart);
+        const {x: x2, y: y2} = getPaddingFromRectangleNodes(to, nodes, paddingEnd);
+
+        console.log(x1, x2, y1, y2);
+
+        return cloneElement(
+          link,
+          {x1, x2, y1, y2, ..._linkProps},
+          children
+        );
+      });
 
     return (
       <svg {..._props}>
         {defs}
         {Children.toArray(nodesWithCoords)}
-        {/*{linksWithCoords}*/}
+        {linksWithCoords}
       </svg>
     );
   }
