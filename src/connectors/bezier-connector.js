@@ -52,29 +52,6 @@ export default function BezierConnector({
     );
   }
   return <path d="" {...props}/>
-
-  // const ds = shapes.map(
-  //   ({startcap, forward, endcap, back}) => {
-  //     return [startcap, forward, endcap, back].map(
-  //       l => l.toSVG().replace('M', 'L')
-  //     ).join(' ').replace('L', 'M');
-  //   }
-  // );
-
-  // return (
-  //   <g>
-  //     {ds.map(
-  //       (d, ind) => {
-  //         return (
-  //           <path
-  //             key={ind}
-  //             d={d}
-  //             {...props}/>
-  //         );
-  //       }
-  //     )}
-  //   </g>
-  // );
 }
 
 BezierConnector.graphNodeType = NODE_TYPES.LINK;

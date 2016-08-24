@@ -172,11 +172,12 @@ export default class SankeyDiagramExample extends Component {
               margin={10}>{name}</BlockAnchor>
           </RectangleNode>
         ))}
-        {links.map(({from, to}) => (
+        {links.map(({from, to, value}) => (
           <BezierConnector
             key={`${from}-${to}`}
             from={from}
             to={to}
+            width={value * 10}
             fill="rgba(0, 0, 0, 0.5)"
             color="rgba(24, 55, 55, 0.6)"/>
         ))}
