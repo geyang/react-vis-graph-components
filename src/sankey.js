@@ -138,8 +138,8 @@ export default class SankeyGraph extends Component {
         height={containerHeight}
         {..._props}>
         {defs}
-        {Children.toArray(nodesWithCoords)}
         {linksWithCoords}
+        {Children.toArray(nodesWithCoords)}
       </svg>
     );
   }

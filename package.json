@@ -89,6 +89,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "bezier-js": "^2.2.1",
     "global": "^4.3.0",
     "react-addons-shallow-compare": "^15.3.0",
     "react-vis": "^0.4.2"

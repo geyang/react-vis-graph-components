@@ -6,7 +6,7 @@ import SankeyGraph from '../sankey';
 import RectangleNode from '../blocks/rectangle-node';
 import BlockAnchor from '../blocks/block-anchor';
 import Text from '../blocks/text';
-import StraightConnector from '../connectors/straight-connector';
+import BezierConnector from '../connectors/bezier-connector';
 
 const NODES = [
   {name: 'Energy'},
@@ -173,10 +173,11 @@ export default class SankeyDiagramExample extends Component {
           </RectangleNode>
         ))}
         {links.map(({from, to}) => (
-          <StraightConnector
+          <BezierConnector
             key={`${from}-${to}`}
             from={from}
             to={to}
+            fill="rgba(0, 0, 0, 0.5)"
             color="rgba(24, 55, 55, 0.6)"/>
         ))}
       </SankeyGraph>
