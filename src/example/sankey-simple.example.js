@@ -4,6 +4,8 @@
 import React, {Component, PropTypes} from 'react';
 import SankeyGraph from '../sankey';
 import RectangleNode from '../blocks/rectangle-node';
+import BlockAnchor from '../blocks/block-anchor';
+import Text from '../blocks/text';
 import StraightConnector from '../connectors/straight-connector';
 
 const NODES = [
@@ -157,9 +159,18 @@ export default class SankeyDiagramExample extends Component {
   render() {
     const {links, nodes} = this.state;
     return (
-      <SankeyGraph width={800} height={600} spacing={100} margin={10}>
+      <SankeyGraph width={1200} height={600} spacing={100} margin={10}>
         {nodes.map(({name}) => (
-          <RectangleNode name={name} key={name} width={10}/>
+          <RectangleNode
+            name={name}
+            key={name}
+            width={100}>
+            <BlockAnchor
+              component={Text}
+              alignVertical="middle"
+              dominantBaseline="middle"
+              margin={10}>{name}</BlockAnchor>
+          </RectangleNode>
         ))}
         {links.map(({from, to}) => (
           <StraightConnector

@@ -12,12 +12,18 @@ export default function CircleNode({
   r,
   fill = 'transparent',
   stroke = 'rgba(35, 170, 255, 0.5)',
-  strokeWidth = '3',
+  strokeWidth = 3,
   children,
   ..._props
 }) {
   const props = {
-    name, cx, cy, r, fill, stroke, strokeWidth,
+    name,
+    cx,
+    cy,
+    r: r - strokeWidth,
+    fill,
+    stroke,
+    strokeWidth,
     ..._props
   };
   // if (isDefined(children)) {

@@ -3,7 +3,7 @@ import shallowCompare from 'react-addons-shallow-compare';
 import isDefined from './utils/isDefined';
 import NODE_TYPES from './node-types';
 import splitHeadsFromRest from './utils/splitHeadsFromRest';
-import getPaddingFromRectangleNodes from './utils/getPaddingFromRectangleNodes';
+import getAnchorFromRectangleNodes from './utils/get-anchor-from-rectangle-nodes';
 
 const {number} = PropTypes;
 export default class SankeyGraph extends Component {
@@ -119,12 +119,11 @@ export default class SankeyGraph extends Component {
           from, to, paddingStart = 0, paddingEnd = 0, children, ..._linkProps
         } = link.props;
 
-
         const nodes = Children.toArray(nodesWithCoords);
-        const {x: x1, y: y1} = getPaddingFromRectangleNodes(from, nodes, paddingStart);
-        const {x: x2, y: y2} = getPaddingFromRectangleNodes(to, nodes, paddingEnd);
-
-        console.log(x1, x2, y1, y2);
+        const {x: x1, y: y1} =
+          getAnchorFromRectangleNodes(from, nodes, 'right');
+        const {x: x2, y: y2} =
+          getAnchorFromRectangleNodes(to, nodes, 'left');
 
         return cloneElement(
           link,

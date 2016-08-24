@@ -1,6 +1,5 @@
 import React, {PropTypes, Component, Children, cloneElement} from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
-import isDefined from './utils/isDefined';
 import padLine from './utils/padLine';
 import NODE_TYPES from './node-types';
 import getPaddingFromCircleNodes from './utils/getPaddingFromCircleNodes';
@@ -37,13 +36,15 @@ export default class LinkGraph extends Component {
         from, to, paddingStart = 0, paddingEnd = 0, ..._linkProps
       } = link.props;
 
-      const {cx: x1, cy: y1, totalPadding: padding1} =
-        getPaddingFromCircleNodes(from, nodes, paddingStart);
-      const {cx: x2, cy: y2, totalPadding: padding2} =
-        getPaddingFromCircleNodes(to, nodes, paddingEnd);
+      const {cx: x1, cy: y1, r: r1} =
+        getPaddingFromCircleNodes(from, nodes);
+      const {cx: x2, cy: y2, r: r2} =
+        getPaddingFromCircleNodes(to, nodes);
 
       // calculate the intersection points
-      const paddedEndPoints = padLine(x1, y1, x2, y2, -padding1, -padding2);
+      const paddedEndPoints =
+        padLine(x1, y1, x2, y2, -r1 - paddingStart, -r2 - paddingEnd);
+
       return cloneElement(
         link,
         {...paddedEndPoints, ..._linkProps},
