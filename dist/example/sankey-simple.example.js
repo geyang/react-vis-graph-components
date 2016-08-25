@@ -81,7 +81,7 @@ var SankeyDiagramExample = function (_Component) {
 
       return _react2.default.createElement(
         _sankey2.default,
-        { width: 1200, height: 600, spacing: 100, margin: 10 },
+        { width: 1200, height: 800, spacing: 100, margin: 10 },
         nodes.map(function (_ref) {
           var name = _ref.name;
           return _react2.default.createElement(
@@ -109,8 +109,8 @@ var SankeyDiagramExample = function (_Component) {
             key: from + '-' + to,
             from: from,
             to: to,
-            width: value * 4,
-            fill: 'rgba(0, 0, 0, 0.5)',
+            width: value * 5,
+            fill: 'rgba(0, 0, 0, 0.15)',
             color: 'rgba(24, 55, 55, 0.6)' });
         })
       );
