@@ -8,9 +8,9 @@ export default function getWidthSums(nodeHash, linkWidths, from, to, linkKey) {
       (sum, key) => (sum + linkWidths[key]),
       0
     ),
-    toSum: nodeHash[to].from.slice(
+    toSum: nodeHash[to].to.slice(
       0,
-      nodeHash[to].from.indexOf(linkKey)
+      nodeHash[to].to.indexOf(linkKey)
     ).reduce(
       (sum, key) => (sum + linkWidths[key]),
       0
