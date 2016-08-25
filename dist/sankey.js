@@ -54,16 +54,16 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var number = _react.PropTypes.number;
-var SankeyGraph = (_temp = _class = function (_Component) {
-  _inherits(SankeyGraph, _Component);
+var Sankey = (_temp = _class = function (_Component) {
+  _inherits(Sankey, _Component);
 
-  function SankeyGraph() {
-    _classCallCheck(this, SankeyGraph);
+  function Sankey() {
+    _classCallCheck(this, Sankey);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(SankeyGraph).apply(this, arguments));
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Sankey).apply(this, arguments));
   }
 
-  _createClass(SankeyGraph, [{
+  _createClass(Sankey, [{
     key: 'shouldComponentUpdate',
     value: function shouldComponentUpdate(nextProp, nextState) {
       return (0, _reactAddonsShallowCompare2.default)(this, nextProp, nextState);
@@ -85,30 +85,24 @@ var SankeyGraph = (_temp = _class = function (_Component) {
         var type = _ref.type;
         return type === _nodeTypes2.default.DEFS;
       });
-      var links = childArray.filter(function (_ref2) {
+      var nodes = childArray.filter(function (_ref2) {
         var graphNodeType = _ref2.type.graphNodeType;
-        return graphNodeType === _nodeTypes2.default.LINK;
-      });
-      var nodes = childArray.filter(function (_ref3) {
-        var graphNodeType = _ref3.type.graphNodeType;
         return graphNodeType === _nodeTypes2.default.NODE;
       });
+      var links = childArray.filter(function (_ref3) {
+        var graphNodeType = _ref3.type.graphNodeType;
+        return graphNodeType === _nodeTypes2.default.LINK;
+      });
 
-      /* 2. find head
-       *      - iterate through notes, iterate through links */
-      // get headNodes and nonHeadNodes;
       var stack = [];
-      var linksBetween = [];
       var restNodes = nodes || [];
       var restLinks = links || [];
       while (restNodes.length) {
         var heads = [];
-        var linksFrom = [];
 
         var _splitHeadsFromRest = (0, _splitHeadsFromRest3.default)(restNodes, restLinks);
 
         heads = _splitHeadsFromRest.heads;
-        linksFrom = _splitHeadsFromRest.linksFrom;
         restNodes = _splitHeadsFromRest.restNodes;
         restLinks = _splitHeadsFromRest.restLinks;
 
@@ -116,7 +110,6 @@ var SankeyGraph = (_temp = _class = function (_Component) {
           break;
         }
         stack.push(heads);
-        linksBetween.push(linksFrom);
       }
 
       var defaultWidth = (containerWidth - (stack.length - 1) * spacing) / stack.length;
@@ -130,9 +123,9 @@ var SankeyGraph = (_temp = _class = function (_Component) {
         }).concat(defaultWidth));
       });
 
-      var nodesWithCoords = stack.map(function (column, columnIndex) {
+      var nodesWithCoords = _react.Children.toArray(stack.map(function (column, columnIndex) {
         if (column.length === 0) {
-          return;
+          return null;
         }
         var nodeHeights = column.map(function (_ref5) {
           var _ref5$props = _ref5.props;
@@ -143,7 +136,7 @@ var SankeyGraph = (_temp = _class = function (_Component) {
             return height;
           }
 
-          var _links$reduce = links.reduce(function (_ref6, _ref7) {
+          var sums = links.reduce(function (_ref6, _ref7) {
             var fromSum = _ref6.fromSum;
             var toSum = _ref6.toSum;
             var _ref7$props = _ref7.props;
@@ -164,22 +157,19 @@ var SankeyGraph = (_temp = _class = function (_Component) {
             }
             return { fromSum: fromSum, toSum: toSum };
           }, { fromSum: 0, toSum: 0 });
-
-          var fromSum = _links$reduce.fromSum;
-          var toSum = _links$reduce.toSum;
-
-          return Math.max(fromSum, toSum);
+          return Math.max(sums.fromSum, sums.toSum);
         });
 
         return column.map(function (node, nodeIndex) {
           var _node$props = node.props;
           var x = _node$props.x;
           var y = _node$props.y;
-          var _node$props$width = _node$props.width;
-          var width = _node$props$width === undefined ? columnWidths[columnIndex] : _node$props$width;
-          var _node$props$height = _node$props.height;
-          var height = _node$props$height === undefined ? nodeHeights[nodeIndex] : _node$props$height;
-          var children = _node$props.children;
+          var _node$props2 = node.props;
+          var _node$props2$width = _node$props2.width;
+          var width = _node$props2$width === undefined ? columnWidths[columnIndex] : _node$props2$width;
+          var _node$props2$height = _node$props2.height;
+          var height = _node$props2$height === undefined ? nodeHeights[nodeIndex] : _node$props2$height;
+          var nodeChild = _node$props2.children;
 
 
           if (!(0, _isDefined2.default)(x)) {
@@ -197,23 +187,42 @@ var SankeyGraph = (_temp = _class = function (_Component) {
             }, 0);
           }
 
-          return (0, _react.cloneElement)(node, { x: x, y: y, width: width, height: height }, children);
+          return (0, _react.cloneElement)(node, { x: x, y: y, width: width, height: height }, nodeChild);
         });
+      }));
+
+      // const nodeNames = nodes.map(({props: {name}}) => name);
+      var nodeYs = {};
+      nodesWithCoords.forEach(function (_ref8) {
+        var _ref8$props = _ref8.props;
+        var name = _ref8$props.name;
+        var y = _ref8$props.y;
+        var height = _ref8$props.height;
+        return nodeYs[name] = y + height / 2;
+      });
+      var orderedLinks = links.sort(function (_ref9, _ref10) {
+        var _ref9$props = _ref9.props;
+        var to1 = _ref9$props.to;
+        var from1 = _ref9$props.from;
+        var _ref10$props = _ref10.props;
+        var to2 = _ref10$props.to;
+        var from2 = _ref10$props.from;
+        return nodeYs[to1] - nodeYs[to2] + nodeYs[from1] - nodeYs[from2];
       });
 
       var linkWidths = {};
-      links.forEach(function (_ref8) {
-        var _ref8$props = _ref8.props;
-        var from = _ref8$props.from;
-        var to = _ref8$props.to;
-        var width = _ref8$props.width;
+      links.forEach(function (_ref11) {
+        var _ref11$props = _ref11.props;
+        var from = _ref11$props.from;
+        var to = _ref11$props.to;
+        var width = _ref11$props.width;
 
         linkWidths[(0, _linkKey2.default)(from, to)] = width;
       });
 
       var nodeHash = {};
-      nodes.forEach(function (_ref9) {
-        var name = _ref9.props.name;
+      nodes.forEach(function (_ref12) {
+        var name = _ref12.props.name;
 
         nodeHash[name] = {
           from: [],
@@ -221,33 +230,31 @@ var SankeyGraph = (_temp = _class = function (_Component) {
         };
       });
 
-      links.map(function (_ref10) {
-        var _ref10$props = _ref10.props;
-        var from = _ref10$props.from;
-        var to = _ref10$props.to;
-        var width = _ref10$props.width;
+      orderedLinks.forEach(function (_ref13) {
+        var _ref13$props = _ref13.props;
+        var from = _ref13$props.from;
+        var to = _ref13$props.to;
+        var width = _ref13$props.width;
 
         nodeHash[from].from.push((0, _linkKey2.default)(from, to));
         nodeHash[to].to.push((0, _linkKey2.default)(from, to));
       });
 
-      var linksWithCoords = links.map(function (link, ind) {
+      var linksWithCoords = orderedLinks.map(function (link, ind) {
         var _link$props = link.props;
         var from = _link$props.from;
         var to = _link$props.to;
         var width = _link$props.width;
-        var children = _link$props.children;
+        var linkChildren = _link$props.children;
 
         var _linkProps = _objectWithoutProperties(_link$props, ['from', 'to', 'width', 'children']);
 
-        var nodes = _react.Children.toArray(nodesWithCoords);
-
-        var _getAnchorFromRectang = (0, _getAnchorFromRectangleNodes2.default)(from, nodes, 'topright');
+        var _getAnchorFromRectang = (0, _getAnchorFromRectangleNodes2.default)(from, nodesWithCoords, 'topright');
 
         var x1 = _getAnchorFromRectang.x;
         var y1 = _getAnchorFromRectang.y;
 
-        var _getAnchorFromRectang2 = (0, _getAnchorFromRectangleNodes2.default)(to, nodes, 'topleft');
+        var _getAnchorFromRectang2 = (0, _getAnchorFromRectangleNodes2.default)(to, nodesWithCoords, 'topleft');
 
         var x2 = _getAnchorFromRectang2.x;
         var y2 = _getAnchorFromRectang2.y;
@@ -263,7 +270,7 @@ var SankeyGraph = (_temp = _class = function (_Component) {
           x2: x2,
           y1: y1 + fromSum + width / 2,
           y2: y2 + toSum + width / 2
-        }, _linkProps), children);
+        }, _linkProps), linkChildren);
       });
 
       return _react2.default.createElement(
@@ -274,21 +281,24 @@ var SankeyGraph = (_temp = _class = function (_Component) {
         }, _props),
         defs,
         linksWithCoords,
-        _react.Children.toArray(nodesWithCoords)
+        nodesWithCoords
       );
     }
   }]);
 
-  return SankeyGraph;
+  return Sankey;
 }(_react.Component), _class.propTypes = {
-  width: number,
-  height: number,
+  width: number.isRequired,
+  height: number.isRequired,
   /** spacing (horizontal) */
   spacing: number,
   /** margin (vertical) */
   margin: number
+}, _class.defaultProps = {
+  spacing: 10,
+  margin: 10
 }, _temp);
-exports.default = SankeyGraph;
+exports.default = Sankey;
 ;
 
 (function () {
@@ -298,7 +308,7 @@ exports.default = SankeyGraph;
 
   __REACT_HOT_LOADER__.register(number, 'number', 'src/sankey.js');
 
-  __REACT_HOT_LOADER__.register(SankeyGraph, 'SankeyGraph', 'src/sankey.js');
+  __REACT_HOT_LOADER__.register(Sankey, 'Sankey', 'src/sankey.js');
 })();
 
 ;

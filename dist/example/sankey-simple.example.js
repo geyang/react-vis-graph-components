@@ -80,7 +80,7 @@ var SankeyDiagramExample = function (_Component) {
       var nodes = _state.nodes;
 
       return _react2.default.createElement(
-        _sankey2.default,
+        Sankey,
         { width: 1200, height: 800, spacing: 100, margin: 10 },
         nodes.map(function (_ref) {
           var name = _ref.name;
@@ -89,7 +89,8 @@ var SankeyDiagramExample = function (_Component) {
             {
               name: name,
               key: name,
-              width: 100 },
+              width: 100,
+              fill: 'white' },
             _react2.default.createElement(
               _blockAnchor2.default,
               {
