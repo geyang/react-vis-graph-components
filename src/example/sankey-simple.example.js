@@ -164,7 +164,8 @@ export default class SankeyDiagramExample extends Component {
           <RectangleNode
             name={name}
             key={name}
-            width={100}>
+            width={100}
+            fill="white">
             <BlockAnchor
               component={Text}
               alignVertical="middle"
