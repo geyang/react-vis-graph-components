@@ -20,11 +20,6 @@ export default class Sankey extends Component {
     margin: number
   };
 
-  static defaultProps = {
-    spacing: 10,
-    margin: 10
-  };
-
   shouldComponentUpdate(nextProp, nextState) {
     return shallowCompare(this, nextProp, nextState);
   }

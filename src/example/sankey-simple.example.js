@@ -2,7 +2,7 @@
  * Created by ge on 6/23/16.
  */
 import React, {Component, PropTypes} from 'react';
-import SankeyGraph from '../sankey';
+import Sankey from '../sankey';
 import RectangleNode from '../blocks/rectangle-node';
 import BlockAnchor from '../blocks/block-anchor';
 import Text from '../blocks/text';
