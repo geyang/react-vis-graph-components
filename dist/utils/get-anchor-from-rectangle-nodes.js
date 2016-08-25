@@ -36,6 +36,26 @@ function getAnchorFromRectangleNodes(name, nodes, id) {
       x: x + width / 2,
       y: y + height
     };
+  } else if (id === 'topleft') {
+    return {
+      x: x,
+      y: y
+    };
+  } else if (id === 'bottomleft') {
+    return {
+      x: x,
+      y: y + height
+    };
+  } else if (id === 'topright') {
+    return {
+      x: x + width,
+      y: y
+    };
+  } else if (id === 'bottomright') {
+    return {
+      x: x + width,
+      y: y + height
+    };
   }
 
   return null;

@@ -66,11 +66,8 @@ function BezierConnector(_ref) {
     }).join(' ').replace(/^L/i, 'M');
   } catch (e) {
     // if points are degenerate, fall back on regular path
-    console.warn(e);
-    return _react2.default.createElement('path', _extends({ d: '' }, props));
+    return _react2.default.createElement('path', _extends({ d: 'M ' + x1 + ' ' + (y1 + width / 2) + ' L ' + x2 + ' ' + (y2 + width / 2) + '\n    L ' + x2 + ' ' + (y2 - width / 2) + ' L ' + x1 + ' ' + (y1 - width / 2) + ' Z' }, props));
   }
-
-  console.log(d);
 
   if (d) {
     return _react2.default.createElement('path', _extends({}, props, { d: d }));

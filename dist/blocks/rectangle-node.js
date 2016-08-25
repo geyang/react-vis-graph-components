@@ -58,9 +58,6 @@ function RectangleNode(_ref) {
     strokeWidth: strokeWidth
   }, _props);
 
-  console.log('x and y of rectangle node', x, y);
-  console.log('width and height of rectangle node', width, height);
-
   if ((0, _isDefined2.default)(children)) {
     return _react2.default.createElement(
       'g',

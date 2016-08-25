@@ -23,6 +23,14 @@ var _isDefined = require('./utils/isDefined');
 
 var _isDefined2 = _interopRequireDefault(_isDefined);
 
+var _linkKey = require('./utils/link-key');
+
+var _linkKey2 = _interopRequireDefault(_linkKey);
+
+var _getWidthSums2 = require('./utils/get-width-sums');
+
+var _getWidthSums3 = _interopRequireDefault(_getWidthSums2);
+
 var _nodeTypes = require('./node-types');
 
 var _nodeTypes2 = _interopRequireDefault(_nodeTypes);
@@ -126,12 +134,41 @@ var SankeyGraph = (_temp = _class = function (_Component) {
         if (column.length === 0) {
           return;
         }
-        var defaultHeight = (containerHeight - (column.length - 1) * margin) / column.length;
-
         var nodeHeights = column.map(function (_ref5) {
-          var _ref5$props$height = _ref5.props.height;
-          var height = _ref5$props$height === undefined ? defaultHeight : _ref5$props$height;
-          return height;
+          var _ref5$props = _ref5.props;
+          var name = _ref5$props.name;
+          var height = _ref5$props.height;
+
+          if ((0, _isDefined2.default)(height)) {
+            return height;
+          }
+
+          var _links$reduce = links.reduce(function (_ref6, _ref7) {
+            var fromSum = _ref6.fromSum;
+            var toSum = _ref6.toSum;
+            var _ref7$props = _ref7.props;
+            var from = _ref7$props.from;
+            var to = _ref7$props.to;
+            var width = _ref7$props.width;
+
+            if (from === name) {
+              return {
+                fromSum: fromSum + width,
+                toSum: toSum
+              };
+            } else if (to === name) {
+              return {
+                fromSum: fromSum,
+                toSum: toSum + width
+              };
+            }
+            return { fromSum: fromSum, toSum: toSum };
+          }, { fromSum: 0, toSum: 0 });
+
+          var fromSum = _links$reduce.fromSum;
+          var toSum = _links$reduce.toSum;
+
+          return Math.max(fromSum, toSum);
         });
 
         return column.map(function (node, nodeIndex) {
@@ -164,32 +201,69 @@ var SankeyGraph = (_temp = _class = function (_Component) {
         });
       });
 
-      var linksWithCoords = links.map(function (link) {
+      var linkWidths = {};
+      links.forEach(function (_ref8) {
+        var _ref8$props = _ref8.props;
+        var from = _ref8$props.from;
+        var to = _ref8$props.to;
+        var width = _ref8$props.width;
+
+        linkWidths[(0, _linkKey2.default)(from, to)] = width;
+      });
+
+      var nodeHash = {};
+      nodes.forEach(function (_ref9) {
+        var name = _ref9.props.name;
+
+        nodeHash[name] = {
+          from: [],
+          to: []
+        };
+      });
+
+      links.map(function (_ref10) {
+        var _ref10$props = _ref10.props;
+        var from = _ref10$props.from;
+        var to = _ref10$props.to;
+        var width = _ref10$props.width;
+
+        nodeHash[from].from.push((0, _linkKey2.default)(from, to));
+        nodeHash[to].to.push((0, _linkKey2.default)(from, to));
+      });
+
+      var linksWithCoords = links.map(function (link, ind) {
         var _link$props = link.props;
         var from = _link$props.from;
         var to = _link$props.to;
-        var _link$props$paddingSt = _link$props.paddingStart;
-        var paddingStart = _link$props$paddingSt === undefined ? 0 : _link$props$paddingSt;
-        var _link$props$paddingEn = _link$props.paddingEnd;
-        var paddingEnd = _link$props$paddingEn === undefined ? 0 : _link$props$paddingEn;
+        var width = _link$props.width;
         var children = _link$props.children;
 
-        var _linkProps = _objectWithoutProperties(_link$props, ['from', 'to', 'paddingStart', 'paddingEnd', 'children']);
+        var _linkProps = _objectWithoutProperties(_link$props, ['from', 'to', 'width', 'children']);
 
         var nodes = _react.Children.toArray(nodesWithCoords);
 
-        var _getAnchorFromRectang = (0, _getAnchorFromRectangleNodes2.default)(from, nodes, 'right');
+        var _getAnchorFromRectang = (0, _getAnchorFromRectangleNodes2.default)(from, nodes, 'topright');
 
         var x1 = _getAnchorFromRectang.x;
         var y1 = _getAnchorFromRectang.y;
 
-        var _getAnchorFromRectang2 = (0, _getAnchorFromRectangleNodes2.default)(to, nodes, 'left');
+        var _getAnchorFromRectang2 = (0, _getAnchorFromRectangleNodes2.default)(to, nodes, 'topleft');
 
         var x2 = _getAnchorFromRectang2.x;
         var y2 = _getAnchorFromRectang2.y;
 
+        var _getWidthSums = (0, _getWidthSums3.default)(nodeHash, linkWidths, from, to, (0, _linkKey2.default)(from, to));
 
-        return (0, _react.cloneElement)(link, _extends({ x1: x1, x2: x2, y1: y1, y2: y2 }, _linkProps), children);
+        var fromSum = _getWidthSums.fromSum;
+        var toSum = _getWidthSums.toSum;
+
+
+        return (0, _react.cloneElement)(link, _extends({
+          x1: x1,
+          x2: x2,
+          y1: y1 + fromSum + width / 2,
+          y2: y2 + toSum + width / 2
+        }, _linkProps), children);
       });
 
       return _react2.default.createElement(
