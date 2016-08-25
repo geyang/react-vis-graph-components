@@ -1,20 +1,18 @@
-"use strict";
+'use strict';
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = require("react-dom");
+var _reactDom = require('react-dom');
 
-var _reactHotLoader = require("react-hot-loader");
+var _reactHotLoader = require('react-hot-loader');
 
-var _Readme = require("./Readme");
+var _Readme = require('./Readme');
 
 var _Readme2 = _interopRequireDefault(_Readme);
 
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {default: obj};
-}
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * Created by ge on 6/23/16.
@@ -43,7 +41,7 @@ if (module.hot) {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(readmeContainer, "readmeContainer", "src/example/index.js");
+  __REACT_HOT_LOADER__.register(readmeContainer, 'readmeContainer', 'src/example/index.js');
 })();
 
 ;

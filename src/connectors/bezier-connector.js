@@ -44,8 +44,6 @@ export default function BezierConnector({
     return <path d="" {...props}/>
   }
 
-  console.log(d);
-
   if (d) {
     return (
       <path {...props} d={d}/>

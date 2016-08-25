@@ -1,48 +1,43 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = Readme;
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactMarkdownit = require("react-markdownit");
+var _reactMarkdownit = require('react-markdownit');
 
 var _reactMarkdownit2 = _interopRequireDefault(_reactMarkdownit);
 
-var _reactHighlight = require("@episodeyang/react-highlight.js");
+var _reactHighlight = require('@episodeyang/react-highlight.js');
 
 var _reactHighlight2 = _interopRequireDefault(_reactHighlight);
 
-var _reactComponentPropsTable = require("react-component-props-table");
+var _linkNodesSimple = require('./link-nodes-simple.example');
 
-var _reactComponentPropsTable2 = _interopRequireDefault(_reactComponentPropsTable);
+var _linkNodesSimple2 = _interopRequireDefault(_linkNodesSimple);
 
-var _HappySandwichMaker = require("../HappySandwichMaker.example");
+var _linkNodesSimpleExample = require('!!raw!./link-nodes-simple.example.js');
 
-var _HappySandwichMaker2 = _interopRequireDefault(_HappySandwichMaker);
+var _linkNodesSimpleExample2 = _interopRequireDefault(_linkNodesSimpleExample);
 
-var _HappySandwichMaker3 = require("!!raw!../HappySandwichMaker.example");
+var _sankeySimple = require('./sankey-simple.example');
 
-var _HappySandwichMaker4 = _interopRequireDefault(_HappySandwichMaker3);
+var _sankeySimple2 = _interopRequireDefault(_sankeySimple);
 
-var _HappySandwichMaker5 = require("!!react-docgen!../HappySandwichMaker");
+var _sankeySimpleExample = require('!!raw!./sankey-simple.example.js');
 
-var _HappySandwichMaker6 = _interopRequireDefault(_HappySandwichMaker5);
+var _sankeySimpleExample2 = _interopRequireDefault(_sankeySimpleExample);
 
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {default: obj};
-}
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _objectDestructuringEmpty(obj) {
-  if (obj == null) throw new TypeError("Cannot destructure undefined");
-}
-/**
- * Created by ge on 6/24/16.
- */
+function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); } /**
+                                                                                                                   * Created by ge on 6/24/16.
+                                                                                                                   */
 
 
 function Readme(_ref) {
@@ -50,25 +45,32 @@ function Readme(_ref) {
 
   return _react2.default.createElement(
     _reactMarkdownit2.default,
-    {stripIndent: true},
-    "\n      # Linked Node Graph Component\n\n      [![github](https://img.shields.io/github/downloads/episodeyang/react-vis-link-graph/total.svg?style=flat-square&maxAge=2592000)]()\n\n      A template repo for react components written with es6 syntax.\n\n      ## Usage (as a template)\n\n      ~~~shell\n      git clone https://github.com/episodeyang/react-vis-link-graph <name of your new component>\n      cd <name of your new component>\n      rm -rf .git\n      rm -rf dist\n\n      # now do your git init, git add/coommit/push\n      # replace \"react-vis-link-graph\" with your own\n      # replace \"react es6 template\" with your own\n      # replace \"react es6 component\" with you own etc.\n      ~~~\n\n      After cloning from gitHub, you can run the example by doing\n      ~~~shell\n      npm run serve-docs\n      ~~~\n\n      And then open your browser at [http://localhost:5000](http://localhost:5000).\n\n      This one calls webpack (you should look at the `package.json` source) and uses the\n      webpack-dev-server to serve from `./src/example/` with hot module reloading.\n\n      ### How is this README written:\n      This readme is written with react and markdown. It includes:\n      1. a **live react component demo**\n      2. a table of the component's props that is generated automatically\n      3. **source** of the example component\n\n      ## Example Component: `HappySandwichMaker`\n      This component makes you a delicious Subway sandwich.\n      ",
-    _react2.default.createElement(_HappySandwichMaker2.default, null),
-    "### Props",
-    "This table below is generated automatically",
-    _react2.default.createElement(
-      "div",
-      {className: "table-container horizontal-scroll flex-column center"},
-      _react2.default.createElement(_reactComponentPropsTable2.default, {propMetaData: _HappySandwichMaker6.default.props})
-    ),
-    "\n      ### Usage Example\n\n      The source code below of the example above is loaded using the webpack raw loader.",
+    { stripIndent: true },
+    '\n      # Linked Node Graph Component and Sankey Diagram\n\n      ## Linked Node Graph\n\n      [![github](https://img.shields.io/github/downloads/episodeyang/' + 'react-vis-link-graph/total.svg?style=flat-square&maxAge=2592000)]()\n\n      This component allows you to draw a linked node graph easily.\n      The graph component takes in the children (links and nodes) and\n      automatically calculates the end points for the connections and\n      adds padding.\n      ',
+    _react2.default.createElement(_linkNodesSimple2.default, null),
+    '\n      ### Usage Example\n\n      The source code below of the example above is loaded using the\n      webpack raw loader.',
     _react2.default.createElement(
       _reactHighlight2.default,
       null,
-      _HappySandwichMaker4.default
+      _linkNodesSimpleExample2.default
     ),
-    "\n      ## Develop\n\n      1. First make your changes, then git commit. Use `serve-docs` to view live update at [http://localhost:5000](http://localhost:5000).\n      2. run `build-docs`, `build-static-docs`, `gh-pages`\n      3. Then remember to push to master.\n\n      "
+    '\n\n      ## Sankey Diagram\n\n      ',
+    _react2.default.createElement(_sankeySimple2.default, null),
+    '\n      ### Usage example\n\n      The source code below of the example above is loaded using the\n      webpack raw loader.',
+    _react2.default.createElement(
+      _reactHighlight2.default,
+      null,
+      _sankeySimpleExample2.default
+    ),
+    '\n\n      ## Develop\n\n      1. First make your changes, then git commit. Use `serve-docs`\n       to view live update at [http://localhost:5000](http://localhost:5000).\n      2. run `build-docs`, `build-static-docs`, `gh-pages`\n      3. Then remember to push to master.\n\n      '
   );
 }
+// ### Props
+// {`This table below is generated automatically`}
+// <div className='table-container horizontal-scroll flex-column center'>
+//   <PropsTable propMetaData={HappySandwichMakerAST.props}/>
+// </div>
+
 ;
 
 (function () {
@@ -76,7 +78,7 @@ function Readme(_ref) {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(Readme, "Readme", "src/example/Readme.js");
+  __REACT_HOT_LOADER__.register(Readme, 'Readme', 'src/example/Readme.js');
 })();
 
 ;

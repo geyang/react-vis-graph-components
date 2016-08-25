@@ -1,6 +1,8 @@
 import React, {PropTypes, Component, Children, cloneElement} from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
 import isDefined from './utils/isDefined';
+import linkKey from './utils/link-key';
+import getWidthSums from './utils/get-width-sums';
 import NODE_TYPES from './node-types';
 import splitHeadsFromRest from './utils/splitHeadsFromRest';
 import getAnchorFromRectangleNodes from './utils/get-anchor-from-rectangle-nodes';
@@ -61,25 +63,41 @@ export default class SankeyGraph extends Component {
       (containerWidth - (stack.length - 1) * spacing) /
       stack.length;
 
-    const columnWidths =
-      stack.map(
-        column =>
-          Math.max.apply(null, column.map(
-            ({props: {width, r}}) => width || r * 2).concat(defaultWidth)
-          )
-      );
+    const columnWidths = stack.map(
+      column =>
+        Math.max.apply(null, column.map(
+          ({props: {width, r}}) => width || r * 2).concat(defaultWidth)
+        )
+    );
 
     const nodesWithCoords = stack.map(
       (column, columnIndex) => {
         if (column.length === 0) {
           return;
         }
-        const defaultHeight =
-          (containerHeight - (column.length - 1) * margin) /
-          column.length;
-
         const nodeHeights = column.map(
-          ({props: {height = defaultHeight}}) => height
+          ({props: {name, height}}) => {
+            if (isDefined(height)) {
+              return height;
+            }
+
+            const {fromSum, toSum} = links
+              .reduce(({fromSum, toSum}, {props: {from, to, width}}) => {
+                if (from === name) {
+                  return {
+                    fromSum: fromSum + width,
+                    toSum
+                  }
+                } else if (to === name) {
+                  return {
+                    fromSum,
+                    toSum: toSum + width
+                  }
+                }
+                return {fromSum, toSum}
+              }, {fromSum: 0, toSum: 0});
+            return Math.max(fromSum, toSum);
+          }
         );
 
         return column.map(
@@ -113,21 +131,53 @@ export default class SankeyGraph extends Component {
       }
     );
 
+    const linkWidths = {};
+    links.forEach(
+      ({props: {from, to, width}}) => {
+        linkWidths[linkKey(from, to)] = width;
+      }
+    );
+
+    const nodeHash = {};
+    nodes.forEach(
+      ({props: {name}}) => {
+        nodeHash[name] = {
+          from: [],
+          to: []
+        }
+      }
+    );
+
+    links.map(
+      ({props: {from, to, width}}) => {
+        nodeHash[from].from.push(linkKey(from, to));
+        nodeHash[to].to.push(linkKey(from, to));
+      }
+    );
+
     const linksWithCoords = links.map(
-      link => {
+      (link, ind) => {
         const {
-          from, to, paddingStart = 0, paddingEnd = 0, children, ..._linkProps
+          from, to, width, children, ..._linkProps
         } = link.props;
 
         const nodes = Children.toArray(nodesWithCoords);
         const {x: x1, y: y1} =
-          getAnchorFromRectangleNodes(from, nodes, 'right');
+          getAnchorFromRectangleNodes(from, nodes, 'topright');
         const {x: x2, y: y2} =
-          getAnchorFromRectangleNodes(to, nodes, 'left');
+          getAnchorFromRectangleNodes(to, nodes, 'topleft');
+
+        const {fromSum, toSum} = getWidthSums(nodeHash, linkWidths, from, to, linkKey(from, to));
 
         return cloneElement(
           link,
-          {x1, x2, y1, y2, ..._linkProps},
+          {
+            x1,
+            x2,
+            y1: y1 + fromSum + width / 2,
+            y2: y2 + toSum + width / 2,
+            ..._linkProps
+          },
           children
         );
       });

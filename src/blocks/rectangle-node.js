@@ -30,9 +30,6 @@ export default function RectangleNode({
     ..._props
   };
 
-  console.log('x and y of rectangle node', x, y);
-  console.log('width and height of rectangle node', width, height);
-
   if (isDefined(children)) {
     return (
       <g>

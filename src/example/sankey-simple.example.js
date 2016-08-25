@@ -177,7 +177,7 @@ export default class SankeyDiagramExample extends Component {
             key={`${from}-${to}`}
             from={from}
             to={to}
-            width={value * 10}
+            width={value * 4}
             fill="rgba(0, 0, 0, 0.5)"
             color="rgba(24, 55, 55, 0.6)"/>
         ))}
