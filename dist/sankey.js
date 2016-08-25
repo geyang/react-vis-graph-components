@@ -294,9 +294,6 @@ var Sankey = (_temp = _class = function (_Component) {
   spacing: number,
   /** margin (vertical) */
   margin: number
-}, _class.defaultProps = {
-  spacing: 10,
-  margin: 10
 }, _temp);
 exports.default = Sankey;
 ;
