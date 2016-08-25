@@ -5,18 +5,24 @@ import linkKey from './utils/link-key';
 import getWidthSums from './utils/get-width-sums';
 import NODE_TYPES from './node-types';
 import splitHeadsFromRest from './utils/splitHeadsFromRest';
-import getAnchorFromRectangleNodes from './utils/get-anchor-from-rectangle-nodes';
+import getAnchorFromRectangleNodes
+  from './utils/get-anchor-from-rectangle-nodes';
 
 const {number} = PropTypes;
-export default class SankeyGraph extends Component {
+export default class Sankey extends Component {
 
   static propTypes = {
-    width: number,
-    height: number,
+    width: number.isRequired,
+    height: number.isRequired,
     /** spacing (horizontal) */
     spacing: number,
     /** margin (vertical) */
     margin: number
+  };
+
+  static defaultProps = {
+    spacing: 10,
+    margin: 10
   };
 
   shouldComponentUpdate(nextProp, nextState) {
@@ -37,36 +43,22 @@ export default class SankeyGraph extends Component {
       ({type}) => (type === NODE_TYPES.DEFS));
     const nodes = childArray.filter(
       ({type: {graphNodeType}}) => (graphNodeType === NODE_TYPES.NODE));
-    const nodeNames = nodes.map(({props: {name}}) => name);
     const links = childArray
       .filter(
         ({type: {graphNodeType}}) => (graphNodeType === NODE_TYPES.LINK)
-      ).sort(
-        ({props: {to: to1, from: from1}}, {props: {to: to2, from: from2}}) =>
-          (
-            nodeNames.indexOf(to1) - nodeNames.indexOf(to2)
-            + nodeNames.indexOf(from1) - nodeNames.indexOf(from2)
-          )
       );
 
-
-    /* 2. find head
-     *      - iterate through notes, iterate through links */
-    // get headNodes and nonHeadNodes;
     const stack = [];
-    const linksBetween = [];
     let restNodes = nodes || [];
     let restLinks = links || [];
     while (restNodes.length) {
       let heads = [];
-      let linksFrom = [];
-      ({heads, linksFrom, restNodes, restLinks} =
+      ({heads, restNodes, restLinks} =
         splitHeadsFromRest(restNodes, restLinks));
       if (!heads.length) {
         break;
       }
       stack.push(heads);
-      linksBetween.push(linksFrom);
     }
 
     const defaultWidth =
@@ -80,10 +72,10 @@ export default class SankeyGraph extends Component {
         )
     );
 
-    const nodesWithCoords = stack.map(
+    const nodesWithCoords = Children.toArray(stack.map(
       (column, columnIndex) => {
         if (column.length === 0) {
-          return;
+          return null;
         }
         const nodeHeights = column.map(
           ({props: {name, height}}) => {
@@ -91,22 +83,22 @@ export default class SankeyGraph extends Component {
               return height;
             }
 
-            const {fromSum, toSum} = links
+            const sums = links
               .reduce(({fromSum, toSum}, {props: {from, to, width}}) => {
                 if (from === name) {
                   return {
                     fromSum: fromSum + width,
                     toSum
-                  }
+                  };
                 } else if (to === name) {
                   return {
                     fromSum,
                     toSum: toSum + width
-                  }
+                  };
                 }
-                return {fromSum, toSum}
+                return {fromSum, toSum};
               }, {fromSum: 0, toSum: 0});
-            return Math.max(fromSum, toSum);
+            return Math.max(sums.fromSum, sums.toSum);
           }
         );
 
@@ -114,10 +106,12 @@ export default class SankeyGraph extends Component {
           (node, nodeIndex) => {
             let {
               x,
-              y,
+              y
+            } = node.props;
+            const {
               width = columnWidths[columnIndex],
               height = nodeHeights[nodeIndex],
-              children
+              children: nodeChild
             } = node.props;
 
             if (!isDefined(x)) {
@@ -133,12 +127,25 @@ export default class SankeyGraph extends Component {
 
             return cloneElement(
               node,
-              {x: x, y: y, width, height},
-              children
+              {x, y, width, height},
+              nodeChild
             );
           }
         );
       }
+    ));
+
+    // const nodeNames = nodes.map(({props: {name}}) => name);
+    const nodeYs = {};
+    nodesWithCoords.forEach(
+      ({props: {name, y, height}}) => (nodeYs[name] = (y + height / 2))
+    );
+    const orderedLinks = links.sort(
+      ({props: {to: to1, from: from1}}, {props: {to: to2, from: from2}}) =>
+        (
+          nodeYs[to1] - nodeYs[to2] +
+          nodeYs[from1] - nodeYs[from2]
+        )
     );
 
     const linkWidths = {};
@@ -154,30 +161,30 @@ export default class SankeyGraph extends Component {
         nodeHash[name] = {
           from: [],
           to: []
-        }
+        };
       }
     );
 
-    links.map(
+    orderedLinks.forEach(
       ({props: {from, to, width}}) => {
         nodeHash[from].from.push(linkKey(from, to));
         nodeHash[to].to.push(linkKey(from, to));
       }
     );
 
-    const linksWithCoords = links.map(
+    const linksWithCoords = orderedLinks.map(
       (link, ind) => {
         const {
-          from, to, width, children, ..._linkProps
+          from, to, width, children: linkChildren, ..._linkProps
         } = link.props;
 
-        const nodes = Children.toArray(nodesWithCoords);
         const {x: x1, y: y1} =
-          getAnchorFromRectangleNodes(from, nodes, 'topright');
+          getAnchorFromRectangleNodes(from, nodesWithCoords, 'topright');
         const {x: x2, y: y2} =
-          getAnchorFromRectangleNodes(to, nodes, 'topleft');
+          getAnchorFromRectangleNodes(to, nodesWithCoords, 'topleft');
 
-        const {fromSum, toSum} = getWidthSums(nodeHash, linkWidths, from, to, linkKey(from, to));
+        const {fromSum, toSum} =
+          getWidthSums(nodeHash, linkWidths, from, to, linkKey(from, to));
 
         return cloneElement(
           link,
@@ -188,7 +195,7 @@ export default class SankeyGraph extends Component {
             y2: y2 + toSum + width / 2,
             ..._linkProps
           },
-          children
+          linkChildren
         );
       });
 
@@ -199,7 +206,7 @@ export default class SankeyGraph extends Component {
         {..._props}>
         {defs}
         {linksWithCoords}
-        {Children.toArray(nodesWithCoords)}
+        {nodesWithCoords}
       </svg>
     );
   }
