@@ -35,10 +35,20 @@ export default class SankeyGraph extends Component {
     const childArray = Children.toArray(children);
     const defs = childArray.filter(
       ({type}) => (type === NODE_TYPES.DEFS));
-    const links = childArray.filter(
-      ({type: {graphNodeType}}) => (graphNodeType === NODE_TYPES.LINK));
     const nodes = childArray.filter(
       ({type: {graphNodeType}}) => (graphNodeType === NODE_TYPES.NODE));
+    const nodeNames = nodes.map(({props: {name}}) => name);
+    const links = childArray
+      .filter(
+        ({type: {graphNodeType}}) => (graphNodeType === NODE_TYPES.LINK)
+      ).sort(
+        ({props: {to: to1, from: from1}}, {props: {to: to2, from: from2}}) =>
+          (
+            nodeNames.indexOf(to1) - nodeNames.indexOf(to2)
+            + nodeNames.indexOf(from1) - nodeNames.indexOf(from2)
+          )
+      );
+
 
     /* 2. find head
      *      - iterate through notes, iterate through links */
