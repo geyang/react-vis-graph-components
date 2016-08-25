@@ -5,6 +5,7 @@ import React, {Component, PropTypes} from 'react';
 
 const {string} = PropTypes;
 export default class HappySandwichMaker extends Component {
+
   static propTypes = {
     style: string.isRequired
   };
