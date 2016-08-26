@@ -16,17 +16,34 @@ var _nodeTypes = require('../node-types');
 
 var _nodeTypes2 = _interopRequireDefault(_nodeTypes);
 
-var _isDefined = require('../utils/isDefined');
+var _isDefined = require('../utils/is-defined');
 
 var _isDefined2 = _interopRequireDefault(_isDefined);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; } /** Created by ge on 8/14/16. */
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; } /** Created on 8/14/16. */
 
 
-var propTypes = {};
+var string = _react.PropTypes.string;
+var number = _react.PropTypes.number;
+var any = _react.PropTypes.any;
 
+
+var propTypes = {
+  name: string,
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+  margin: number,
+  fill: string,
+  stroke: number,
+  strokeWidth: number,
+  children: any
+};
+
+// todo: implement container block API as a higher level component
 function RectangleNode(_ref) {
   var name = _ref.name;
   var x = _ref.x;
@@ -84,6 +101,12 @@ RectangleNode.propTypes = propTypes;
   if (typeof __REACT_HOT_LOADER__ === 'undefined') {
     return;
   }
+
+  __REACT_HOT_LOADER__.register(string, 'string', 'src/blocks/rectangle-node.js');
+
+  __REACT_HOT_LOADER__.register(number, 'number', 'src/blocks/rectangle-node.js');
+
+  __REACT_HOT_LOADER__.register(any, 'any', 'src/blocks/rectangle-node.js');
 
   __REACT_HOT_LOADER__.register(propTypes, 'propTypes', 'src/blocks/rectangle-node.js');
 

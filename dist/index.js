@@ -31,12 +31,12 @@ Object.defineProperty(exports, 'StraightConnector', {
   }
 });
 
-var _linkNodes = require('./link-nodes');
+var _linkGraph = require('./link-graph');
 
 Object.defineProperty(exports, 'LinkNodes', {
   enumerable: true,
   get: function get() {
-    return _interopRequireDefault(_linkNodes).default;
+    return _interopRequireDefault(_linkGraph).default;
   }
 });
 

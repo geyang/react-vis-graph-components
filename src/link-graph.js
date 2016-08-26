@@ -1,7 +1,7 @@
 import React, {PropTypes, Component, Children, cloneElement} from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
 import padLine from './utils/pad-line';
-import NODE_TYPES from './node-types';
+import separateChildrenByType from './utils/separate-children-by-type';
 import getPaddingFromCircleNodes from './utils/get-padding-from-circle-nodes';
 
 // helper functions
@@ -20,13 +20,7 @@ export default class LinkGraph extends Component {
 
   render() {
     const {children, ..._props} = this.props;
-    const childArray = Children.toArray(children);
-    const defs = childArray.filter(
-      ({type}) => (type === NODE_TYPES.DEFS));
-    const links = childArray.filter(
-      ({type: {graphNodeType}}) => (graphNodeType === NODE_TYPES.LINK));
-    const nodes = childArray.filter(
-      ({type: {graphNodeType}}) => (graphNodeType === NODE_TYPES.NODE));
+    const {defs, nodes, links} = separateChildrenByType(children);
 
     // 1. get all nodes and extract their cx, cy locations
     // 2. clone the links and subplant the x1, y1 with the cx cy locations

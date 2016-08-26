@@ -36,7 +36,7 @@ var _sankeySimpleExample2 = _interopRequireDefault(_sankeySimpleExample);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); } /**
-                                                                                                                   * Created by ge on 6/24/16.
+                                                                                                                   * Created on 6/24/16.
                                                                                                                    */
 
 

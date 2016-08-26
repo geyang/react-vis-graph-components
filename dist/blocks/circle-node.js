@@ -16,17 +16,14 @@ var _nodeTypes = require('../node-types');
 
 var _nodeTypes2 = _interopRequireDefault(_nodeTypes);
 
-var _isDefined = require('../utils/isDefined');
-
-var _isDefined2 = _interopRequireDefault(_isDefined);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; } /** Created by ge on 8/14/16. */
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; } /** Created on 8/14/16. */
 
 
 var propTypes = {};
 
+// todo: implement container block API as a higher level component
 function CircleNode(_ref) {
   var name = _ref.name;
   var cx = _ref.cx;
@@ -38,9 +35,8 @@ function CircleNode(_ref) {
   var stroke = _ref$stroke === undefined ? 'rgba(35, 170, 255, 0.5)' : _ref$stroke;
   var _ref$strokeWidth = _ref.strokeWidth;
   var strokeWidth = _ref$strokeWidth === undefined ? 3 : _ref$strokeWidth;
-  var children = _ref.children;
 
-  var _props = _objectWithoutProperties(_ref, ['name', 'cx', 'cy', 'r', 'fill', 'stroke', 'strokeWidth', 'children']);
+  var _props = _objectWithoutProperties(_ref, ['name', 'cx', 'cy', 'r', 'fill', 'stroke', 'strokeWidth']);
 
   var props = _extends({
     name: name,
@@ -51,19 +47,6 @@ function CircleNode(_ref) {
     stroke: stroke,
     strokeWidth: strokeWidth
   }, _props);
-  // if (isDefined(children)) {
-  //   return (
-  //     <g>
-  //       <circle {...props}/>
-  {/*{children.toArray().map(*/}
-  {/*child => {*/}
-  {/*const {cx, cy, dx, dy} = child.props;*/}
-  {} /*return cloneElement(child, {x: cx + dx, y: cy + dy});*/
-  //         }
-  //       )}
-  //     </g>
-  //   );
-  // }
   return _react2.default.createElement('circle', props);
 }
 

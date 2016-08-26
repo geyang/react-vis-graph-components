@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = getAnchorFromRectangleNodes;
-/** Created by ge on 8/22/16. */
+/** Created on 8/22/16. */
 function getAnchorFromRectangleNodes(name, nodes, id) {
   var _nodes$filter$0$props = nodes.filter(function (_ref) {
     var nodeName = _ref.props.name;

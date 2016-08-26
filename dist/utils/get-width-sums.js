@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = getWidthSums;
-/** Created by ge on 8/24/16. */
+/** Created on 8/24/16. */
 function getWidthSums(nodeHash, linkWidths, from, to, linkKey) {
   return {
     fromSum: nodeHash[from].from.slice(0, nodeHash[from].from.indexOf(linkKey)).reduce(function (sum, key) {

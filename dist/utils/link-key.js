@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = linkKey;
-/** Created by ge on 8/24/16. */
+/** Created on 8/24/16. */
 function linkKey(from, to) {
   return from + "@@" + to;
 }

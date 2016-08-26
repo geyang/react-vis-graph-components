@@ -19,10 +19,6 @@ var _reactAddonsShallowCompare = require('react-addons-shallow-compare');
 
 var _reactAddonsShallowCompare2 = _interopRequireDefault(_reactAddonsShallowCompare);
 
-var _isDefined = require('./utils/isDefined');
-
-var _isDefined2 = _interopRequireDefault(_isDefined);
-
 var _linkKey = require('./utils/link-key');
 
 var _linkKey2 = _interopRequireDefault(_linkKey);
@@ -31,19 +27,27 @@ var _getWidthSums2 = require('./utils/get-width-sums');
 
 var _getWidthSums3 = _interopRequireDefault(_getWidthSums2);
 
-var _nodeTypes = require('./node-types');
+var _separateChildrenByType = require('./utils/separate-children-by-type');
 
-var _nodeTypes2 = _interopRequireDefault(_nodeTypes);
+var _separateChildrenByType2 = _interopRequireDefault(_separateChildrenByType);
 
-var _splitHeadsFromRest2 = require('./utils/splitHeadsFromRest');
+var _findColumns = require('./utils/find-columns');
 
-var _splitHeadsFromRest3 = _interopRequireDefault(_splitHeadsFromRest2);
+var _findColumns2 = _interopRequireDefault(_findColumns);
+
+var _configureNodeCoordinates = require('./utils/configure-node-coordinates');
+
+var _configureNodeCoordinates2 = _interopRequireDefault(_configureNodeCoordinates);
 
 var _getAnchorFromRectangleNodes = require('./utils/get-anchor-from-rectangle-nodes');
 
 var _getAnchorFromRectangleNodes2 = _interopRequireDefault(_getAnchorFromRectangleNodes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
@@ -80,165 +84,72 @@ var Sankey = (_temp = _class = function (_Component) {
 
       var _props = _objectWithoutProperties(_props2, ['children', 'width', 'height', 'spacing', 'margin']);
 
-      var childArray = _react.Children.toArray(children);
-      var defs = childArray.filter(function (_ref) {
-        var type = _ref.type;
-        return type === _nodeTypes2.default.DEFS;
-      });
-      var nodes = childArray.filter(function (_ref2) {
-        var graphNodeType = _ref2.type.graphNodeType;
-        return graphNodeType === _nodeTypes2.default.NODE;
-      });
-      var links = childArray.filter(function (_ref3) {
-        var graphNodeType = _ref3.type.graphNodeType;
-        return graphNodeType === _nodeTypes2.default.LINK;
-      });
+      var _separateChildrenByTy = (0, _separateChildrenByType2.default)(children);
 
-      var stack = [];
-      var restNodes = nodes || [];
-      var restLinks = links || [];
-      while (restNodes.length) {
-        var heads = [];
+      var defs = _separateChildrenByTy.defs;
+      var nodes = _separateChildrenByTy.nodes;
+      var links = _separateChildrenByTy.links;
 
-        var _splitHeadsFromRest = (0, _splitHeadsFromRest3.default)(restNodes, restLinks);
 
-        heads = _splitHeadsFromRest.heads;
-        restNodes = _splitHeadsFromRest.restNodes;
-        restLinks = _splitHeadsFromRest.restLinks;
+      var columns = (0, _findColumns2.default)(nodes, links);
 
-        if (!heads.length) {
-          break;
-        }
-        stack.push(heads);
-      }
+      var columnWidth = (containerWidth - (columns.length - 1) * spacing) / columns.length;
 
-      var defaultWidth = (containerWidth - (stack.length - 1) * spacing) / stack.length;
-
-      var columnWidths = stack.map(function (column) {
-        return Math.max.apply(null, column.map(function (_ref4) {
-          var _ref4$props = _ref4.props;
-          var width = _ref4$props.width;
-          var r = _ref4$props.r;
+      var columnWidths = columns.map(function (column) {
+        return Math.max.apply(null, column.map(function (_ref) {
+          var _ref$props = _ref.props;
+          var width = _ref$props.width;
+          var r = _ref$props.r;
           return width || r * 2;
-        }).concat(defaultWidth));
+        }).concat(columnWidth));
       });
 
-      var nodesWithCoords = _react.Children.toArray(stack.map(function (column, columnIndex) {
-        if (column.length === 0) {
-          return null;
-        }
-        var nodeHeights = column.map(function (_ref5) {
-          var _ref5$props = _ref5.props;
-          var name = _ref5$props.name;
-          var height = _ref5$props.height;
+      var nodesWithCoords = (0, _configureNodeCoordinates2.default)(columns, nodes, links, columnWidths, spacing, margin);
 
-          if ((0, _isDefined2.default)(height)) {
-            return height;
-          }
+      var nodeYs = nodesWithCoords.reduce(function (hash, _ref2) {
+        var _ref2$props = _ref2.props;
+        var name = _ref2$props.name;
+        var y = _ref2$props.y;
+        var height = _ref2$props.height;
 
-          var sums = links.reduce(function (_ref6, _ref7) {
-            var fromSum = _ref6.fromSum;
-            var toSum = _ref6.toSum;
-            var _ref7$props = _ref7.props;
-            var from = _ref7$props.from;
-            var to = _ref7$props.to;
-            var width = _ref7$props.width;
+        return _extends({}, hash, _defineProperty({}, name, y + height / 2));
+      }, {});
 
-            if (from === name) {
-              return {
-                fromSum: fromSum + width,
-                toSum: toSum
-              };
-            } else if (to === name) {
-              return {
-                fromSum: fromSum,
-                toSum: toSum + width
-              };
-            }
-            return { fromSum: fromSum, toSum: toSum };
-          }, { fromSum: 0, toSum: 0 });
-          return Math.max(sums.fromSum, sums.toSum);
-        });
-
-        return column.map(function (node, nodeIndex) {
-          var _node$props = node.props;
-          var x = _node$props.x;
-          var y = _node$props.y;
-          var _node$props2 = node.props;
-          var _node$props2$width = _node$props2.width;
-          var width = _node$props2$width === undefined ? columnWidths[columnIndex] : _node$props2$width;
-          var _node$props2$height = _node$props2.height;
-          var height = _node$props2$height === undefined ? nodeHeights[nodeIndex] : _node$props2$height;
-          var nodeChild = _node$props2.children;
-
-
-          if (!(0, _isDefined2.default)(x)) {
-            x = columnIndex * spacing + columnWidths.slice(0, columnIndex).reduce(function () {
-              var a = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
-              var b = arguments.length <= 1 || arguments[1] === undefined ? 0 : arguments[1];
-              return (a || 0) + (b || 0);
-            }, 0);
-          }
-          if (!(0, _isDefined2.default)(y)) {
-            y = margin * nodeIndex + nodeHeights.slice(0, nodeIndex).reduce(function () {
-              var a = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
-              var b = arguments.length <= 1 || arguments[1] === undefined ? 0 : arguments[1];
-              return (a || 0) + (b || 0);
-            }, 0);
-          }
-
-          return (0, _react.cloneElement)(node, { x: x, y: y, width: width, height: height }, nodeChild);
-        });
-      }));
-
-      // const nodeNames = nodes.map(({props: {name}}) => name);
-      var nodeYs = {};
-      nodesWithCoords.forEach(function (_ref8) {
-        var _ref8$props = _ref8.props;
-        var name = _ref8$props.name;
-        var y = _ref8$props.y;
-        var height = _ref8$props.height;
-        return nodeYs[name] = y + height / 2;
-      });
-      var orderedLinks = links.sort(function (_ref9, _ref10) {
-        var _ref9$props = _ref9.props;
-        var to1 = _ref9$props.to;
-        var from1 = _ref9$props.from;
-        var _ref10$props = _ref10.props;
-        var to2 = _ref10$props.to;
-        var from2 = _ref10$props.from;
+      // order links by the from and to block vertical position (Y).
+      // this is the layout logic that prevents connectors from crossing
+      // each other.
+      var orderedLinks = links.sort(function (_ref3, _ref4) {
+        var _ref3$props = _ref3.props;
+        var to1 = _ref3$props.to;
+        var from1 = _ref3$props.from;
+        var _ref4$props = _ref4.props;
+        var to2 = _ref4$props.to;
+        var from2 = _ref4$props.from;
         return nodeYs[to1] - nodeYs[to2] + nodeYs[from1] - nodeYs[from2];
       });
 
-      var linkWidths = {};
-      links.forEach(function (_ref11) {
-        var _ref11$props = _ref11.props;
-        var from = _ref11$props.from;
-        var to = _ref11$props.to;
-        var width = _ref11$props.width;
+      var linkWidths = links.reduce(function (hash, _ref5) {
+        var _ref5$props = _ref5.props;
+        var from = _ref5$props.from;
+        var to = _ref5$props.to;
+        var width = _ref5$props.width;
 
-        linkWidths[(0, _linkKey2.default)(from, to)] = width;
-      });
+        return _extends({}, hash, _defineProperty({}, (0, _linkKey2.default)(from, to), width));
+      }, {});
 
-      var nodeHash = {};
-      nodes.forEach(function (_ref12) {
-        var name = _ref12.props.name;
+      var nodeHash = orderedLinks.reduce(function (hash, _ref6) {
+        var _extends4;
 
-        nodeHash[name] = {
-          from: [],
-          to: []
-        };
-      });
+        var _ref6$props = _ref6.props;
+        var from = _ref6$props.from;
+        var to = _ref6$props.to;
 
-      orderedLinks.forEach(function (_ref13) {
-        var _ref13$props = _ref13.props;
-        var from = _ref13$props.from;
-        var to = _ref13$props.to;
-        var width = _ref13$props.width;
-
-        nodeHash[from].from.push((0, _linkKey2.default)(from, to));
-        nodeHash[to].to.push((0, _linkKey2.default)(from, to));
-      });
+        return _extends({}, hash, (_extends4 = {}, _defineProperty(_extends4, from, _extends({}, hash[from], {
+          from: [].concat(_toConsumableArray(hash[from] && hash[from].from ? hash[from].from : []), [(0, _linkKey2.default)(from, to)])
+        })), _defineProperty(_extends4, to, _extends({}, hash[to], {
+          to: [].concat(_toConsumableArray(hash[to] && hash[to].to ? hash[to].to : []), [(0, _linkKey2.default)(from, to)])
+        })), _extends4));
+      }, {});
 
       var linksWithCoords = orderedLinks.map(function (link, ind) {
         var _link$props = link.props;
@@ -288,7 +199,9 @@ var Sankey = (_temp = _class = function (_Component) {
 
   return Sankey;
 }(_react.Component), _class.propTypes = {
+  /** width of svg figure */
   width: number.isRequired,
+  /** height of svg figure */
   height: number.isRequired,
   /** spacing (horizontal) */
   spacing: number,

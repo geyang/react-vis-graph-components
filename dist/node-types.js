@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 /**
- * Created by ge on 8/17/16.
+ * Created on 8/17/16.
  */
 var NODE_TYPES = {
   DEFS: 'defs',
