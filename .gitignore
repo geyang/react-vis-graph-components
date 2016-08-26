@@ -2,6 +2,7 @@
 .idea
 
 # log files
+*.log*
 *.log
 *.logs
 
