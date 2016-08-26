@@ -62,7 +62,7 @@ export default function configureNodeCoordinates(
           if (!isDefined(y)) {
             y = margin * nodeIndex +
               nodeHeights.slice(0, nodeIndex)
-                .reduce((a, b) => (a || 0) + b), 0);
+                .reduce((a, b) => (a || 0) + b, 0);
           }
 
           return cloneElement(
