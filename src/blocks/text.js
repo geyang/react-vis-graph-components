@@ -1,8 +1,8 @@
 /**
- * Created by ge on 8/23/16.
+ * Created on 8/23/16.
  */
 import React, {PropTypes} from 'react';
-import isDefined from '../utils/isDefined';
+import isDefined from '../utils/is-defined';
 
 export default function Text({
   children,

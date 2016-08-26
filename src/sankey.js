@@ -5,7 +5,8 @@ import getWidthSums from './utils/get-width-sums';
 import separateChildrenByType from './utils/separate-children-by-type';
 import findColumns from './utils/find-columns';
 import configureNodeCoordinates from './utils/configure-node-coordinates';
-import getAnchorFromRectangleNodes from './utils/get-anchor-from-rectangle-nodes';
+import getAnchorFromRectangleNodes
+  from './utils/get-anchor-from-rectangle-nodes';
 
 const {number} = PropTypes;
 export default class Sankey extends Component {

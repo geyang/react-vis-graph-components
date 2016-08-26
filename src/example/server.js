@@ -1,5 +1,5 @@
 /**
- * Created by ge on 6/26/16.
+ * Created on 6/26/16.
  */
 import React from 'react';
 import {renderToString} from 'react-dom/server';

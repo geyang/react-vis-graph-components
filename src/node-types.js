@@ -1,5 +1,5 @@
 /**
- * Created by ge on 8/17/16.
+ * Created on 8/17/16.
  */
 const NODE_TYPES = {
   DEFS: 'defs',

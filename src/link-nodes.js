@@ -1,8 +1,8 @@
 import React, {PropTypes, Component, Children, cloneElement} from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
-import padLine from './utils/padLine';
+import padLine from './utils/pad-line';
 import NODE_TYPES from './node-types';
-import getPaddingFromCircleNodes from './utils/getPaddingFromCircleNodes';
+import getPaddingFromCircleNodes from './utils/get-padding-from-circle-nodes';
 
 // helper functions
 

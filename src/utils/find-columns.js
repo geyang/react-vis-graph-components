@@ -1,7 +1,7 @@
 /**
- * Created by ge on 8/25/16.
+ * Created on 8/25/16.
  */
-import splitHeadsFromRest from './splitHeadsFromRest';
+import splitHeadsFromRest from './split-heads-from-rest';
 export default function findColumns(nodes, links) {
   const stack = [];
   let restNodes = nodes || [];

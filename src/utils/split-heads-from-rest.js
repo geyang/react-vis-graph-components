@@ -1,4 +1,4 @@
-/** Created by ge on 8/22/16. */
+/** Created on 8/22/16. */
 
 export default function splitHeadsFromRest(nodes = [], links = []) {
   const heads = nodes.filter(

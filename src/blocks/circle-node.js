@@ -1,10 +1,10 @@
-/** Created by ge on 8/14/16. */
-import React, {cloneElement} from 'react';
+/** Created on 8/14/16. */
+import React, {cloneElement, Children} from 'react';
 import NODE_TYPES from '../node-types';
-import isDefined from '../utils/isDefined';
 
 const propTypes = {};
 
+// todo: implement container block API as a higher level component
 export default function CircleNode({
   name,
   cx,
@@ -13,7 +13,6 @@ export default function CircleNode({
   fill = 'transparent',
   stroke = 'rgba(35, 170, 255, 0.5)',
   strokeWidth = 3,
-  children,
   ..._props
 }) {
   const props = {
@@ -26,19 +25,6 @@ export default function CircleNode({
     strokeWidth,
     ..._props
   };
-  // if (isDefined(children)) {
-  //   return (
-  //     <g>
-  //       <circle {...props}/>
-        {/*{children.toArray().map(*/}
-          {/*child => {*/}
-            {/*const {cx, cy, dx, dy} = child.props;*/}
-            {/*return cloneElement(child, {x: cx + dx, y: cy + dy});*/}
-  //         }
-  //       )}
-  //     </g>
-  //   );
-  // }
   return <circle {...props}/>;
 }
 

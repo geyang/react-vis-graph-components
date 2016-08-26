@@ -1,8 +1,5 @@
-/**
- * Created by ge on 8/25/16.
- */
 import {Children, cloneElement} from 'react';
-import isDefined from './isDefined';
+import isDefined from './is-defined';
 
 export default function configureNodeCoordinates(columns,
                                                  nodes,

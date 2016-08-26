@@ -1,4 +1,4 @@
-/** Created by ge on 8/26/16. */
+/** Created on 8/26/16. */
 import {Children} from 'react';
 import NODE_TYPES from '../node-types';
 

@@ -1,4 +1,4 @@
-/** Created by ge on 8/22/16. */
+/** Created on 8/22/16. */
 export default function getAnchorFromRectangleNodes(name, nodes, id) {
   const {props: {x, y, width, height}} =
     nodes.filter(({props: {name: nodeName}}) => (nodeName === name))[0];

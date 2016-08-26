@@ -1,10 +1,24 @@
-/** Created by ge on 8/14/16. */
-import React, {cloneElement, Children} from 'react';
+/** Created on 8/14/16. */
+import React, {PropTypes, cloneElement, Children} from 'react';
 import NODE_TYPES from '../node-types';
-import isDefined from '../utils/isDefined';
+import isDefined from '../utils/is-defined';
 
-const propTypes = {};
+const {string, number, any} = PropTypes;
 
+const propTypes = {
+  name: string,
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+  margin: number,
+  fill: string,
+  stroke: number,
+  strokeWidth: number,
+  children: any
+};
+
+// todo: implement container block API as a higher level component
 export default function RectangleNode({
   name,
   x,

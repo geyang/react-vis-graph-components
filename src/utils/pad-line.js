@@ -1,5 +1,5 @@
 /**
- * Created by ge on 8/15/16.
+ * Created on 8/15/16.
  */
 const {sqrt, pow} = Math;
 export default function padLine(x1, y1, x2, y2, pad1 = 0, pad2 = 0) {
