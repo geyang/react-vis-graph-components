@@ -5,9 +5,7 @@ import getWidthSums from './utils/get-width-sums';
 import separateChildrenByType from './utils/separate-children-by-type';
 import findColumns from './utils/find-columns';
 import configureNodeCoordinates from './utils/configure-node-coordinates';
-import getNodeYs from './utils/get-node-ys';
-import getAnchorFromRectangleNodes from
-  './utils/get-anchor-from-rectangle-nodes';
+import getAnchorFromRectangleNodes from './utils/get-anchor-from-rectangle-nodes';
 
 const {number} = PropTypes;
 export default class Sankey extends Component {
@@ -25,6 +23,10 @@ export default class Sankey extends Component {
     return shallowCompare(this, nextProp, nextState);
   }
 
+  _separateChildrenByType() {
+    return separateChildrenByType(this.props.children);
+  }
+
   render() {
     const {
       children,
@@ -35,18 +37,17 @@ export default class Sankey extends Component {
       ..._props
     } = this.props;
 
-    const {defs, nodes, links} = separateChildrenByType(children);
+    const {defs, nodes, links} = this._separateChildrenByType();
 
     const columns = findColumns(nodes, links);
 
-    const defaultWidth =
-      (containerWidth - (columns.length - 1) * spacing) /
+    const columnWidth = (containerWidth - (columns.length - 1) * spacing) /
       columns.length;
 
     const columnWidths = columns.map(
       column =>
         Math.max.apply(null, column.map(
-          ({props: {width, r}}) => width || r * 2).concat(defaultWidth)
+          ({props: {width, r}}) => width || r * 2).concat(columnWidth)
         )
     );
 
@@ -60,7 +61,19 @@ export default class Sankey extends Component {
         margin
       );
 
-    const nodeYs = getNodeYs(nodesWithCoords);
+    const nodeYs = nodesWithCoords.map(
+      ({props: {name, y, height}}) => {
+        return {name, y: (y + height / 2)};
+      }
+    ).reduce(
+      ({name, y}, hash) => {
+        return {
+          ...hash,
+          [name]: y
+        }
+      },
+      {}
+    );
 
     const orderedLinks = links.sort(
       ({props: {to: to1, from: from1}}, {props: {to: to2, from: from2}}) =>
@@ -69,6 +82,7 @@ export default class Sankey extends Component {
           nodeYs[from1] - nodeYs[from2]
         )
     );
+
 
     const linkWidths = {};
     links.forEach(
@@ -93,6 +107,7 @@ export default class Sankey extends Component {
         nodeHash[to].to.push(linkKey(from, to));
       }
     );
+
 
     const linksWithCoords = orderedLinks.map(
       (link, ind) => {

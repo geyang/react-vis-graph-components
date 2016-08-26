@@ -8,14 +8,16 @@ export default function separateChildrenByType(children) {
   const childrenByType = {
     defs: [],
     nodes: [],
-    connectors: []
+    links: [],
+    rest: []
   };
+
   childArray.forEach(
     child => {
       const {type} = child;
       if (!type) {
-        return null;
-      } else if (child.type === NODE_TYPES.DEFS) {
+        childrenByType.rest.push(child);
+      } else if (type === NODE_TYPES.DEFS) {
         childrenByType.defs.push(child);
       } else if (type.graphNodeType === NODE_TYPES.NODE) {
         childrenByType.nodes.push(child);
