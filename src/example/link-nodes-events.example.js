@@ -3,7 +3,7 @@
  */
 import {window} from 'global';
 import React, {Component} from 'react';
-import LinkGraph from '../link-nodes';
+import LinkGraph from '../link-graph';
 import Arrow from '../arrow';
 import CircleNode from '../blocks/circle-node';
 import StraightConnector from '../connectors/straight-connector';

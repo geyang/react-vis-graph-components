@@ -136,7 +136,6 @@ export default class Sankey extends Component {
       });
 
     return (
-
       <svg
         width={containerWidth}
         height={containerHeight}
