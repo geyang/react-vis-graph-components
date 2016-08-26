@@ -4,14 +4,12 @@
 import {Children, cloneElement} from 'react';
 import isDefined from './isDefined';
 
-export default function configureNodeCoordinates(
-  columns,
-  nodes,
-  links,
-  columnWidths,
-  spacing,
-  margin
-) {
+export default function configureNodeCoordinates(columns,
+                                                 nodes,
+                                                 links,
+                                                 columnWidths,
+                                                 spacing,
+                                                 margin) {
   const nodesWithCoordinates = columns.map(
     (column, columnIndex) => {
       if (column.length === 0) {
@@ -57,12 +55,12 @@ export default function configureNodeCoordinates(
           if (!isDefined(x)) {
             x = columnIndex * spacing +
               columnWidths.slice(0, columnIndex)
-                .reduce((a, b) => (a || 0) + b, 0);
+                .reduce((a, b) => a + (b || 0), 0);
           }
           if (!isDefined(y)) {
             y = margin * nodeIndex +
               nodeHeights.slice(0, nodeIndex)
-                .reduce((a, b) => (a || 0) + b, 0);
+                .reduce((a, b) => a + (b || 0), 0);
           }
 
           return cloneElement(
