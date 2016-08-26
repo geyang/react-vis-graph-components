@@ -1,12 +1,13 @@
-import React, {PropTypes, Component, Children, cloneElement} from 'react';
+import React, {PropTypes, Component, cloneElement} from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
-import isDefined from './utils/isDefined';
 import linkKey from './utils/link-key';
 import getWidthSums from './utils/get-width-sums';
-import NODE_TYPES from './node-types';
+import separateChildrenByType from './utils/separate-children-by-type';
 import findColumns from './utils/find-columns';
 import configureNodeCoordinates from './utils/configure-node-coordinates';
-import getAnchorFromRectangleNodes from './utils/get-anchor-from-rectangle-nodes';
+import getNodeYs from './utils/get-node-ys';
+import getAnchorFromRectangleNodes from
+  './utils/get-anchor-from-rectangle-nodes';
 
 const {number} = PropTypes;
 export default class Sankey extends Component {
@@ -33,14 +34,8 @@ export default class Sankey extends Component {
       margin,
       ..._props
     } = this.props;
-    const childArray = Children.toArray(children);
-    const defs = childArray.filter(
-      ({type}) => (type === NODE_TYPES.DEFS));
-    const nodes = childArray.filter(
-      ({type: {graphNodeType}}) => (graphNodeType === NODE_TYPES.NODE));
-    const links = childArray.filter(
-      ({type: {graphNodeType}}) => (graphNodeType === NODE_TYPES.LINK)
-    );
+
+    const {defs, nodes, links} = separateChildrenByType(children);
 
     const columns = findColumns(nodes, links);
 
@@ -55,13 +50,18 @@ export default class Sankey extends Component {
         )
     );
 
-    const nodesWithCoords = configureNodeCoordinates(columns, nodes, links);
+    const nodesWithCoords =
+      configureNodeCoordinates(
+        columns,
+        nodes,
+        links,
+        columnWidths,
+        spacing,
+        margin
+      );
 
-    // const nodeNames = nodes.map(({props: {name}}) => name);
-    const nodeYs = {};
-    nodesWithCoords.forEach(
-      ({props: {name, y, height}}) => (nodeYs[name] = (y + height / 2))
-    );
+    const nodeYs = getNodeYs(nodesWithCoords);
+
     const orderedLinks = links.sort(
       ({props: {to: to1, from: from1}}, {props: {to: to2, from: from2}}) =>
         (
