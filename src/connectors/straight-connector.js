@@ -1,24 +1,36 @@
 import React, {PropTypes} from 'react';
 import NODE_TYPES from '../node-types';
 
-const {arrayOf, oneOf} = PropTypes;
-const propTypes = {
-  points: arrayOf(oneOf(['square', 'cubic']))
+const STYLEP_ROPS = {
+  fill: 'transparent'
 };
 
-const styleProps = {
-  fill: 'transparent'
+const {number, string} = PropTypes;
+const propTypes = {
+  from: string,
+  to: string,
+  paddingStart: number,
+  paddingEnd: number,
+  x1: number,
+  y1: number,
+  x2: number,
+  y2: number,
+  markerStartId: string,
+  markerMidId: string,
+  markerEndId: string,
+  stroke: string,
+  strokeWidth: number,
 };
 
 export default function StraightConnector({
   from,
   to,
+  paddingStart,
+  paddingEnd,
   x1,
   y1,
   x2,
   y2,
-  paddingStart,
-  paddingEnd,
   markerStartId,
   markerMidId,
   markerEndId,
@@ -34,7 +46,7 @@ export default function StraightConnector({
   const markerEnd = markerEndId ? `url(#${markerEndId})` : '';
 
   const props = {
-    ...styleProps,
+    ...STYLEP_ROPS,
     d, stroke, strokeWidth, markerStart, markerMid, markerEnd,
     ..._props
   };

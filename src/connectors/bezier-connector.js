@@ -2,13 +2,24 @@ import React, {PropTypes} from 'react';
 import Bezier from 'bezier-js';
 import NODE_TYPES from '../node-types';
 
-const {arrayOf, oneOf} = PropTypes;
-const propTypes = {
-  points: arrayOf(oneOf(['square', 'cubic']))
+const STYLE_PROPS = {
+  fill: 'transparent'
 };
 
-const styleProps = {
-  fill: 'transparent'
+const {number, string} = PropTypes;
+const propTypes = {
+  from: string,
+  to: string,
+  x1: number,
+  y1: number,
+  x2: number,
+  y2: number,
+  /** width of the bezier connector */
+  width: number.isRequired,
+  /** offset for the anchor points of the cubit bezier curve */
+  bezierOffset: number,
+  stroke: string,
+  strokeWidth: number
 };
 
 export default function BezierConnector({
@@ -18,7 +29,7 @@ export default function BezierConnector({
   y1,
   x2,
   y2,
-  width = 20,
+  width,
   bezierOffset = 30,
   stroke = 'black',
   strokeWidth = 0,
@@ -26,12 +37,13 @@ export default function BezierConnector({
 }) {
 
   const props = {
-    ...styleProps,
+    ...STYLE_PROPS,
     strokeWidth: 0,
     ..._props
   };
 
-  const line = new Bezier(x1, y1, x1 + bezierOffset, y1, x2 - bezierOffset, y2, x2, y2);
+  const line = new Bezier(x1, y1, x1 + bezierOffset,
+    y1, x2 - bezierOffset, y2, x2, y2);
 
   let d;
   try {
@@ -41,7 +53,7 @@ export default function BezierConnector({
   } catch (e) {
     // if points are degenerate, fall back on regular path
     return <path d={
-    `M ${x1} ${y1 + width / 2} L ${x2} ${y2 + width / 2}
+      `M ${x1} ${y1 + width / 2} L ${x2} ${y2 + width / 2}
     L ${x2} ${y2 - width / 2} L ${x1} ${y1 - width / 2} Z`} {...props}/>
   }
 

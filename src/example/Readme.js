@@ -4,8 +4,8 @@
 import React from 'react';
 import Markdown from 'react-markdownit';
 import Highlight from '@episodeyang/react-highlight.js';
-import HappySandwichMakerExample from './link-nodes-simple.example';
-import HappySandwichMakerSource from '!!raw!./link-nodes-simple.example.js';
+import HappySandwichMakerExample from './link-graph-simple.example';
+import HappySandwichMakerSource from '!!raw!./link-graph-simple.example.js';
 import SankeyDiagramExample from './sankey-simple.example';
 import SankeyDiagramSource from '!!raw!./sankey-simple.example.js';
 
