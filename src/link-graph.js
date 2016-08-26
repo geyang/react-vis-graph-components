@@ -1,4 +1,4 @@
-import React, {PropTypes, Component, Children, cloneElement} from 'react';
+import React, {PropTypes, Component, cloneElement} from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
 import padLine from './utils/pad-line';
 import separateChildrenByType from './utils/separate-children-by-type';
