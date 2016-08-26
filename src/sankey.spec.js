@@ -1,8 +1,8 @@
 import test from 'tape';
 import React, {Component}  from 'react';
-import LinkNodesExample from './example/link-nodes-simple.example';
+import SankeyExample from './example/sankey-simple.example';
 
 test('Render the simple link-nodes component', assert => {
-  const linkedNodes = <LinkNodesExample/>;
+  const sankey = <SankeyExample/>;
   assert.end();
 });
