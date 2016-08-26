@@ -4,9 +4,9 @@ import isDefined from './utils/isDefined';
 import linkKey from './utils/link-key';
 import getWidthSums from './utils/get-width-sums';
 import NODE_TYPES from './node-types';
-import splitHeadsFromRest from './utils/splitHeadsFromRest';
-import getAnchorFromRectangleNodes
-  from './utils/get-anchor-from-rectangle-nodes';
+import findColumns from './utils/find-columns';
+import configureNodeCoordinates from './utils/configure-node-coordinates';
+import getAnchorFromRectangleNodes from './utils/get-anchor-from-rectangle-nodes';
 
 const {number} = PropTypes;
 export default class Sankey extends Component {
@@ -38,97 +38,24 @@ export default class Sankey extends Component {
       ({type}) => (type === NODE_TYPES.DEFS));
     const nodes = childArray.filter(
       ({type: {graphNodeType}}) => (graphNodeType === NODE_TYPES.NODE));
-    const links = childArray
-      .filter(
-        ({type: {graphNodeType}}) => (graphNodeType === NODE_TYPES.LINK)
-      );
+    const links = childArray.filter(
+      ({type: {graphNodeType}}) => (graphNodeType === NODE_TYPES.LINK)
+    );
 
-    const stack = [];
-    let restNodes = nodes || [];
-    let restLinks = links || [];
-    while (restNodes.length) {
-      let heads = [];
-      ({heads, restNodes, restLinks} =
-        splitHeadsFromRest(restNodes, restLinks));
-      if (!heads.length) {
-        break;
-      }
-      stack.push(heads);
-    }
+    const columns = findColumns(nodes, links);
 
     const defaultWidth =
-      (containerWidth - (stack.length - 1) * spacing) /
-      stack.length;
+      (containerWidth - (columns.length - 1) * spacing) /
+      columns.length;
 
-    const columnWidths = stack.map(
+    const columnWidths = columns.map(
       column =>
         Math.max.apply(null, column.map(
           ({props: {width, r}}) => width || r * 2).concat(defaultWidth)
         )
     );
 
-    const nodesWithCoords = Children.toArray(stack.map(
-      (column, columnIndex) => {
-        if (column.length === 0) {
-          return null;
-        }
-        const nodeHeights = column.map(
-          ({props: {name, height}}) => {
-            if (isDefined(height)) {
-              return height;
-            }
-
-            const sums = links
-              .reduce(({fromSum, toSum}, {props: {from, to, width}}) => {
-                if (from === name) {
-                  return {
-                    fromSum: fromSum + width,
-                    toSum
-                  };
-                } else if (to === name) {
-                  return {
-                    fromSum,
-                    toSum: toSum + width
-                  };
-                }
-                return {fromSum, toSum};
-              }, {fromSum: 0, toSum: 0});
-            return Math.max(sums.fromSum, sums.toSum);
-          }
-        );
-
-        return column.map(
-          (node, nodeIndex) => {
-            let {
-              x,
-              y
-            } = node.props;
-            const {
-              width = columnWidths[columnIndex],
-              height = nodeHeights[nodeIndex],
-              children: nodeChild
-            } = node.props;
-
-            if (!isDefined(x)) {
-              x = columnIndex * spacing +
-                columnWidths.slice(0, columnIndex)
-                  .reduce((a = 0, b = 0) => (a || 0) + (b || 0), 0);
-            }
-            if (!isDefined(y)) {
-              y = margin * nodeIndex +
-                nodeHeights.slice(0, nodeIndex)
-                  .reduce((a = 0, b = 0) => (a || 0) + (b || 0), 0);
-            }
-
-            return cloneElement(
-              node,
-              {x, y, width, height},
-              nodeChild
-            );
-          }
-        );
-      }
-    ));
+    const nodesWithCoords = configureNodeCoordinates(columns, nodes, links);
 
     // const nodeNames = nodes.map(({props: {name}}) => name);
     const nodeYs = {};
