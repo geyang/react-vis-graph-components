@@ -23,9 +23,9 @@ var _padLine = require('./utils/pad-line');
 
 var _padLine2 = _interopRequireDefault(_padLine);
 
-var _nodeTypes = require('./node-types');
+var _separateChildrenByType = require('./utils/separate-children-by-type');
 
-var _nodeTypes2 = _interopRequireDefault(_nodeTypes);
+var _separateChildrenByType2 = _interopRequireDefault(_separateChildrenByType);
 
 var _getPaddingFromCircleNodes = require('./utils/get-padding-from-circle-nodes');
 
@@ -66,23 +66,16 @@ var LinkGraph = (_temp = _class = function (_Component) {
 
       var _props = _objectWithoutProperties(_props2, ['children']);
 
-      var childArray = _react.Children.toArray(children);
-      var defs = childArray.filter(function (_ref) {
-        var type = _ref.type;
-        return type === _nodeTypes2.default.DEFS;
-      });
-      var links = childArray.filter(function (_ref2) {
-        var graphNodeType = _ref2.type.graphNodeType;
-        return graphNodeType === _nodeTypes2.default.LINK;
-      });
-      var nodes = childArray.filter(function (_ref3) {
-        var graphNodeType = _ref3.type.graphNodeType;
-        return graphNodeType === _nodeTypes2.default.NODE;
-      });
+      var _separateChildrenByTy = (0, _separateChildrenByType2.default)(children);
+
+      var defs = _separateChildrenByTy.defs;
+      var nodes = _separateChildrenByTy.nodes;
+      var links = _separateChildrenByTy.links;
 
       // 1. get all nodes and extract their cx, cy locations
       // 2. clone the links and subplant the x1, y1 with the cx cy locations
       // of the nodes.
+
       var linksWithCoords = links.map(function (link) {
         var _link$props = link.props;
         var from = _link$props.from;
