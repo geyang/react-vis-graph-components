@@ -4,8 +4,6 @@ import padLine from './utils/pad-line';
 import separateChildrenByType from './utils/separate-children-by-type';
 import getPaddingFromCircleNodes from './utils/get-padding-from-circle-nodes';
 
-// helper functions
-
 const {number} = PropTypes;
 export default class LinkGraph extends Component {
 
