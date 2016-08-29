@@ -1,5 +1,5 @@
 {
-  "name": "react-vis-link-graph",
+  "name": "react-vis-graph-components",
   "version": "0.0.0",
   "description": "a template for react es6 components. Contains webpack configuration and document generator.",
   "main": "dist/index.js",
@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/episodeyang/react-vis-link-graph.git"
+    "url": "git+https://github.com/episodeyang/react-vis-graph-components.git"
   },
   "keywords": [
     "react",
@@ -37,9 +37,9 @@
   "author": "Ge Yang <yangge1987@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/episodeyang/react-vis-link-graph/issues"
+    "url": "https://github.com/episodeyang/react-vis-graph-components/issues"
   },
-  "homepage": "https://github.com/episodeyang/react-vis-link-graph#readme",
+  "homepage": "https://github.com/episodeyang/react-vis-graph-components#readme",
   "devDependencies": {
     "@episodeyang/react-highlight.js": "^1.0.3",
     "autoprefixer": "^6.3.6",

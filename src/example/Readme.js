@@ -17,7 +17,7 @@ export default function Readme({}) {
       ## Linked Node Graph
 
       [![github](https://img.shields.io/github/downloads/episodeyang/` +
-      `react-vis-link-graph/total.svg?style=flat-square&maxAge=2592000)]()
+      `react-vis-graph-components/total.svg?style=flat-square&maxAge=2592000)]()
 
       This component allows you to draw a linked node graph easily.
       The graph component takes in the children (links and nodes) and
