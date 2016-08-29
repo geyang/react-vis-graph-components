@@ -24,15 +24,26 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-var arrayOf = _react.PropTypes.arrayOf;
-var oneOf = _react.PropTypes.oneOf;
-
-var propTypes = {
-  points: arrayOf(oneOf(['square', 'cubic']))
+var STYLE_PROPS = {
+  fill: 'transparent'
 };
 
-var styleProps = {
-  fill: 'transparent'
+var number = _react.PropTypes.number;
+var string = _react.PropTypes.string;
+
+var propTypes = {
+  from: string,
+  to: string,
+  x1: number,
+  y1: number,
+  x2: number,
+  y2: number,
+  /** width of the bezier connector */
+  width: number.isRequired,
+  /** offset for the anchor points of the cubit bezier curve */
+  bezierOffset: number,
+  stroke: string,
+  strokeWidth: number
 };
 
 function BezierConnector(_ref) {
@@ -42,8 +53,7 @@ function BezierConnector(_ref) {
   var y1 = _ref.y1;
   var x2 = _ref.x2;
   var y2 = _ref.y2;
-  var _ref$width = _ref.width;
-  var width = _ref$width === undefined ? 20 : _ref$width;
+  var width = _ref.width;
   var _ref$bezierOffset = _ref.bezierOffset;
   var bezierOffset = _ref$bezierOffset === undefined ? 30 : _ref$bezierOffset;
   var _ref$stroke = _ref.stroke;
@@ -53,7 +63,7 @@ function BezierConnector(_ref) {
 
   var _props = _objectWithoutProperties(_ref, ['from', 'to', 'x1', 'y1', 'x2', 'y2', 'width', 'bezierOffset', 'stroke', 'strokeWidth']);
 
-  var props = _extends({}, styleProps, {
+  var props = _extends({}, STYLE_PROPS, {
     strokeWidth: 0
   }, _props);
 
@@ -84,13 +94,13 @@ BezierConnector.propTypes = propTypes;
     return;
   }
 
-  __REACT_HOT_LOADER__.register(arrayOf, 'arrayOf', 'src/connectors/bezier-connector.js');
+  __REACT_HOT_LOADER__.register(STYLE_PROPS, 'STYLE_PROPS', 'src/connectors/bezier-connector.js');
 
-  __REACT_HOT_LOADER__.register(oneOf, 'oneOf', 'src/connectors/bezier-connector.js');
+  __REACT_HOT_LOADER__.register(number, 'number', 'src/connectors/bezier-connector.js');
+
+  __REACT_HOT_LOADER__.register(string, 'string', 'src/connectors/bezier-connector.js');
 
   __REACT_HOT_LOADER__.register(propTypes, 'propTypes', 'src/connectors/bezier-connector.js');
-
-  __REACT_HOT_LOADER__.register(styleProps, 'styleProps', 'src/connectors/bezier-connector.js');
 
   __REACT_HOT_LOADER__.register(BezierConnector, 'BezierConnector', 'src/connectors/bezier-connector.js');
 })();

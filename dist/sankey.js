@@ -64,7 +64,7 @@ var Sankey = (_temp = _class = function (_Component) {
   function Sankey() {
     _classCallCheck(this, Sankey);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Sankey).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Sankey.__proto__ || Object.getPrototypeOf(Sankey)).apply(this, arguments));
   }
 
   _createClass(Sankey, [{

@@ -64,7 +64,7 @@ var SankeyDiagramExample = function (_Component) {
   function SankeyDiagramExample() {
     _classCallCheck(this, SankeyDiagramExample);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(SankeyDiagramExample).apply(this, arguments));
+    return _possibleConstructorReturn(this, (SankeyDiagramExample.__proto__ || Object.getPrototypeOf(SankeyDiagramExample)).apply(this, arguments));
   }
 
   _createClass(SankeyDiagramExample, [{

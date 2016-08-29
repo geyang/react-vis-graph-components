@@ -8,14 +8,14 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _linkNodesSimple = require('./example/link-nodes-simple.example');
+var _linkGraphSimple = require('./example/link-graph-simple.example');
 
-var _linkNodesSimple2 = _interopRequireDefault(_linkNodesSimple);
+var _linkGraphSimple2 = _interopRequireDefault(_linkGraphSimple);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _tape2.default)('Render the simple link-nodes component', function (assert) {
-  var linkedNodes = _react2.default.createElement(_linkNodesSimple2.default, null);
+  var linkedNodes = _react2.default.createElement(_linkGraphSimple2.default, null);
   assert.isDefined(linkedNodes, 'component should be defined');
   assert.end();
 });

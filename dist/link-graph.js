@@ -41,8 +41,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-// helper functions
-
 var number = _react.PropTypes.number;
 var LinkGraph = (_temp = _class = function (_Component) {
   _inherits(LinkGraph, _Component);
@@ -50,7 +48,7 @@ var LinkGraph = (_temp = _class = function (_Component) {
   function LinkGraph() {
     _classCallCheck(this, LinkGraph);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(LinkGraph).apply(this, arguments));
+    return _possibleConstructorReturn(this, (LinkGraph.__proto__ || Object.getPrototypeOf(LinkGraph)).apply(this, arguments));
   }
 
   _createClass(LinkGraph, [{
