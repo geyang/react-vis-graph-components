@@ -12,7 +12,7 @@ import SankeyDiagramSource from '!!raw!./sankey-simple.example.js';
 export default function Readme({}) {
   return (
     <Markdown stripIndent={true}>{`
-      # Linked Node Graph Component and Sankey Diagram
+      # React Vis Graph Component: Link Graph and Sankey Diagram
 
       ## Linked Node Graph
 

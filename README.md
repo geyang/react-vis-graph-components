@@ -1,4 +1,4 @@
-# Linked Node Graph Component
+# React Vis Graph Component: Link Graph and Sankey Diagram
 
 [![github](https://img.shields.io/github/downloads/episodeyang/react-vis-graph-components/total.svg?style=flat-square&maxAge=2592000)]()
 
