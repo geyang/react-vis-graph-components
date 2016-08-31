@@ -9,20 +9,20 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _index = require('../index');
+var _ = require('../');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /** Created on 8/30/16. */
 function LinkGraphSimpleExample() {
   return _react2.default.createElement(
-    _index.LinkGraph,
+    _.LinkGraph,
     { width: 200, height: 140 },
-    _react2.default.createElement(_index.CircleNode, { name: 'Gatsby', cx: 60, cy: 40, r: 10, stroke: 'red' }),
-    _react2.default.createElement(_index.CircleNode, { name: 'Daisy', cx: 120, cy: 120, r: 10 }),
-    _react2.default.createElement(_index.CircleNode, { name: 'Ge', cx: 180, cy: 100, r: 10 }),
-    _react2.default.createElement(_index.StraightConnector, { from: 'Gatsby', to: 'Daisy' }),
-    _react2.default.createElement(_index.StraightConnector, { from: 'Ge', to: 'Gatsby' })
+    _react2.default.createElement(_.CircleNode, { name: 'Gatsby', cx: 60, cy: 40, r: 10, stroke: 'red' }),
+    _react2.default.createElement(_.CircleNode, { name: 'Daisy', cx: 120, cy: 120, r: 10 }),
+    _react2.default.createElement(_.CircleNode, { name: 'Ge', cx: 180, cy: 100, r: 10 }),
+    _react2.default.createElement(_.StraightConnector, { from: 'Gatsby', to: 'Daisy' }),
+    _react2.default.createElement(_.StraightConnector, { from: 'Ge', to: 'Gatsby' })
   );
 }
 ;
