@@ -24,7 +24,7 @@ const links = [
 
 export default function SankeyDiagramSimpleExample() {
   return (
-    <Sankey width={900} height={300} spacing={80} margin={20}>
+    <Sankey width={900} height={190} spacing={80} margin={20}>
       <Text x={10} y={100}>LeNet++ with Centroid Loss</Text>
       {nodes.map(({name, text}) =>
         <RectangleNode
