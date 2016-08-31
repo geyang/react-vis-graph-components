@@ -5,8 +5,7 @@ import getWidthSums from './utils/get-width-sums';
 import separateChildrenByType from './utils/separate-children-by-type';
 import findColumns from './utils/find-columns';
 import configureNodeCoordinates from './utils/configure-node-coordinates';
-import getAnchorFromRectangleNodes
-  from './utils/get-anchor-from-rectangle-nodes';
+import getAnchorFromRectangleNodes from './utils/get-anchor-from-rectangle-nodes';
 
 const {number} = PropTypes;
 export default class Sankey extends Component {
@@ -40,14 +39,18 @@ export default class Sankey extends Component {
 
     const columns = findColumns(nodes, links);
 
-    const columnWidth = (containerWidth - (columns.length - 1) * spacing) /
-      columns.length;
+    const defaultColumnWidth = (containerWidth - columns.length * spacing) /
+      (columns.length + 1);
 
+
+    /* if the max width of the column is less than the default column with,
+     * take the bigger value. When no width is given, a default column width
+     * is used. */
     const columnWidths = columns.map(
       column =>
-        Math.max.apply(null, column.map(
-          ({props: {width, r}}) => width || r * 2).concat(columnWidth)
-        )
+        (Math.max.apply(null, column.map(
+          ({props: {width, r}}) => width || r * 2)
+        ) || defaultColumnWidth)
     );
 
     const nodesWithCoords =

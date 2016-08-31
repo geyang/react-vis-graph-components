@@ -51,12 +51,14 @@ export default function configureNodeCoordinates(columns,
 
           if (!isDefined(x)) {
             x = columnIndex * spacing +
-              columnWidths.slice(0, columnIndex)
+              columnWidths
+                .slice(0, columnIndex)
                 .reduce((a, b) => a + (b || 0), 0);
           }
           if (!isDefined(y)) {
             y = margin * nodeIndex +
-              nodeHeights.slice(0, nodeIndex)
+              nodeHeights
+                .slice(0, nodeIndex)
                 .reduce((a, b) => a + (b || 0), 0);
           }
 
