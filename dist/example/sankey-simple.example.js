@@ -14,14 +14,14 @@ var _ = require('../');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /** Created on 6/23/16. */
-var nodes = [{ name: 'page 1', text: 'Visitors' }, { name: 'page 2', text: 'Page 2' }, { name: 'loss 1', text: 'left' }, { name: 'page 3', text: 'Page 3' }, { name: 'loss 2', text: 'left' }, { name: 'retention', text: 'completed Purchase' }, { name: 'total loss', text: 'Total Loss' }];
+var nodes = [{ name: 'page 1', text: 'Visitors' }, { name: 'page 2', text: 'Page 2' }, { name: 'loss 1', text: 'left' }, { name: 'page 3', text: 'Page 3' }, { name: 'loss 2', text: 'left' }, { name: 'retention', text: 'completed Purchase (50%)' }, { name: 'total loss', text: 'Total Loss (50%)' }];
 
 var links = [{ from: 'page 1', to: 'page 2', value: 60 }, { from: 'page 1', to: 'loss 1', value: 40 }, { from: 'page 2', to: 'page 3', value: 50 }, { from: 'page 2', to: 'loss 2', value: 10 }, { from: 'page 3', to: 'retention', value: 50 }, { from: 'loss 1', to: 'total loss', value: 40 }, { from: 'loss 2', to: 'total loss', value: 10 }];
 
 function SankeyDiagramSimpleExample() {
   return _react2.default.createElement(
     _.Sankey,
-    { width: 900, height: 300, spacing: 80, margin: 20 },
+    { width: 900, height: 190, spacing: 80, margin: 20 },
     _react2.default.createElement(
       _.Text,
       { x: 10, y: 100 },
