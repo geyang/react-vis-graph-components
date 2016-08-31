@@ -15,7 +15,7 @@ Object.defineProperty(exports, 'Arrow', {
 
 var _circleNode = require('./blocks/circle-node');
 
-Object.defineProperty(exports, 'CircleNodes', {
+Object.defineProperty(exports, 'CircleNode', {
   enumerable: true,
   get: function get() {
     return _interopRequireDefault(_circleNode).default;
@@ -33,7 +33,7 @@ Object.defineProperty(exports, 'StraightConnector', {
 
 var _linkGraph = require('./link-graph');
 
-Object.defineProperty(exports, 'LinkNodes', {
+Object.defineProperty(exports, 'LinkGraph', {
   enumerable: true,
   get: function get() {
     return _interopRequireDefault(_linkGraph).default;
