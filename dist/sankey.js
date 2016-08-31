@@ -93,15 +93,18 @@ var Sankey = (_temp = _class = function (_Component) {
 
       var columns = (0, _findColumns2.default)(nodes, links);
 
-      var columnWidth = (containerWidth - (columns.length - 1) * spacing) / columns.length;
+      var defaultColumnWidth = (containerWidth - columns.length * spacing) / (columns.length + 1);
 
+      /* if the max width of the column is less than the default column with,
+       * take the bigger value. When no width is given, a default column width
+       * is used. */
       var columnWidths = columns.map(function (column) {
         return Math.max.apply(null, column.map(function (_ref) {
           var _ref$props = _ref.props;
           var width = _ref$props.width;
           var r = _ref$props.r;
           return width || r * 2;
-        }).concat(columnWidth));
+        })) || defaultColumnWidth;
       });
 
       var nodesWithCoords = (0, _configureNodeCoordinates2.default)(columns, nodes, links, columnWidths, spacing, margin);

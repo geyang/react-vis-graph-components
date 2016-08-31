@@ -22,12 +22,48 @@ Object.defineProperty(exports, 'CircleNode', {
   }
 });
 
+var _rectangleNode = require('./blocks/rectangle-node');
+
+Object.defineProperty(exports, 'RectangleNode', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_rectangleNode).default;
+  }
+});
+
+var _blockAnchor = require('./blocks/block-anchor');
+
+Object.defineProperty(exports, 'BlockAnchor', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_blockAnchor).default;
+  }
+});
+
+var _text = require('./blocks/text');
+
+Object.defineProperty(exports, 'Text', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_text).default;
+  }
+});
+
 var _straightConnector = require('./connectors/straight-connector');
 
 Object.defineProperty(exports, 'StraightConnector', {
   enumerable: true,
   get: function get() {
     return _interopRequireDefault(_straightConnector).default;
+  }
+});
+
+var _bezierConnector = require('./connectors/bezier-connector');
+
+Object.defineProperty(exports, 'BezierConnector', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_bezierConnector).default;
   }
 });
 
