@@ -8,8 +8,8 @@ const nodes = [
   {name: 'loss 1', text: 'left'},
   {name: 'page 3', text: 'Page 3'},
   {name: 'loss 2', text: 'left'},
-  {name: 'retention', text: 'completed Purchase'},
-  {name: 'total loss', text: 'Total Loss'}
+  {name: 'retention', text: 'completed Purchase (50%)'},
+  {name: 'total loss', text: 'Total Loss (50%)'}
 ];
 
 const links = [
