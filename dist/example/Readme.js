@@ -33,6 +33,14 @@ var _sankeySimpleExample = require('!!raw!./sankey-simple.example.js');
 
 var _sankeySimpleExample2 = _interopRequireDefault(_sankeySimpleExample);
 
+var _sankeyFull = require('./sankey-full.example');
+
+var _sankeyFull2 = _interopRequireDefault(_sankeyFull);
+
+var _sankeyFullExample = require('!!raw!./sankey-full.example.js');
+
+var _sankeyFullExample2 = _interopRequireDefault(_sankeyFullExample);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); } /**
@@ -56,13 +64,20 @@ function Readme(_ref) {
     ),
     '\n\n      ## Sankey Diagram\n\n      ',
     _react2.default.createElement(_sankeySimple2.default, null),
-    '\n      ### Usage example\n\n      The source code below of the example above is loaded using the\n      webpack raw loader.',
+    '\n      ### Simple Usage example\n\n      The source code below of the example above is loaded using the\n      webpack raw loader.',
     _react2.default.createElement(
       _reactHighlight2.default,
       null,
       _sankeySimpleExample2.default
     ),
-    '\n\n      ## Develop\n\n      1. First make your changes, then git commit. Use `serve-docs`\n       to view live update at [http://localhost:5000](http://localhost:5000).\n      2. run `build-docs`, `build-static-docs`, `gh-pages`\n      3. Then remember to push to master.\n\n      '
+    '\n      ### A More Sophisticated Sankey Example\n\n      ',
+    _react2.default.createElement(_sankeyFull2.default, null),
+    _react2.default.createElement(
+      _reactHighlight2.default,
+      null,
+      _sankeyFullExample2.default
+    ),
+    '\n\n\n      ## Develop\n\n      1. First make your changes, then git commit. Use `serve-docs`\n       to view live update at [http://localhost:5000](http://localhost:5000).\n      2. run `build-docs`, `build-static-docs`, `gh-pages`\n      3. Then remember to push to master.\n\n      '
   );
 }
 // ### Props

@@ -6,8 +6,10 @@ import Markdown from 'react-markdownit';
 import Highlight from '@episodeyang/react-highlight.js';
 import HappySandwichMakerExample from './link-graph-simple.example';
 import HappySandwichMakerSource from '!!raw!./link-graph-simple.example.js';
-import SankeyDiagramExample from './sankey-simple.example';
-import SankeyDiagramSource from '!!raw!./sankey-simple.example.js';
+import SankeyDiagramSimpleExample from './sankey-simple.example';
+import SankeyDiagramSimpleExampleSource from '!!raw!./sankey-simple.example.js';
+import SankeyDiagramFullExample from './sankey-full.example';
+import SankeyDiagramFullExampleSource from '!!raw!./sankey-full.example.js';
 
 export default function Readme({}) {
   return (
@@ -36,14 +38,21 @@ export default function Readme({}) {
       ## Sankey Diagram
 
       `}
-      <SankeyDiagramExample/>
+      <SankeyDiagramSimpleExample/>
       {`
-      ### Usage example
+      ### Simple Usage example
 
       The source code below of the example above is loaded using the
       webpack raw loader.`}
-      <Highlight>{SankeyDiagramSource}</Highlight>
+      <Highlight>{SankeyDiagramSimpleExampleSource}</Highlight>
       {`
+      ### A More Sophisticated Sankey Example
+
+      `}
+      <SankeyDiagramFullExample/>
+      <Highlight>{SankeyDiagramFullExampleSource}</Highlight>
+      {`
+
 
       ## Develop
 
