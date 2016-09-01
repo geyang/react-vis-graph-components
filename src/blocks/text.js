@@ -1,6 +1,3 @@
-/**
- * Created on 8/23/16.
- */
 import React, {PropTypes} from 'react';
 import isDefined from '../utils/is-defined';
 

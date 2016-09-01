@@ -1,4 +1,3 @@
-/** Created on 8/14/16. */
 import React, {PropTypes, cloneElement, Children} from 'react';
 import NODE_TYPES from '../node-types';
 import isDefined from '../utils/is-defined';

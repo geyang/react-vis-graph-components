@@ -1,6 +1,3 @@
-/**
- * Created on 6/24/16.
- */
 import React from 'react';
 import Markdown from 'react-markdownit';
 import Highlight from '@episodeyang/react-highlight.js';

@@ -1,4 +1,3 @@
-/** Created on 8/30/16. */
 import React from 'react';
 import {LinkGraph, CircleNode, StraightConnector} from '../';
 

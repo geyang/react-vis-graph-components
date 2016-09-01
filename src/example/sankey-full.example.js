@@ -1,6 +1,3 @@
-/**
- * Created on 6/23/16.
- */
 import React, {Component, PropTypes} from 'react';
 import Sankey from '../sankey';
 import RectangleNode from '../blocks/rectangle-node';

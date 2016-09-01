@@ -1,4 +1,3 @@
-/** Created on 6/23/16. */
 import React, {Component, PropTypes} from 'react';
 import {Sankey, RectangleNode, BlockAnchor, Text, BezierConnector} from '../';
 

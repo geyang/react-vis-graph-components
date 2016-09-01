@@ -1,6 +1,3 @@
-/**
- * Created on 6/23/16.
- */
 import React from 'react';
 import {render} from 'react-dom';
 import {AppContainer} from 'react-hot-loader';

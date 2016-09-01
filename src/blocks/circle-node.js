@@ -1,4 +1,3 @@
-/** Created on 8/14/16. */
 import React, {cloneElement, Children} from 'react';
 import NODE_TYPES from '../node-types';
 
