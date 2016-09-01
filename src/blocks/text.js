@@ -10,7 +10,7 @@ export default function Text({
   y,
   ax,
   ay,
-  ..._props
+  ...restProps
 }) {
   if (!isDefined(x) && isDefined(ax)) {
     x = ax;
@@ -23,7 +23,7 @@ export default function Text({
   const props = {
     x,
     y,
-    ..._props
+    ...restProps
   };
 
   return (

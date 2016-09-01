@@ -1,48 +1,62 @@
 /** Created on 8/22/16. */
+export const ANCHOR_CONSTANTS = {
+  LEFT: 'left',
+  RIGHT: 'right',
+  TOP: 'top',
+  BOTTOM: 'bottom',
+  TOPLEFT: 'topleft',
+  BOTTOMLEFT: 'bottomleft',
+  TOPRIGHT: 'topright',
+  BOTTOMRIGHT: 'bottomright'
+};
+
+const {LEFT, RIGHT, TOP, BOTTOM, TOPLEFT, BOTTOMLEFT, TOPRIGHT, BOTTOMRIGHT} = ANCHOR_CONSTANTS;
+
 export default function getAnchorFromRectangleNodes(name, nodes, id) {
   const {props: {x, y, width, height}} =
     nodes.filter(({props: {name: nodeName}}) => (nodeName === name))[0];
 
-  if (id === 'left') {
-    return {
-      x,
-      y: y + height / 2
-    };
-  } else if (id === 'right') {
-    return {
-      x: x + width,
-      y: y + height / 2
-    };
-  } else if (id === 'top') {
-    return {
-      x: x + width / 2,
-      y
-    };
-  } else if (id === 'bottom') {
-    return {
-      x: x + width / 2,
-      y: y + height
-    };
-  } else if (id === 'topleft') {
-    return {
-      x,
-      y
-    };
-  } else if (id === 'bottomleft') {
-    return {
-      x,
-      y: y + height
-    };
-  } else if (id === 'topright') {
-    return {
-      x: x + width,
-      y
-    };
-  } else if (id === 'bottomright') {
-    return {
-      x: x + width,
-      y: y + height
-    };
+  switch (id) {
+    case LEFT:
+      return {
+        x,
+        y: y + height / 2
+      };
+    case RIGHT:
+      return {
+        x: x + width,
+        y: y + height / 2
+      };
+    case TOP:
+      return {
+        x: x + width / 2,
+        y
+      };
+    case BOTTOM:
+      return {
+        x: x + width / 2,
+        y: y + height
+      };
+    case TOPLEFT:
+      return {
+        x,
+        y
+      };
+    case BOTTOMLEFT:
+      return {
+        x,
+        y: y + height
+      };
+    case TOPRIGHT:
+      return {
+        x: x + width,
+        y
+      };
+    case BOTTOMRIGHT:
+      return {
+        x: x + width,
+        y: y + height
+      };
   }
 
   return null;

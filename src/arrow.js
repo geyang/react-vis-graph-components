@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Arrow({
+function Arrow({
   id,
   refX = 0.1,
   refY = 2,
@@ -9,13 +9,13 @@ export default function Arrow({
   height: markerHeight = 5,
   color: fill = 'black',
   orient = 'auto',
-  ..._props
+  ...restProps
 }) {
   const props = {
     id, refX, refY, markerWidth, markerHeight, orient
   };
   const pathProps = {
-    fill, d, ..._props
+    fill, d, ...restProps
   };
   return (
     <marker {...props}>
@@ -23,3 +23,5 @@ export default function Arrow({
     </marker>
   );
 }
+
+export default Arrow;

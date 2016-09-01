@@ -17,7 +17,7 @@ export default class LinkGraph extends Component {
   }
 
   render() {
-    const {children, ..._props} = this.props;
+    const {children, ...restProps} = this.props;
     const {defs, nodes, links} = separateChildrenByType(children);
 
     // 1. get all nodes and extract their cx, cy locations
@@ -25,7 +25,7 @@ export default class LinkGraph extends Component {
     // of the nodes.
     const linksWithCoords = links.map(link => {
       const {
-        from, to, paddingStart = 0, paddingEnd = 0, ..._linkProps
+        from, to, paddingStart = 0, paddingEnd = 0, ...linkProps
       } = link.props;
 
       const {cx: x1, cy: y1, r: r1} =
@@ -39,13 +39,13 @@ export default class LinkGraph extends Component {
 
       return cloneElement(
         link,
-        {...paddedEndPoints, ..._linkProps},
+        {...paddedEndPoints, ...linkProps},
         link.children
       );
     });
 
     return (
-      <svg {..._props}>
+      <svg {...restProps}>
         {defs}
         {nodes}
         {linksWithCoords}

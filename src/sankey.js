@@ -1,11 +1,11 @@
 import React, {PropTypes, Component, cloneElement} from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
-import linkKey from './utils/link-key';
+import getLinkKey from './utils/get-link-key';
 import getWidthSums from './utils/get-width-sums';
 import separateChildrenByType from './utils/separate-children-by-type';
 import findColumns from './utils/find-columns';
 import configureNodeCoordinates from './utils/configure-node-coordinates';
-import getAnchorFromRectangleNodes from './utils/get-anchor-from-rectangle-nodes';
+import getAnchorFromRectangleNodes, {ANCHOR_CONSTANTS} from './utils/get-anchor-from-rectangle-nodes';
 
 const {number} = PropTypes;
 export default class Sankey extends Component {
@@ -21,6 +21,11 @@ export default class Sankey extends Component {
     margin: number
   };
 
+  static defaultProps = {
+    spacing: 0,
+    margin: 10
+  };
+
   shouldComponentUpdate(nextProp, nextState) {
     return shallowCompare(this, nextProp, nextState);
   }
@@ -32,7 +37,7 @@ export default class Sankey extends Component {
       height: containerHeight,
       spacing,
       margin,
-      ..._props
+      ...restProps
     } = this.props;
 
     const {defs, nodes, links} = separateChildrenByType(children);
@@ -42,14 +47,13 @@ export default class Sankey extends Component {
     const defaultColumnWidth = (containerWidth - columns.length * spacing) /
       (columns.length + 1);
 
-
     /* if the max width of the column is less than the default column with,
      * take the bigger value. When no width is given, a default column width
      * is used. */
     const columnWidths = columns.map(
       column =>
         (Math.max.apply(null, column.map(
-          ({props: {width, r}}) => width || r * 2)
+          ({props: {width}}) => width)
         ) || defaultColumnWidth)
     );
 
@@ -86,7 +90,7 @@ export default class Sankey extends Component {
       .reduce((hash, {props: {from, to, width}}) => {
         return {
           ...hash,
-          [linkKey(from, to)]: width
+          [getLinkKey(from, to)]: width
         };
       }, {});
 
@@ -98,14 +102,14 @@ export default class Sankey extends Component {
             ...hash[from],
             from: [
               ...((hash[from] && hash[from].from) ? hash[from].from : []),
-              linkKey(from, to)
+              getLinkKey(from, to)
             ]
           },
           [to]: {
             ...hash[to],
             to: [
               ...((hash[to] && hash[to].to) ? hash[to].to : []),
-              linkKey(from, to)
+              getLinkKey(from, to)
             ]
           }
         };
@@ -114,16 +118,16 @@ export default class Sankey extends Component {
     const linksWithCoords = orderedLinks.map(
       (link, ind) => {
         const {
-          from, to, width, children: linkChildren, ..._linkProps
+          from, to, width, children: linkChildren, ...linkProps
         } = link.props;
 
         const {x: x1, y: y1} =
-          getAnchorFromRectangleNodes(from, nodesWithCoords, 'topright');
+          getAnchorFromRectangleNodes(from, nodesWithCoords, ANCHOR_CONSTANTS.TOPRIGHT);
         const {x: x2, y: y2} =
-          getAnchorFromRectangleNodes(to, nodesWithCoords, 'topleft');
+          getAnchorFromRectangleNodes(to, nodesWithCoords, ANCHOR_CONSTANTS.TOPLEFT);
 
         const {fromSum, toSum} =
-          getWidthSums(nodeHash, linkWidths, from, to, linkKey(from, to));
+          getWidthSums(nodeHash, linkWidths, from, to, getLinkKey(from, to));
 
         return cloneElement(
           link,
@@ -132,7 +136,7 @@ export default class Sankey extends Component {
             x2,
             y1: y1 + fromSum + width / 2,
             y2: y2 + toSum + width / 2,
-            ..._linkProps
+            ...linkProps
           },
           linkChildren
         );
@@ -142,7 +146,7 @@ export default class Sankey extends Component {
       <svg
         width={containerWidth}
         height={containerHeight}
-        {..._props}>
+        {...restProps}>
         {defs}
         {linksWithCoords}
         {nodesWithCoords}

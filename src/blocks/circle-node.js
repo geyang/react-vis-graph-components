@@ -5,7 +5,7 @@ import NODE_TYPES from '../node-types';
 const propTypes = {};
 
 // todo: implement container block API as a higher level component
-export default function CircleNode({
+function CircleNode({
   name,
   cx,
   cy,
@@ -13,7 +13,7 @@ export default function CircleNode({
   fill = 'transparent',
   stroke = 'rgba(35, 170, 255, 0.5)',
   strokeWidth = 3,
-  ..._props
+  ...restProps
 }) {
   const props = {
     name,
@@ -23,11 +23,11 @@ export default function CircleNode({
     fill,
     stroke,
     strokeWidth,
-    ..._props
+    ...restProps
   };
   return <circle {...props}/>;
 }
 
 CircleNode.graphNodeType = NODE_TYPES.NODE;
 CircleNode.propTypes = propTypes;
-
+export default CircleNode;

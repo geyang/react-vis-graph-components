@@ -22,7 +22,7 @@ const propTypes = {
   strokeWidth: number,
 };
 
-export default function StraightConnector({
+function StraightConnector({
   from,
   to,
   paddingStart,
@@ -36,10 +36,9 @@ export default function StraightConnector({
   markerEndId,
   stroke = 'black',
   strokeWidth,
-  ..._props
+  ...restProps
 }) {
-  const wayPoints = [[x1, y1], [x2, y2]];
-  const d = 'M ' + wayPoints.map(pt => pt.join(', ')).join(' ');
+  const d = `M ${x1},${y1} ${x2},${y2}`;
 
   const markerStart = markerStartId ? `url(#${markerStartId})` : '';
   const markerMid = markerMidId ? `url(#${markerMidId})` : '';
@@ -48,7 +47,7 @@ export default function StraightConnector({
   const props = {
     ...STYLEP_ROPS,
     d, stroke, strokeWidth, markerStart, markerMid, markerEnd,
-    ..._props
+    ...restProps
   };
   return (
     <path {...props}/>
@@ -57,3 +56,4 @@ export default function StraightConnector({
 
 StraightConnector.graphNodeType = NODE_TYPES.LINK;
 StraightConnector.propTypes = propTypes;
+export default StraightConnector;

@@ -19,7 +19,7 @@ const propTypes = {
 };
 
 // todo: implement container block API as a higher level component
-export default function RectangleNode({
+function RectangleNode({
   name,
   x,
   y,
@@ -30,7 +30,7 @@ export default function RectangleNode({
   stroke = 'rgba(35, 170, 255, 0.5)',
   strokeWidth = '3',
   children,
-  ..._props
+  ...restProps
 }) {
   const props = {
     name,
@@ -41,7 +41,7 @@ export default function RectangleNode({
     fill,
     stroke,
     strokeWidth,
-    ..._props
+    ...restProps
   };
 
   if (isDefined(children)) {
@@ -66,4 +66,4 @@ export default function RectangleNode({
 
 RectangleNode.graphNodeType = NODE_TYPES.NODE;
 RectangleNode.propTypes = propTypes;
-
+export default RectangleNode;

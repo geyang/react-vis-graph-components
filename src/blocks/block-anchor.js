@@ -6,20 +6,32 @@ import React, {PropTypes} from 'react';
 
 const {oneOf, any} = PropTypes;
 
+export const HORIZONTAL_ALIGNS = {
+  LEFT: 'left',
+  RIGHT: 'right',
+  CENTER: 'center'
+};
+
+export const VERTICAL_ALIGNS = {
+  TOP: 'top',
+  BOTTOM: 'bottom',
+  MIDDLE: 'middle'
+};
+
 const propTypes = {
   component: any.isRequired,
-  alignHorizontal: oneOf(['left', 'right', 'center']),
-  alignVertical: oneOf(['top', 'bottom', 'middle'])
+  alignHorizontal: oneOf(Object.values(HORIZONTAL_ALIGNS)),
+  alignVertical: oneOf(Object.values(VERTICAL_ALIGNS))
 };
 
 const defaultProps = {
-  alignHorizontal: 'right',
-  alignVertical: 'bottom',
+  alignHorizontal: HORIZONTAL_ALIGNS.RIGHT,
+  alignVertical: VERTICAL_ALIGNS.MIDDLE,
   margin: 0
 };
 
 // todo: add anchor logic prop to allow passing-in of custom layout function.
-export default function Text({
+function BlockAnchor({
   children,
   component: Component,
   anchorX,
@@ -29,34 +41,43 @@ export default function Text({
   alignHorizontal,
   alignVertical,
   margin,
-  ..._props
+  ...restProps
 }) {
   let ax = anchorX;
   let ay = anchorY;
-  if (alignHorizontal === 'left') {
-    ax = anchorX - margin;
-  } else if (alignHorizontal === 'right') {
-    ax = anchorX + anchorWidth + margin;
-  } else if (alignHorizontal === 'center') {
-    ax = anchorX + anchorWidth / 2;
+  switch (alignHorizontal) {
+    case HORIZONTAL_ALIGNS.LEFT:
+      ax = anchorX - margin;
+      break;
+    case HORIZONTAL_ALIGNS.RIGHT:
+      ax = anchorX + anchorWidth + margin;
+      break;
+    case HORIZONTAL_ALIGNS.CENTER:
+      ax = anchorX + anchorWidth / 2;
+      break;
   }
 
-  if (alignVertical === 'top') {
-    ay = anchorY - margin;
-  } else if (alignVertical === 'bottom') {
-    ay = anchorY + anchorHeight + margin;
-  } else if (alignVertical === 'middle') {
-    ay = anchorY + anchorHeight / 2;
+  switch (alignVertical) {
+    case VERTICAL_ALIGNS.TOP:
+      ay = anchorY - margin;
+      break;
+    case VERTICAL_ALIGNS.BOTTOM:
+      ay = anchorY + anchorHeight + margin;
+      break;
+    case VERTICAL_ALIGNS.MIDDLE:
+      ay = anchorY + anchorHeight / 2;
+      break;
   }
 
   const props = {
     ax,
     ay,
-    ..._props
+    ...restProps
   };
 
   return <Component {...props}>{children}</Component>;
 }
 
-Text.propTypes = propTypes;
-Text.defaultProps = defaultProps;
+BlockAnchor.propTypes = propTypes;
+BlockAnchor.defaultProps = defaultProps;
+export default BlockAnchor;
