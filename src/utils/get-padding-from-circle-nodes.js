@@ -2,9 +2,9 @@
 import isDefined from './is-defined';
 export default function getPaddingFromCircleNodes(name, nodes) {
   const {props: {cx, cy, r}} =
-    nodes.filter(({props: {name: nodeName}}) => (nodeName === name))[0];
+    nodes.find(({props: {name: nodeName}}) => (nodeName === name));
   if (isDefined(cx) && isDefined(cy)) {
     return {cx, cy, r};
   }
-  return null;
+  return {cx: 0, cy: 0, r: 0};
 }

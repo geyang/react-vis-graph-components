@@ -3,13 +3,13 @@
 export default function splitHeadsFromRest(nodes = [], links = []) {
   const heads = nodes.filter(
     ({props: {name}}) => {
-      return !links.filter(({props: {to}}) => (to === name)).length;
+      return !links.find(({props: {to}}) => (to === name));
     }
   );
 
   const linksFrom = links.filter(
     ({props: {from}}) => {
-      return heads.filter(({props: {name}}) => (from === name)).length;
+      return heads.find(({props: {name}}) => (from === name));
     }
   );
 

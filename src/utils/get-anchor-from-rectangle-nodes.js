@@ -14,7 +14,7 @@ const {LEFT, RIGHT, TOP, BOTTOM, TOPLEFT, BOTTOMLEFT, TOPRIGHT, BOTTOMRIGHT} = A
 
 export default function getAnchorFromRectangleNodes(name, nodes, id) {
   const {props: {x, y, width, height}} =
-    nodes.filter(({props: {name: nodeName}}) => (nodeName === name))[0];
+    nodes.find(({props: {name: nodeName}}) => (nodeName === name));
 
   switch (id) {
     case LEFT:
