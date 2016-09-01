@@ -30,4 +30,5 @@ function CircleNode({
 
 CircleNode.graphNodeType = NODE_TYPES.NODE;
 CircleNode.propTypes = propTypes;
+CircleNode.displayName = 'CircleNode';
 export default CircleNode;

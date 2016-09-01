@@ -66,4 +66,5 @@ function RectangleNode({
 
 RectangleNode.graphNodeType = NODE_TYPES.NODE;
 RectangleNode.propTypes = propTypes;
+RectangleNode.displayName = 'RectangleNode';
 export default RectangleNode;

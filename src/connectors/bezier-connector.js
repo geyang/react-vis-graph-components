@@ -63,4 +63,5 @@ function BezierConnector({
 
 BezierConnector.graphNodeType = NODE_TYPES.LINK;
 BezierConnector.propTypes = propTypes;
+BezierConnector.displayName = 'BezierConnector';
 export default BezierConnector;

@@ -20,8 +20,8 @@ export const VERTICAL_ALIGNS = {
 
 const propTypes = {
   component: any.isRequired,
-  alignHorizontal: oneOf(Object.values(HORIZONTAL_ALIGNS)),
-  alignVertical: oneOf(Object.values(VERTICAL_ALIGNS))
+  alignHorizontal: oneOf(Object.keys(HORIZONTAL_ALIGNS).map(key => HORIZONTAL_ALIGNS[key])),
+  alignVertical: oneOf(Object.keys(VERTICAL_ALIGNS).map(key => VERTICAL_ALIGNS[key]))
 };
 
 const defaultProps = {
@@ -80,4 +80,5 @@ function BlockAnchor({
 
 BlockAnchor.propTypes = propTypes;
 BlockAnchor.defaultProps = defaultProps;
+BlockAnchor.displayName = 'BlockAnchor';
 export default BlockAnchor;

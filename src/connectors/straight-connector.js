@@ -56,4 +56,5 @@ function StraightConnector({
 
 StraightConnector.graphNodeType = NODE_TYPES.LINK;
 StraightConnector.propTypes = propTypes;
+StraightConnector.displayName = 'StraightConnector';
 export default StraightConnector;
