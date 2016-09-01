@@ -15,15 +15,15 @@ export default class Sankey extends Component {
     width: number.isRequired,
     /** height of svg figure */
     height: number.isRequired,
-    /** spacing (horizontal) */
-    spacing: number,
-    /** margin (vertical) */
-    margin: number
+    /** columnSpacing (horizontal) */
+    columnSpacing: number,
+    /** blockSpacing (vertical) */
+    blockSpacing: number
   };
 
   static defaultProps = {
-    spacing: 0,
-    margin: 10
+    columnSpacing: 0,
+    blockSpacing: 10
   };
 
   shouldComponentUpdate(nextProp, nextState) {
@@ -35,8 +35,8 @@ export default class Sankey extends Component {
       children,
       width: containerWidth,
       height: containerHeight,
-      spacing,
-      margin,
+      columnSpacing,
+      blockSpacing,
       ...restProps
     } = this.props;
 
@@ -44,7 +44,7 @@ export default class Sankey extends Component {
 
     const columns = findColumns(nodes, links);
 
-    const defaultColumnWidth = (containerWidth - columns.length * spacing) /
+    const defaultColumnWidth = (containerWidth - columns.length * columnSpacing) /
       (columns.length + 1);
 
     /* if the max width of the column is less than the default column with,
@@ -63,8 +63,8 @@ export default class Sankey extends Component {
         nodes,
         links,
         columnWidths,
-        spacing,
-        margin
+        columnSpacing,
+        blockSpacing
       );
 
     const nodeYs = nodesWithCoords

@@ -5,7 +5,7 @@ export default function configureNodeCoordinates(columns,
                                                  nodes,
                                                  links,
                                                  columnWidths,
-                                                 spacing,
+                                                 columnSpacing,
                                                  margin) {
   const nodesWithCoordinates = columns.map(
     (column, columnIndex) => {
@@ -50,7 +50,7 @@ export default function configureNodeCoordinates(columns,
           } = node.props;
 
           if (!isDefined(x)) {
-            x = columnIndex * spacing +
+            x = columnIndex * columnSpacing +
               columnWidths
                 .slice(0, columnIndex)
                 .reduce((a, b) => a + b, 0);

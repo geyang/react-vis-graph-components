@@ -159,7 +159,7 @@ export default class SankeyDiagramExample extends Component {
   render() {
     const {links, nodes} = this.state;
     return (
-      <Sankey width={1200} height={650} spacing={250} margin={10}>
+      <Sankey width={1200} height={650} columnSpacing={250} blockSpacing={10}>
         {nodes.map(({name}) => (
           <RectangleNode
             name={name}
@@ -170,7 +170,7 @@ export default class SankeyDiagramExample extends Component {
               component={Text}
               alignVertical="middle"
               dominantBaseline="middle"
-              margin={10}>{name}</BlockAnchor>
+              blockSpacing={10}>{name}</BlockAnchor>
           </RectangleNode>
         ))}
         {links.map(({from, to, value}) => (
