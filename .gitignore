@@ -1,0 +1,19 @@
+# webStorm files
+.idea
+
+# log files
+*.log*
+*.log
+*.logs
+
+# node files
+*~
+node_modules
+
+# OSX files
+.DS_Store
+
+# Coverage directory used by istanbul
+coverage
+
+
