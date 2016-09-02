@@ -1,12 +1,19 @@
 import React from 'react';
 import Markdown from 'react-markdownit';
 import Highlight from '@episodeyang/react-highlight.js';
+import PropsTable from 'react-component-props-table';
 import HappySandwichMakerExample from './link-graph-simple.example';
+import HappySandwichMakerAst from '!!react-docgen!../link-graph';
 import HappySandwichMakerSource from '!!raw!./link-graph-simple.example.js';
+import CircleNodeAst from '!!react-docgen!../blocks/circle-node';
+import StraightConnectorAst
+  from '!!react-docgen!../connectors/straight-connector';
 import SankeyDiagramSimpleExample from './sankey-simple.example';
+import SankeyDiagramSimpleAst from '!!react-docgen!../sankey';
 import SankeyDiagramSimpleExampleSource from '!!raw!./sankey-simple.example.js';
 import SankeyDiagramFullExample from './sankey-full.example';
 import SankeyDiagramFullExampleSource from '!!raw!./sankey-full.example.js';
+
 
 export default function Readme({}) {
   return (
@@ -22,6 +29,7 @@ export default function Readme({}) {
       The graph component takes in the children (links and nodes) and
       automatically calculates the end points for the connections and
       adds padding.
+
       `}
       <HappySandwichMakerExample/>
       {`
@@ -31,10 +39,46 @@ export default function Readme({}) {
       webpack raw loader.`}
       <Highlight>{HappySandwichMakerSource}</Highlight>
       {`
+      ### Component API
+      #### Props
+      The component takes the following props:
+      `}
+      <PropsTable propMetaData={HappySandwichMakerAst.props}/>
+      {`
+      #### Children
+      The \`LinkGraph\` component takes three types of children:
+      - SVG \`\<defs\>\` elements that contains reusable svg nodes.
+      - Node graph children type, and
+      - Link graph children type.
+
+      The Node children and the link children's type are implemented by a static
+      property on the component \`graphNodeType\`. To implement your own, you
+      can look at the source here: [CircleNode soruce code](https://github.` +
+      `com/episodeyang/react-vis-graph-components/blob/master/src/blocks/ci` +
+      `rcle-node.js#L30)
+
+      #### CircleNode API
+      The \`CircleNode\` is a light wrapper on top of \`\<circle\>\`.
+      `}
+      <PropsTable propMetaData={CircleNodeAst.props}/>
+      {`
+      #### StraightConnector API
+
+      The \`StraightConnector\` when used inside \`LinkGraph\`, can look up
+      peers with the correct name and automatically calculate the coordinates
+      of the start and the end of the connector. This logic is inside
+      \`LinkGraph\`.
+
+      Typically only \`from\` and \`to\` are used whereas \`x/y_i\` are calculated
+      automatically.
+      `}
+      <PropsTable propMetaData={StraightConnectorAst.props}/>
+      {`
 
       ## Sankey Diagram
 
       `}
+      <PropsTable propMetaData={SankeyDiagramSimpleAst.props}/>
       <SankeyDiagramSimpleExample/>
       {`
       ### Simple Usage example

@@ -167,7 +167,7 @@ export default class SankeyDiagramExample extends Component {
               component={Text}
               alignVertical="middle"
               dominantBaseline="middle"
-              blockSpacing={10}>{name}</BlockAnchor>
+              margin={10}>{name}</BlockAnchor>
           </RectangleNode>
         ))}
         {links.map(({from, to, value}) => (

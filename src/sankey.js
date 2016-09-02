@@ -5,7 +5,8 @@ import getWidthSums from './utils/get-width-sums';
 import separateChildrenByType from './utils/separate-children-by-type';
 import findColumns from './utils/find-columns';
 import configureNodeCoordinates from './utils/configure-node-coordinates';
-import getAnchorFromRectangleNodes, {ANCHOR_CONSTANTS} from './utils/get-anchor-from-rectangle-nodes';
+import getAnchorFromRectangleNodes, {ANCHOR_CONSTANTS}
+from './utils/get-anchor-from-rectangle-nodes';
 
 const {number} = PropTypes;
 export default class Sankey extends Component {
@@ -44,8 +45,8 @@ export default class Sankey extends Component {
 
     const columns = findColumns(nodes, links);
 
-    const defaultColumnWidth = (containerWidth - columns.length * columnSpacing) /
-      (columns.length + 1);
+    const defaultColumnWidth = (containerWidth -
+      columns.length * columnSpacing) / (columns.length + 1);
 
     /* if the max width of the column is less than the default column with,
      * take the bigger value. When no width is given, a default column width
@@ -122,9 +123,11 @@ export default class Sankey extends Component {
         } = link.props;
 
         const {x: x1, y: y1} =
-          getAnchorFromRectangleNodes(from, nodesWithCoords, ANCHOR_CONSTANTS.TOPRIGHT);
+          getAnchorFromRectangleNodes(from, nodesWithCoords,
+            ANCHOR_CONSTANTS.TOPRIGHT);
         const {x: x2, y: y2} =
-          getAnchorFromRectangleNodes(to, nodesWithCoords, ANCHOR_CONSTANTS.TOPLEFT);
+          getAnchorFromRectangleNodes(to, nodesWithCoords,
+            ANCHOR_CONSTANTS.TOPLEFT);
 
         const {fromSum, toSum} =
           getWidthSums(nodeHash, linkWidths, from, to, getLinkKey(from, to));

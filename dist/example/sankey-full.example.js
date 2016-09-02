@@ -37,10 +37,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created on 6/23/16.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var NODES = [{ name: 'Energy' }, { name: 'Industrial Processes' }, { name: 'Electricity and heat' }, { name: 'Industry' }, { name: 'Land Use Change' }, { name: 'Agriculture' }, { name: 'Waste' }, { name: 'Transportation' }, { name: 'Other Fuel Combustion' }, { name: 'Fugitive Emissions' }, { name: 'Road' }, { name: 'Air' }, { name: 'Rail - Ship and Other Transport' }, { name: 'Residential Buildings' }, { name: 'Commercial Buildings' }, { name: 'Unallocated Fuel Combustion' }, { name: 'Iron and Steel' }, { name: 'Aluminium Non-Ferrous Metals' }, { name: 'Machinery' }, { name: 'Pulp - Paper and Printing' }, { name: 'Food and Tobacco' }, { name: 'Chemicals' }, { name: 'Cement' }, { name: 'Other Industry' }, { name: 'T and D Losses' }, { name: 'Coal Mining' }, { name: 'Oil and Gas Processing' }, { name: 'Deforestation' }, { name: 'Harvest \/ Management' }, { name: 'Agricultural Energy Use' }, { name: 'Agriculture Soils' }, { name: 'Livestock and Manure' }, { name: 'Rice Cultivation' }, { name: 'Other Agriculture' }, { name: 'Landfills' }, { name: 'Waste water - Other Waste' }, { name: 'Carbon Dioxide' }, { name: 'HFCs - PFCs' }, { name: 'Methane' }, { name: 'Nitrous Oxide' }];
 
@@ -81,7 +78,7 @@ var SankeyDiagramExample = function (_Component) {
 
       return _react2.default.createElement(
         _sankey2.default,
-        { width: 1200, height: 650, spacing: 250, margin: 10 },
+        { width: 1200, height: 650, columnSpacing: 250, blockSpacing: 10 },
         nodes.map(function (_ref) {
           var name = _ref.name;
           return _react2.default.createElement(
@@ -97,7 +94,7 @@ var SankeyDiagramExample = function (_Component) {
                 component: _text2.default,
                 alignVertical: 'middle',
                 dominantBaseline: 'middle',
-                margin: 10 },
+                blockSpacing: 10 },
               name
             )
           );

@@ -20,8 +20,7 @@ var _isDefined2 = _interopRequireDefault(_isDefined);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; } /** Created on 8/14/16. */
-
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 var string = _react.PropTypes.string;
 var number = _react.PropTypes.number;
@@ -93,6 +92,7 @@ function RectangleNode(_ref) {
 
 RectangleNode.graphNodeType = _nodeTypes2.default.NODE;
 RectangleNode.propTypes = propTypes;
+RectangleNode.displayName = 'RectangleNode';
 var _default = RectangleNode;
 exports.default = _default;
 ;

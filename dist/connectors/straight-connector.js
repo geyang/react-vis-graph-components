@@ -73,6 +73,7 @@ function StraightConnector(_ref) {
 
 StraightConnector.graphNodeType = _nodeTypes2.default.LINK;
 StraightConnector.propTypes = propTypes;
+StraightConnector.displayName = 'StraightConnector';
 var _default = StraightConnector;
 exports.default = _default;
 ;

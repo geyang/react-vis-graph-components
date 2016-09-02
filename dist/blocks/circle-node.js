@@ -16,8 +16,7 @@ var _nodeTypes2 = _interopRequireDefault(_nodeTypes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; } /** Created on 8/14/16. */
-
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 var propTypes = {};
 
@@ -50,6 +49,7 @@ function CircleNode(_ref) {
 
 CircleNode.graphNodeType = _nodeTypes2.default.NODE;
 CircleNode.propTypes = propTypes;
+CircleNode.displayName = 'CircleNode';
 var _default = CircleNode;
 exports.default = _default;
 ;

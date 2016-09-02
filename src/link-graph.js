@@ -8,8 +8,10 @@ const {number} = PropTypes;
 export default class LinkGraph extends Component {
 
   static propTypes = {
-    width: number,
-    height: number
+    /** width of svg figure */
+    width: number.isRequired,
+    /** height of svg figure */
+    height: number.isRequired
   };
 
   shouldComponentUpdate(nextProp, nextState) {

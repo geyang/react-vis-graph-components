@@ -35,8 +35,12 @@ var VERTICAL_ALIGNS = exports.VERTICAL_ALIGNS = {
 
 var propTypes = {
   component: any.isRequired,
-  alignHorizontal: oneOf(Object.values(HORIZONTAL_ALIGNS)),
-  alignVertical: oneOf(Object.values(VERTICAL_ALIGNS))
+  alignHorizontal: oneOf(Object.keys(HORIZONTAL_ALIGNS).map(function (key) {
+    return HORIZONTAL_ALIGNS[key];
+  })),
+  alignVertical: oneOf(Object.keys(VERTICAL_ALIGNS).map(function (key) {
+    return VERTICAL_ALIGNS[key];
+  }))
 };
 
 var defaultProps = {
@@ -99,6 +103,7 @@ function BlockAnchor(_ref) {
 
 BlockAnchor.propTypes = propTypes;
 BlockAnchor.defaultProps = defaultProps;
+BlockAnchor.displayName = 'BlockAnchor';
 var _default = BlockAnchor;
 exports.default = _default;
 ;
