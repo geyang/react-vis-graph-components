@@ -26,19 +26,37 @@ var number = _react.PropTypes.number;
 var string = _react.PropTypes.string;
 
 var propTypes = {
+  /** the name of the starting node */
   from: string,
+  /** the name of the ending node */
   to: string,
+  /** the padding to apply to the start of the connector,\
+   * typically used to avoid intersecting the node border */
   paddingStart: number,
+  /** same as above for the other end */
   paddingEnd: number,
+  /** x coordinate of the start, used to override default layout. */
   x1: number,
+  /** x coordinate of the end. */
   y1: number,
+  /** y coordinate of the start. */
   x2: number,
+  /** y coordinate of the end. */
   y2: number,
+  /** the marker component to use for the start, need to \
+   * be the ID of an element defined inside the <defs> container.*/
   markerStartId: string,
+  /** same but for path midpoints */
   markerMidId: string,
+  /** same bug for end piont */
   markerEndId: string,
+  /** color of the link */
   stroke: string,
+  /** width of the link */
   strokeWidth: number
+};
+var defaultProps = {
+  stroke: 'black'
 };
 
 function StraightConnector(_ref) {
@@ -53,8 +71,7 @@ function StraightConnector(_ref) {
   var markerStartId = _ref.markerStartId;
   var markerMidId = _ref.markerMidId;
   var markerEndId = _ref.markerEndId;
-  var _ref$stroke = _ref.stroke;
-  var stroke = _ref$stroke === undefined ? 'black' : _ref$stroke;
+  var stroke = _ref.stroke;
   var strokeWidth = _ref.strokeWidth;
 
   var restProps = _objectWithoutProperties(_ref, ['from', 'to', 'paddingStart', 'paddingEnd', 'x1', 'y1', 'x2', 'y2', 'markerStartId', 'markerMidId', 'markerEndId', 'stroke', 'strokeWidth']);
@@ -73,6 +90,7 @@ function StraightConnector(_ref) {
 
 StraightConnector.graphNodeType = _nodeTypes2.default.LINK;
 StraightConnector.propTypes = propTypes;
+StraightConnector.defaultProps = defaultProps;
 StraightConnector.displayName = 'StraightConnector';
 var _default = StraightConnector;
 exports.default = _default;
@@ -90,6 +108,8 @@ exports.default = _default;
   __REACT_HOT_LOADER__.register(string, 'string', 'src/connectors/straight-connector.js');
 
   __REACT_HOT_LOADER__.register(propTypes, 'propTypes', 'src/connectors/straight-connector.js');
+
+  __REACT_HOT_LOADER__.register(defaultProps, 'defaultProps', 'src/connectors/straight-connector.js');
 
   __REACT_HOT_LOADER__.register(StraightConnector, 'StraightConnector', 'src/connectors/straight-connector.js');
 

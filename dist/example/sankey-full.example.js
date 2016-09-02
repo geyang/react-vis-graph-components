@@ -94,7 +94,7 @@ var SankeyDiagramExample = function (_Component) {
                 component: _text2.default,
                 alignVertical: 'middle',
                 dominantBaseline: 'middle',
-                blockSpacing: 10 },
+                margin: 10 },
               name
             )
           );

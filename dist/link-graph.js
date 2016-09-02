@@ -116,8 +116,10 @@ var LinkGraph = (_temp = _class = function (_Component) {
 
   return LinkGraph;
 }(_react.Component), _class.propTypes = {
-  width: number,
-  height: number
+  /** width of svg figure */
+  width: number.isRequired,
+  /** height of svg figure */
+  height: number.isRequired
 }, _temp);
 exports.default = LinkGraph;
 ;

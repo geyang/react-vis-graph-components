@@ -18,7 +18,31 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-var propTypes = {};
+var string = _react.PropTypes.string;
+var number = _react.PropTypes.number;
+
+var propTypes = {
+  /** name of the node, used for links to look the node up. */
+  name: string,
+  /** x coordinate of the center of node */
+  cx: number,
+  /** y coordinate of the center of node */
+  cy: number,
+  /** radius of node */
+  r: number,
+  /** node background color */
+  fill: string,
+  /** border color */
+  stroke: string,
+  /** border width */
+  strokeWidth: number
+};
+
+var defaultProps = {
+  fill: 'transparent',
+  stroke: 'rgba(35, 170, 255, 0.5)',
+  strokeWidth: 3
+};
 
 // todo: implement container block API as a higher level component
 function CircleNode(_ref) {
@@ -26,12 +50,9 @@ function CircleNode(_ref) {
   var cx = _ref.cx;
   var cy = _ref.cy;
   var r = _ref.r;
-  var _ref$fill = _ref.fill;
-  var fill = _ref$fill === undefined ? 'transparent' : _ref$fill;
-  var _ref$stroke = _ref.stroke;
-  var stroke = _ref$stroke === undefined ? 'rgba(35, 170, 255, 0.5)' : _ref$stroke;
-  var _ref$strokeWidth = _ref.strokeWidth;
-  var strokeWidth = _ref$strokeWidth === undefined ? 3 : _ref$strokeWidth;
+  var fill = _ref.fill;
+  var stroke = _ref.stroke;
+  var strokeWidth = _ref.strokeWidth;
 
   var restProps = _objectWithoutProperties(_ref, ['name', 'cx', 'cy', 'r', 'fill', 'stroke', 'strokeWidth']);
 
@@ -49,6 +70,7 @@ function CircleNode(_ref) {
 
 CircleNode.graphNodeType = _nodeTypes2.default.NODE;
 CircleNode.propTypes = propTypes;
+CircleNode.defaultProps = defaultProps;
 CircleNode.displayName = 'CircleNode';
 var _default = CircleNode;
 exports.default = _default;
@@ -59,7 +81,13 @@ exports.default = _default;
     return;
   }
 
+  __REACT_HOT_LOADER__.register(string, 'string', 'src/blocks/circle-node.js');
+
+  __REACT_HOT_LOADER__.register(number, 'number', 'src/blocks/circle-node.js');
+
   __REACT_HOT_LOADER__.register(propTypes, 'propTypes', 'src/blocks/circle-node.js');
+
+  __REACT_HOT_LOADER__.register(defaultProps, 'defaultProps', 'src/blocks/circle-node.js');
 
   __REACT_HOT_LOADER__.register(CircleNode, 'CircleNode', 'src/blocks/circle-node.js');
 
