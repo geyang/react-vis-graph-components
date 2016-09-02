@@ -20,10 +20,10 @@ export default function Readme({}) {
     <Markdown stripIndent={true}>{`
       # React Vis Graph Component: Link Graph and Sankey Diagram
 
-      ## Linked Node Graph
-
       [![github](https://img.shields.io/github/downloads/episodeyang/` +
       `react-vis-graph-components/total.svg?style=flat-square&maxAge=2592000)]()
+
+      ## Link Graph
 
       This component allows you to draw a linked node graph easily.
       The graph component takes in the children (links and nodes) and
@@ -39,13 +39,39 @@ export default function Readme({}) {
       webpack raw loader.`}
       <Highlight>{HappySandwichMakerSource}</Highlight>
       {`
-      ### Component API
-      #### Props
+
+      ## Sankey Diagram
+
+      `}
+      {`
+      ### Simple Usage example
+
+      here is a simple example of the Sankey Diagram.
+      `}
+      <SankeyDiagramSimpleExample/>
+      <Highlight>{SankeyDiagramSimpleExampleSource}</Highlight>
+      {`
+      ### A More Sophisticated Sankey Example
+
+      `}
+      <SankeyDiagramFullExample/>
+      <Highlight>{SankeyDiagramFullExampleSource}</Highlight>
+      {`
+
+      ## Develop
+
+      1. First make your changes, then git commit. Use \`serve-docs\`
+       to view live update at [http://localhost:5000](http://localhost:5000).
+      2. run \`build-docs\`, \`build-static-docs\`, \`gh-pages\`
+      3. Then remember to push to master.
+
+      ## Link Graph Component API
+      ### Props
       The component takes the following props:
       `}
       <PropsTable propMetaData={HappySandwichMakerAst.props}/>
       {`
-      #### Children
+      ### Children Component API
       The \`LinkGraph\` component takes three types of children:
       - SVG \`\<defs\>\` elements that contains reusable svg nodes.
       - Node graph children type, and
@@ -74,35 +100,14 @@ export default function Readme({}) {
       `}
       <PropsTable propMetaData={StraightConnectorAst.props}/>
       {`
+      ## Sankey Diagram API
 
-      ## Sankey Diagram
+      The Sankey Diagram has a similar API as the LinkGraph. It takes two more
+      props to specify the horizontal and vertical spacing for the layout.
+
 
       `}
       <PropsTable propMetaData={SankeyDiagramSimpleAst.props}/>
-      <SankeyDiagramSimpleExample/>
-      {`
-      ### Simple Usage example
-
-      The source code below of the example above is loaded using the
-      webpack raw loader.`}
-      <Highlight>{SankeyDiagramSimpleExampleSource}</Highlight>
-      {`
-      ### A More Sophisticated Sankey Example
-
-      `}
-      <SankeyDiagramFullExample/>
-      <Highlight>{SankeyDiagramFullExampleSource}</Highlight>
-      {`
-
-
-      ## Develop
-
-      1. First make your changes, then git commit. Use \`serve-docs\`
-       to view live update at [http://localhost:5000](http://localhost:5000).
-      2. run \`build-docs\`, \`build-static-docs\`, \`gh-pages\`
-      3. Then remember to push to master.
-
-      `}
     </Markdown>
   )
 }
