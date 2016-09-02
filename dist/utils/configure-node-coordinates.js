@@ -13,7 +13,7 @@ var _isDefined2 = _interopRequireDefault(_isDefined);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function configureNodeCoordinates(columns, nodes, links, columnWidths, spacing, margin) {
+function configureNodeCoordinates(columns, nodes, links, columnWidths, columnSpacing, margin) {
   var nodesWithCoordinates = columns.map(function (column, columnIndex) {
     if (column.length === 0) {
       return null;
@@ -64,7 +64,7 @@ function configureNodeCoordinates(columns, nodes, links, columnWidths, spacing, 
 
 
       if (!(0, _isDefined2.default)(x)) {
-        x = columnIndex * spacing + columnWidths.slice(0, columnIndex).reduce(function (a, b) {
+        x = columnIndex * columnSpacing + columnWidths.slice(0, columnIndex).reduce(function (a, b) {
           return a + b;
         }, 0);
       }

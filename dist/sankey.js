@@ -79,10 +79,10 @@ var Sankey = (_temp = _class = function (_Component) {
       var children = _props.children;
       var containerWidth = _props.width;
       var containerHeight = _props.height;
-      var spacing = _props.spacing;
-      var margin = _props.margin;
+      var columnSpacing = _props.columnSpacing;
+      var blockSpacing = _props.blockSpacing;
 
-      var restProps = _objectWithoutProperties(_props, ['children', 'width', 'height', 'spacing', 'margin']);
+      var restProps = _objectWithoutProperties(_props, ['children', 'width', 'height', 'columnSpacing', 'blockSpacing']);
 
       var _separateChildrenByTy = (0, _separateChildrenByType2.default)(children);
 
@@ -93,7 +93,7 @@ var Sankey = (_temp = _class = function (_Component) {
 
       var columns = (0, _findColumns2.default)(nodes, links);
 
-      var defaultColumnWidth = (containerWidth - columns.length * spacing) / (columns.length + 1);
+      var defaultColumnWidth = (containerWidth - columns.length * columnSpacing) / (columns.length + 1);
 
       /* if the max width of the column is less than the default column with,
        * take the bigger value. When no width is given, a default column width
@@ -105,7 +105,7 @@ var Sankey = (_temp = _class = function (_Component) {
         })) || defaultColumnWidth;
       });
 
-      var nodesWithCoords = (0, _configureNodeCoordinates2.default)(columns, nodes, links, columnWidths, spacing, margin);
+      var nodesWithCoords = (0, _configureNodeCoordinates2.default)(columns, nodes, links, columnWidths, columnSpacing, blockSpacing);
 
       var nodeYs = nodesWithCoords.reduce(function (hash, _ref2) {
         var _ref2$props = _ref2.props;
@@ -204,13 +204,13 @@ var Sankey = (_temp = _class = function (_Component) {
   width: number.isRequired,
   /** height of svg figure */
   height: number.isRequired,
-  /** spacing (horizontal) */
-  spacing: number,
-  /** margin (vertical) */
-  margin: number
+  /** columnSpacing (horizontal) */
+  columnSpacing: number,
+  /** blockSpacing (vertical) */
+  blockSpacing: number
 }, _class.defaultProps = {
-  spacing: 0,
-  margin: 10
+  columnSpacing: 0,
+  blockSpacing: 10
 }, _temp);
 exports.default = Sankey;
 ;

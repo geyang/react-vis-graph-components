@@ -14,9 +14,6 @@ var _Readme2 = _interopRequireDefault(_Readme);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/**
- * Created on 6/23/16.
- */
 var readmeContainer = document.body.querySelector('#readme-container');
 (0, _reactDom.render)(_react2.default.createElement(
   _reactHotLoader.AppContainer,

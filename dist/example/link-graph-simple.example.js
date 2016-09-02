@@ -13,7 +13,6 @@ var _ = require('../');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/** Created on 8/30/16. */
 function LinkGraphSimpleExample() {
   return _react2.default.createElement(
     _.LinkGraph,

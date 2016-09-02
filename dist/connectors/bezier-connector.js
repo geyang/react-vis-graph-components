@@ -80,6 +80,7 @@ function BezierConnector(_ref) {
 
 BezierConnector.graphNodeType = _nodeTypes2.default.LINK;
 BezierConnector.propTypes = propTypes;
+BezierConnector.displayName = 'BezierConnector';
 var _default = BezierConnector;
 exports.default = _default;
 ;

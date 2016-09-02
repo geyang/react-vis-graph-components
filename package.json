@@ -71,10 +71,9 @@
     "postcss-loader": "^0.9.1",
     "precss": "^1.4.0",
     "raw-loader": "^0.5.1",
-    "react": "15.x",
     "react-addons-test-utils": "^15.1.0",
     "react-component-props-table": "0.0.1",
-    "react-docgen": "^2.8.2",
+    "react-docgen": "^2.10.0",
     "react-docgen-loader": "^2.9.1",
     "react-dom": "15.x",
     "react-hot-loader": "^3.0.0-beta.2",
@@ -90,8 +89,10 @@
   },
   "dependencies": {
     "bezier-js": "^2.2.1",
-    "global": "^4.3.0",
+    "global": "^4.3.0"
+  },
+  "peerDependencies": {
     "react-addons-shallow-compare": "^15.3.0",
-    "react-vis": "^0.4.2"
+    "react": "15.x"
   }
 }
